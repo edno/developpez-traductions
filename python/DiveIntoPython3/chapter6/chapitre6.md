@@ -15,9 +15,9 @@ Si vous avez grandit dans un pays anglophone ou apprit l'anglais dans un context
 - Si un mot se termine avec un S, X, ou Z, ajoutez ES. *Bass* devient *basses*, *fax* devient *faxes*, et *waltz* devient *waltzes*.
 - Si un mot se termine avec un H sonore, ajoutez ES ; s'il se termine avec un H muet, ajoutez juste un S. Qu'est-ce qu'un H sonore ? C'est un H qui combiné avec d'autres lettres forme un son que vous pouvez entendre. Donc *coach* devient *coaches* et *rash* devient *rashes*, parce que vous pouvez entendre les sons CH et SH quand vous les prononcez. Mais *cheetah* devient *cheetahs*, parce que le H est muet.
 - Si un mot se termine avec un Y qui sonne comme in I, remplacez le Y par IES ; si le Y est combiné avec une voyelle pour sonner différemment, ajoutez juste un S. Donc *vacancy* devient *vacancies*, mais *day* devient *days*.
-- Si tout échoue, alors ajouter simplement S et espérez que ça ira. 
+- Si tout échoue, alors ajoutez simplement S et espérez que ça ira. 
 
-(Je sais, il y a pleins d'exception. *Man* devient *men* et *woman* devient *woman*, mais *human* devient *humans*. *Mouse* devient *mice* and *louse* devient *lice*, mais *house* devient *houses*. *Knife* devient *knives* et *wife* devient *wives*, mais *lowlife* devient *lowlifes*. Et on ne parle même pas des mots qui sont leur propre pluriel comme *sheep*, *deer* et *haiku*.)
+(Je sais, il y a plein d'exceptions. *Man* devient *men* et *woman* devient *woman*, mais *human* devient *humans*. *Mouse* devient *mice* and *louse* devient *lice*, mais *house* devient *houses*. *Knife* devient *knives* et *wife* devient *wives*, mais *lowlife* devient *lowlifes*. Et on ne parle même pas des mots qui sont leur propre pluriel comme *sheep*, *deer* et *haiku*.)
 
 Bien évidemment, les autres langues sont complètement différentes.
 
@@ -41,7 +41,7 @@ def plural(noun):
         return noun + 's'
 ```
 
-(1) C'est une expression régulière, mais elle utilise une syntaxe que vous n'avez pas vu dans *Expressions Régulières*. Les crochets signifient "correspond exactement à un des caractères". Donc `[sxz]` signifie "`s`, ou `x`, ou `z`", mais seulement un d'entre eux. Le `$` devrait être familier ; il correspond à la fin de chaîne. Combines, cette expression régulière vérifie si `noun` se termine avec `s`, `x` ou `z`.
+(1) C'est une expression régulière, mais elle utilise une syntaxe que vous n'avez pas vu dans *Expressions Régulières*. Les crochets signifient "correspond exactement à un des caractères". Donc `[sxz]` signifie "`s`, ou `x`, ou `z`", mais seulement un d'entre eux. Le `$` devrait être familier ; il correspond à la fin de chaîne. Combinés, cette expression régulière vérifie si `noun` se termine avec `s`, `x` ou `z`.
 (2) Cette fonction `re.sub()` exécute une substitution d'expression régulière. 
 
 Regardons les substitutions d'expression régulière plus en détail.
@@ -59,7 +59,7 @@ Regardons les substitutions d'expression régulière plus en détail.
 ```
 
 (1) Est-ce que la chaîne `Mark` contient `a`, `b`, ou `c` ? Oui, elle contient `a`.
-(2) OK, maintenant trouvons `a`, `b`, ou `c`, et replaçons le par `o`. `Mark` devient `Mork`.
+(2) OK, maintenant trouvons `a`, `b`, ou `c`, et replaçons-le par `o`. `Mark` devient `Mork`.
 (3) La même fonction transforme `rock` en `rook`.
 (4) Vous devez pensez que cela devrait transformer `caps` en `oaps`, mais en fait non. `re.sub` remplace toutes les correspondances, pas seulement la première. Donc cette expression régulière transforme `caps` en `oops`, parce que le `c` et le `a` sont tous les deux transformés en `o`. 
 
@@ -191,4 +191,209 @@ Mais ce n'est qu'une étape dans la prochaine section. Allons-y...
 
 ## Une Liste De Motifs
 
-http://web.archive.org/web/20180309013153/http://www.diveintopython3.net/generators.html#a-list-of-patterns
+Définir des fonctions nommées séparées pour chaque règle de correspondance et d'application n'est pas vraiment nécessaire. Vous ne les appelez jamais directement ; vous les ajoutez à la séquence `rules` et les appeler depuis-là.  Éliminons les motifs, ainsi la définition de nouvelle règles sera plus simple.
+
+```python
+import re
+
+def build_match_and_apply_functions(pattern, search, replace):
+    def matches_rule(word):                                     ### (1)
+        return re.search(pattern, word)
+    def apply_rule(word):                                       ### (2)
+        return re.sub(search, replace, word)
+    return (matches_rule, apply_rule)                           ### (3)
+```
+
+(1) `build_match_and_apply_functions()` est une fonction qui construit d'autres fonction de façon dynamique. Elle prend `pattern`, `search` et `replace`, puis définit une fonction `matches_rule()` qui appelle `re.search()` avec le motif (`pattern`) qui a été passé à la fonction `build_match_and_apply_functions()`, et le mot (`word`) qui a été passé à la fonction `matches_rule()` que vous construisez. Waouh.
+(2) Construire la fonction d'application fonctionne de la même manière. La fonction d'application est une fonction qui prend un paramètre, et qui appelle `re.sub()` avec les paramètres `search` et `replace` qui ont été passés à la fonction `build_match_and_apply_functions()`, et le mot (`word`) qui a été passé à la fonction `apply_rule()` que vous construisez. Cette technique utilisant les valeurs de paramètres externes au sein d'une fonction dynamique est appelée *closures*. Vous définissez essentiellement des constantes au sein de la fonction d'application que vous construisez : elle prend un paramètre (`word`), mais elle le traite alors avec deux autres valeurs (`search` et `replace`) qui ont été définies quand vous avez défini la fonction application.
+(3) Finalement, la fonction `build_match_and_apply_functions()` retourne un tuple de deux valeurs : les deux fonctions que vous avez juste créées. Les constantes que vous avez définis dans ces fonctions (`pattern` dans la fonction `matches_rule()`, et `search` dans la fonction `apply_rule()`) restent avec ces fonctions, même après que vous retourniez de `build_match_and_apply_functions()`. C'est super cool.
+
+Si cela prête vraiment à confusion (et ça devrait, c'est bizarre), cela devrait devenir plus clair quand vous voyez comment l'utiliser.
+
+```python
+patterns = \                                                        ### (1)
+  (
+    ('[sxz]$',           '$',  'es'),
+    ('[^aeioudgkprt]h$', '$',  'es'),
+    ('(qu|[^aeiou])y$',  'y$', 'ies'),
+    ('$',                '$',  's')                                 ### (2)
+  )
+rules = [build_match_and_apply_functions(pattern, search, replace)  ### (3)
+         for (pattern, search, replace) in patterns]
+```
+
+(1) Nos "règles" du pluriel sont maintenant définies comme tuple de tuples de chaînes de caractères (non pas de fonctions). La première chaîne dans chaque groupe est le motif d'expression régulière que vous utiliseriez avec `re.search()` pour voir si la règle correspond. La deuxième et la troisième chaîne dans chaque groupe sont les expressions de recherche et remplacement que vous utiliseriez avec `re.sub()` pour effectivement appliquer la règle pour transformer un nom en son pluriel.
+(2) Il y a un léger changement ici, dans la règle par défaut. Dans l'exemple précédent, la fonction `match_default()` retournait simplement `True`, signifiant que si aucune des règles spécifiques ne correspond, le code ajouterait simplement un `s` à la fin du mot donné. Cette exemple fait quelque chose de fonctionnellement équivalent. La dernière expression régulière demande si le mot a une fin (`$` correspond à la fin d'une chaîne). Bien sur, toute chaîne a une fin, même une chaîne vide, donc cette expression correspond toujours. Et donc, elle sert le même objectif que la fonction `matches_default()` qui retournait toujours `True` : elle assure que si aucune règle spécifique ne correspond, le code ajoute un `s` à la fin du mot donné.
+(3) Cette ligne est magique. Elle prend la séquence de chaînes dans `patterns` et les transforme en une séquence de fonctions. Comment ? En faisant correspondre les chaînes à la fonction `build_match_and_apply_functions()`. C'est-à-dire, elle prend chaque triplet de chaînes et appelle la fonction `build_match_and_apply_functions()` avec ces trois chaînes comme arguments. La fonction `build_match_and_apply_functions()` retourne un tuple de deux fonctions. Cela signifie que `rules` est donc fonctionnellement équivalemment à l'exemple précédent : une liste de tuples, ou chaque tuple est une paire de fonctions. La première fonction est la fonction de correspondance qui appelle `re.search()`, et la seconde fonction est la fonction d'application qui appelle `re.sub()`.
+
+Cette version du script est complétée par le point d’entrée principal, la fonction `plural()`.
+
+```python
+def plural(noun):
+    for matches_rule, apply_rule in rules:  ### (1)
+        if matches_rule(noun):
+            return apply_rule(noun)
+```
+
+(1) Puisque la liste `rules` est la même que dans l'exemple précédent (c'est vraiment le cas), cela ne devrait pas être surprenant que la fonction `plural()` n'a pas changé du tout. Elle est complètement générique ; elle prend une liste de fonctions de règle et les appelle dans l'ordre. Elle ne se soucie pas de comment les règles sont définies. Dans l'exemple précédent, elle étaient définies comme des fonctions nommées séparées. Maintenant, elles sont construites dynamiquement en faisant correspondre la sortie de la fonction `build_match_and_apply_functions()` avec une liste brute de chaîne de caractères. Cela n'a aucune d'importance ; la fonction `plural()` fonctionne toujours de la même façon.
+
+## Un Fichier De Motifs
+
+Vous avez extrait tout le code duplique et ajoutez assez d'abstraction pour les que les règles du pluriel soient définies dans une liste de chaînes de caractères. La prochaine étape logique est de prendre ces chaînes et de les mettre dans un fichier séparé, où elles peuvent être maintenues séparément du code qui les utilise.
+
+D'abord, créons un fichier texte qui contient les règles que vous voulez. Pas de structure de données sophistiquée, juste des chaînes délimitées par des espaces dans trois colonnes. Appelons-le `plural4-rules.txt`. 
+
+```
+[sxz]$               $    es
+[^aeioudgkprt]h$     $    es
+[^aeiou]y$          y$    ies
+$                    $    s
+```
+
+Maintenant regardons comment nous pouvons utiliser ce fichier de règles.
+
+```python
+import re
+
+def build_match_and_apply_functions(pattern, search, replace):     ### (1)
+    def matches_rule(word):
+        return re.search(pattern, word)
+    def apply_rule(word):
+        return re.sub(search, replace, word)
+    return (matches_rule, apply_rule)
+
+rules = []
+with open('plural4-rules.txt', encoding='utf-8') as pattern_file:  ### (2)
+    for line in pattern_file:                                      ### (3)
+        pattern, search, replace = line.split(None, 3)             ### (4)
+        rules.append(build_match_and_apply_functions(              ### (5)
+                pattern, search, replace))
+```
+
+(1) La fonction `build_match_and_apply_functions()` n'a pas changé. Vous utilisez toujours des closures pour construire deux fonctions dynamiquement qui utilisent les variables définies dans la fonction externe.
+(2) La fonction globale `open()` ouvre un fichier et retourne un objet fichier. Dans ce cas, le fichier que nous ouvrons contient les motifs de chaînes pour mettre au pluriel des noms. L'instruction `with` crée ce qui est appelé un *contexte* : quand le bloc `with` se termine, Python va automatiquement fermer le fichier, même si une exception se produit a l’intérieur du bloc `with`. Vous apprendrez plus à propos des blocs `with` et des objets fichier dans le chapitre [Fichiers]().
+(3) L'idiome `for line in <fileobject>` lit les données depuis le fichier ouvert, une ligne à la fois, et assigne le texte à la variable `line`. Vous apprendrez plus à propos de la lecture de fichier dans le chapitre  [Fichiers]().
+(4) Chaque ligne du fichier a en fait trois valeurs, mais elle sont séparées par des espaces blancs (tabulation ou espace, cela n'a pas d'importance). Pour les séparer, utilisez la  méthode de chaîne de caractères `split()`. Le premier argument de la méthode `split()` est `None`, ce qui signifie "découpe à chaque espace blanc (tabulation ou espace, cela n'a pas d'importance)." Le second argument est `3`, ce qui signifie "découpe sur les espaces blancs 3 fois, puis laisse en l’état le reste de la ligne." Une ligne comme `[sxz]$ $ es` sera découpée en la liste `['[sxz]$', '$', 'es']`, ce qui signifie que `pattern` aura '`[sxz]$`', `search` aura '`$`', et `replace` aura '`es`'. C'est beaucoup de puissance dans une seule petite ligne de code.
+(5) Finalement, vous passez `pattern`, `search`, et `replace` à la fonction `build_match_and_apply_functions()`, qui retourne un tuple de fonctions. Vous ajouter ce tuple à la liste `rules`, et `rules` finit par contenir la liste des fonctions de correspondance et d'application que la fonction `plural()` attend.
+
+L’amélioration ici est que vous avez complètement séparé les règles du pluriel dans une fichier externe, ainsi il peut être maintenu séparément du code qui 'utilise. Le code avec le code, les données avec  les données, et tout va bien.
+
+## Générateurs
+
+Est-ce que ce ne serait pas grandiose d'avoir une fonction générique `plural()` qui analyse le fichier de règles ? Récupère les règles, cherche une correspondance, applique la transformation appropriée, va à la règle suivante. C'est tout ce que la fonction `plural()` a à faire, et c'est tout ce que la fonction `plural()` devrait faire.
+
+```python
+def rules(rules_filename):
+    with open(rules_filename, encoding='utf-8') as pattern_file:
+        for line in pattern_file:
+            pattern, search, replace = line.split(None, 3)
+            yield build_match_and_apply_functions(pattern, search, replace)
+
+def plural(noun, rules_filename='plural5-rules.txt'):
+    for matches_rule, apply_rule in rules(rules_filename):
+        if matches_rule(noun):
+            return apply_rule(noun)
+    raise ValueError('no matching rule for {0}'.format(noun))
+```
+
+Mais comment est-ce que *ça* fonctionne ? Regardons d'abord un exemple interactif.
+
+```python
+>>> def make_counter(x):
+...     print('entering make_counter')
+...     while True:
+...         yield x                    ### (1)
+...         print('incrementing x')
+...         x = x + 1
+... 
+>>> counter = make_counter(2)          ### (2)
+>>> counter                            ### (3)
+<generator object at 0x001C9C10>
+>>> next(counter)                      ### (4)
+entering make_counter
+2
+>>> next(counter)                      ### (5)
+incrementing x
+3
+>>> next(counter)                      ### (6)
+incrementing x
+4
+```
+
+(1) La présence du mot-clef `yield` dans `make_counter` signifie que ce n'est pas une fonction normale. C'est un type spécial de fonction qui génère des valeurs l'une après l'autre. Vous pouvez l'imaginez comme une fonction pouvant être interrompue et reprise. L'appeler retournera un *générateur* qui peut être utiliser pour générer des valeurs successives de `x`.
+(2) Pour créer une instance du générateur `make_counter`, appeler-le juste comme une autre fonction. Notez qu'en fait cela n’exécute pas le code de la fonction. Vous pouvez le voir parce que la première ligne de la fonction `make_counter` appelle `print()`, mais rien n'est encore affiché.
+(3) La fonction `make_counter` retourne un objet générateur.
+(4) La fonction `next()` prend un objet générateur et retourne sa prochaine valeur. La première fois que vous appeler `next()`, elle exécute le code dans `make_counter` jusqu'à la première instruction `yield`, puis retourne la valeur qui a été générée. Dans ce cas, ce sera `2`, car vous avez initialement appelle le générateur en appelant `make_counter(2)`.
+(5) Appeler de façon répétitive `next()` avec le mème objet générateur reprend exactement où on en était reste et continue jusqu'à ce que l'on rencontre la prochaine instruction `yield`. Toutes les variables, état local, etc. sont sauvegardées à `yield` et rétablies à `next()`. La prochaine ligne de code attendant d’être exécutée appelle `print()`, qui affiche `incrementing x`. Après cela, l'instruction `x = x + 1`. Puis on boucle à nouveau au travers de la boucle `while`, et la première chose que l'on rencontre est l'instruction `yield x`, qui sauvegarde l’état de toute chose et retourne la valeur courante de `x` (maintenant `3`).
+(6) La deuxième fois que vous appeler `next()`, vous faites à nouveau les même choses, mais cette fois `x` vaut `4`.
+
+Puisque `make_counter` définit une boucle infinie, vous pouvez théoriquement faire cela pour toujours, et ça continuerait juste d’incrémenter `x` et de cracher des valeurs. Mais regardons plutôt des utilisations productives des générateurs.
+
+> ***“yield” met en pause une fonction. “next()” la reprend où elle s’était interrompue.***
+
+### Un Générateur Fibonacci
+
+``` python
+def fib(max):
+    a, b = 0, 1          ### (1)
+    while a < max:
+        yield a          ### (2)
+        a, b = b, a + b  ### (3)
+```
+
+(1) La séquence de Fibonacci est une séquence de nombres où chaque nombre est la somme des deux nombres qui le précèdent. Elle commence avec `0` et `1`, puis progresse doucement d'abord, puis de plus en plus rapidement. Pour commencer la séquence, vous avez besoin de deux variables : `a` commence à `0`, et `b` commence à `1`.
+(2) `a` est le nombre courant dans la séquence, donc on le génère.
+(3) `b` est le prochain nombre dans la séquence, donc on l'assigne à `a`, mais on calcule aussi la prochaine valeur `(a + b)` et on l'assigne à `b` pour l'utiliser plus tard. Notez que cela se produit en parallèle ; si `a` vaut `3` et `b` vaut `5`, alors `a, b = b, a + b` assignera `5` à `a` (la précédente valeur de `b`) et `8` à `b` (la somme des précédentes valeurs de `a` et `b`). 
+
+Donc vous avez une fonction qui crache les nombres Fibonacci successifs. Bien sur, vous pouvez faire cela avec la récursion, mais cette manière est plus facile à lire. Aussi, cela fonctionne bien avec les boucles `for`.
+
+```python
+>>> from fibonacci import fib
+>>> for n in fib(1000):      ### (1)
+...     print(n, end=' ')    ### (2)
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+>>> list(fib(1000))          ### (3)
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]
+```
+
+(1) Vous pouvez utiliser un générateur comme `fib()` directement dans une boucle `for`. La boucle `for` appellera automatiquement la fonction `next()`, récupère les valeurs de `fib()` et les assigne à la variable d'index (`n`) de la boucle `for`.
+(2) A chaque passage dans la boucle `for`, `n` reçoit une nouvelle valeur de l'instruction `yield` dans `fib()`,  tout ce que vous avez à faire arrivé là c'est de l'afficher. Une fois que `fib()` est à court de nombres (`a` devient plus grand que `max`, qui dans ce cas vaut `1000`), alors la boucle `for` se termine normalement.
+(3) C'est un idiome utile : passez un générateur à la fonction `list()`, et il itérera le générateur tout entier (exactement comme la boucle `for` de l'exemple précédent) et retournera une liste de toute lest valeurs. 
+
+### Un Générateur De Règle Du Pluriel
+
+Retournons à `plural5.py` et voyons comment cette version de `plural()` fonctionne.
+
+```python
+def rules(rules_filename):
+    with open(rules_filename, encoding='utf-8') as pattern_file:
+        for line in pattern_file:
+            pattern, search, replace = line.split(None, 3)                   ### (1)
+            yield build_match_and_apply_functions(pattern, search, replace)  ### (2)
+
+def plural(noun, rules_filename='plural5-rules.txt'):
+    for matches_rule, apply_rule in rules(rules_filename):                   ### (3)
+        if matches_rule(noun):
+            return apply_rule(noun)
+    raise ValueError('no matching rule for {0}'.format(noun))
+```
+
+(1) Pas de magie ici. Souvenez-vous que les lignes du fichier de règles ont trois valeurs séparées par des espaces, donc vous utilisez `line.split(None, 3)` pour récupérer les trois "colonnes" et les assigner à trois variables locales.
+(2) *Et puis vous générez*. Qu'est-ce que vous générez ? Deux fonctions, construites dynamiquement avec notre vieille amie, `build_match_and_apply_functions()`, qui est identique aux exemples précédents. En d'autres mots, `rules()` est un générateur qui crache des fonctions de correspondance et d'application *à la demande*.
+(3) Puisque `rules()` est un générateur, vous pouvez l'utiliser directement dans une boucle `for`. Au premier passage dans la boucle `for`, vous appellerez la fonction `rules()`, qui ouvrira le fichier de motifs, lira la première ligne, construira dynamiquement une fonction de correspondance et une fonction d'application à partir des motifs de cette ligne, et retournera les fonctions construites dynamiquement. Au second passage dans la boucle `for`, vous reprendrez exactement là où vous avez laissé `rules()` (qui était au milieu de la boucle `for line in pattern_file`). La première chose qu'elle fera sera de lire la prochaine ligne du fichier (qui est toujours ouvert), construire dynamiquement une autre fonction de correspondance et une autre fonction d'application sur la base des motifs de cette ligne, et retournera les deux fonctions.
+
+Qu'avez-vous gagné par rapport à l’étape 4 ? Temps de démarrage. A l’étape 4, quand vous importez le module `plural4`, il lit tout le fichier de motifs et construits une liste de toute les règles possibles, avant mème que ne vous pensiez à appeler la fonction `plural()`. Avec les générateurs, vous pouvez tout faire de façon paresseuse : vous lisez la première règles et créez les fonctions et les testez, et si ça fonctionne vous ne lisez même pas le reste du fichier ou créez d'autres fonctions.
+
+Qu'avez-vous perdu ? Performance ! Chaque fois que vous appelez la fonction `plural()`, le générateur `rules` recommence depuis le début — ce qui signifie rouvrir le fichier de motifs et lire depuis le début, une ligne à la fois.
+
+Et si vous pouviez avoir le meilleur des deux mondes : temps de démarrage minimal (ne pas exécuter de code à `import`), et *performance* maximale (ne pas construire les même fonctions encore et encore). Oh, et vous voulez toujours garder les règles dans un fichier séparé (parce que le code avec le code et les données avec les données), tant que vous n'avez jamais besoin de lire deux fois la même ligne.
+
+Pour faire cela, vous allez devoir construire un nouveau générateur. Mais avant que vous fassiez *cela*, vous devez apprendre les classes Python.
+
+## Pour aller plus loin (en anglais)
+
+* [PEP 255: Simple Generators](https://www.python.org/dev/peps/pep-0255/)
+* [Understanding Python’s “with” statement](http://effbot.org/zone/python-with-statement.htm)
+* [Closures in Python](http://ynniv.com/blog/2007/08/closures-in-python.html)
+* [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number)
+
