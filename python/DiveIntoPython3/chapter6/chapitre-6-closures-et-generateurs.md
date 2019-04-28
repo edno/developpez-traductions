@@ -1,8 +1,8 @@
-# Closures et Générateurs
+# Chapitre 6 : Closures et Générateurs
 
 > "My spelling is Wobbly. It’s good spelling but it Wobbles, and the letters get in the wrong places." — Winnie-the-Pooh
 
-## En Plongée
+## En plongée
 
 Ayant grandit en fils de bibliothécaire et d'ès arts spécialisé en anglais, j'ai toujours été fasciné par les langages. Pas les langages de programmation. Enfin si, les langages de programmation, mais aussi les langages naturels. Prenez l'anglais. L'anglais est un langage schizophrénique qui emprunte des mots de l'allemand, du français, de l’espagnol et du latin (pour en citer quelque uns). En fait, "emprunte" n'est pas le bon mot; "pille" est plus approprié. Ou peut être "assimile" — comme les Borgs. Ouais, j'aime ça.
 
@@ -23,7 +23,7 @@ Bien évidemment, les autres langues sont complètement différentes.
 
 Développons une librairie Python qui forme automatiquement le pluriel des mots anglais. Nous commencerons seulement avec ces quatre règles, mais gardez à l'esprit que vous allez inévitablement en ajouter d'autres.
 
-## Je Sais, Utilisons Les Expression Régulières !
+## Je sais, utilisons les expression régulières !
 
 Dons vous regardez des mots qui, au moins en anglais, signifie que vous regardez des chaînes de caractères. Vous avez des règles qui disent que vous devez trouver différentes combinaison de caractères, et puis leur faire différentes choses. Cela semble être un boulot pour les expressions régulières !
 
@@ -113,7 +113,7 @@ Regardons la négation d'expression régulière plus en détail.
 
 Les substitutions d'expression régulière sont extrêmement puissantes, et la syntaxe `\1` les rend encore plus puissante. Mais combiner toute l’opération en une seule expression régulière est aussi plus difficile à lire, et cela ne correspond pas directement à la façon dont vous décrivez les règles du pluriel. Vous avez initialement posé les règles comme "si le mot se termine en S, X, ou Z, alors ajouter ES". Si vous regardez cette fonction, vous avez deux lignes de code qui disent "si le mot se termine en S, X, ou Z, alors ajouter ES". On ne peut pas être plus directe.
 
-## Une Liste De Fonctions
+## Une liste de fonctions
 
 Maintenant, vous allez ajouter un niveau d'abstraction. Vous avez commencé par définir une liste de règles : si ceci, faire cela, sinon aller a la prochaine règle. Compliquons temporairement une partie du programme, ainsi vous pourrez en simplifier une autre partie.
 
@@ -185,11 +185,11 @@ L'avantage ici est que la fonction `plural()` est maintenant simplifiée. Il fau
 
 Les règles peuvent être définies n'importe où, de n'importe quelle façon. La fonction `plural()` ne s'en préoccupe pas.
 
-Maintenant, est-ce qu'ajouter ce niveau d'abstraction en valait la peine ? Et bien, pas encore. Considérez ce qu'il faudrait pour ajouter une nouvelle règle à la fonction. Dans le premier exemple, cela nécessiterait d'ajouter une instruction `if` à la fonction `plural()`. Dans le second exemple. cela nécessiterait d'ajouter deux fonctions, `match_foo()` et `apply_foo()`, et puis mettre à jour la séquence `rules` pour spécifier où dans la séquence les nouvelles fonctions de correspondance et d'application doivent être appelées par rapport aux autres règles.
+Maintenant, est-ce qu'ajouter ce niveau d'abstraction en valait la peine ? Et bien, pas encore. Considérez ce qu'il faudrait pour ajouter une nouvelle règle à la fonction. Dans le premier exemple, cela nécessiterait d'ajouter une instruction `if` à la fonction `plural()`. Dans le second exemple, cela nécessiterait d'ajouter deux fonctions, `match_foo()` et `apply_foo()`, et puis mettre à jour la séquence `rules` pour spécifier où dans la séquence les nouvelles fonctions de correspondance et d'application doivent être appelées par rapport aux autres règles.
 
 Mais ce n'est qu'une étape dans la prochaine section. Allons-y...
 
-## Une Liste De Motifs
+## Une liste de motifs
 
 Définir des fonctions nommées séparées pour chaque règle de correspondance et d'application n'est pas vraiment nécessaire. Vous ne les appelez jamais directement ; vous les ajoutez à la séquence `rules` et les appeler depuis-là.  Éliminons les motifs, ainsi la définition de nouvelle règles sera plus simple.
 
@@ -235,9 +235,9 @@ def plural(noun):
             return apply_rule(noun)
 ```
 
-(1) Puisque la liste `rules` est la même que dans l'exemple précédent (c'est vraiment le cas), cela ne devrait pas être surprenant que la fonction `plural()` n'a pas changé du tout. Elle est complètement générique ; elle prend une liste de fonctions de règle et les appelle dans l'ordre. Elle ne se soucie pas de comment les règles sont définies. Dans l'exemple précédent, elle étaient définies comme des fonctions nommées séparées. Maintenant, elles sont construites dynamiquement en faisant correspondre la sortie de la fonction `build_match_and_apply_functions()` avec une liste brute de chaîne de caractères. Cela n'a aucune d'importance ; la fonction `plural()` fonctionne toujours de la même façon.
+(1) Puisque la liste `rules` est la même que dans l'exemple précédent (c'est vraiment le cas), cela ne devrait pas être surprenant que la fonction `plural()` n'a pas changé du tout. Elle est complètement générique ; elle prend une liste de fonctions de règle et les appelle dans l'ordre. Elle ne se soucie pas de comment les règles sont définies. Dans l'exemple précédent, elle étaient définies comme des fonctions nommées séparées. Maintenant, elles sont construites dynamiquement en faisant correspondre la sortie de la fonction `build_match_and_apply_functions()` avec une liste brute de chaînes de caractères. Cela n'a aucune d'importance ; la fonction `plural()` fonctionne toujours de la même façon.
 
-## Un Fichier De Motifs
+## Un fichier de motifs
 
 Vous avez extrait tout le code duplique et ajoutez assez d'abstraction pour les que les règles du pluriel soient définies dans une liste de chaînes de caractères. La prochaine étape logique est de prendre ces chaînes et de les mettre dans un fichier séparé, où elles peuvent être maintenues séparément du code qui les utilise.
 
@@ -331,7 +331,7 @@ Puisque `make_counter` définit une boucle infinie, vous pouvez théoriquement f
 
 > ***“yield” met en pause une fonction. “next()” la reprend où elle s’était interrompue.***
 
-### Un Générateur Fibonacci
+### Un générateur Fibonacci
 
 ``` python
 def fib(max):
@@ -358,9 +358,9 @@ Donc vous avez une fonction qui crache les nombres Fibonacci successifs. Bien su
 
 (1) Vous pouvez utiliser un générateur comme `fib()` directement dans une boucle `for`. La boucle `for` appellera automatiquement la fonction `next()`, récupère les valeurs de `fib()` et les assigne à la variable d'index (`n`) de la boucle `for`.
 (2) A chaque passage dans la boucle `for`, `n` reçoit une nouvelle valeur de l'instruction `yield` dans `fib()`,  tout ce que vous avez à faire arrivé là c'est de l'afficher. Une fois que `fib()` est à court de nombres (`a` devient plus grand que `max`, qui dans ce cas vaut `1000`), alors la boucle `for` se termine normalement.
-(3) C'est un idiome utile : passez un générateur à la fonction `list()`, et il itérera le générateur tout entier (exactement comme la boucle `for` de l'exemple précédent) et retournera une liste de toute lest valeurs. 
+(3) C'est un idiome utile : passez un générateur à la fonction `list()`, et il itérera le générateur tout entier (exactement comme la boucle `for` de l'exemple précédent) et retournera une liste de toutes les valeurs. 
 
-### Un Générateur De Règle Du Pluriel
+### Un générateur de règle du pluriel
 
 Retournons à `plural5.py` et voyons comment cette version de `plural()` fonctionne.
 
@@ -379,10 +379,10 @@ def plural(noun, rules_filename='plural5-rules.txt'):
 ```
 
 (1) Pas de magie ici. Souvenez-vous que les lignes du fichier de règles ont trois valeurs séparées par des espaces, donc vous utilisez `line.split(None, 3)` pour récupérer les trois "colonnes" et les assigner à trois variables locales.
-(2) *Et puis vous générez*. Qu'est-ce que vous générez ? Deux fonctions, construites dynamiquement avec notre vieille amie, `build_match_and_apply_functions()`, qui est identique aux exemples précédents. En d'autres mots, `rules()` est un générateur qui crache des fonctions de correspondance et d'application *à la demande*.
+(2) *Et puis vous générez*. Qu'est-ce que vous générez ? Deux fonctions, construites dynamiquement avec notre vieille amie, `build_match_and_apply_functions()`, qui est identique à celle des exemples précédents. En d'autres mots, `rules()` est un générateur qui crache des fonctions de correspondance et d'application *à la demande*.
 (3) Puisque `rules()` est un générateur, vous pouvez l'utiliser directement dans une boucle `for`. Au premier passage dans la boucle `for`, vous appellerez la fonction `rules()`, qui ouvrira le fichier de motifs, lira la première ligne, construira dynamiquement une fonction de correspondance et une fonction d'application à partir des motifs de cette ligne, et retournera les fonctions construites dynamiquement. Au second passage dans la boucle `for`, vous reprendrez exactement là où vous avez laissé `rules()` (qui était au milieu de la boucle `for line in pattern_file`). La première chose qu'elle fera sera de lire la prochaine ligne du fichier (qui est toujours ouvert), construire dynamiquement une autre fonction de correspondance et une autre fonction d'application sur la base des motifs de cette ligne, et retournera les deux fonctions.
 
-Qu'avez-vous gagné par rapport à l’étape 4 ? Temps de démarrage. A l’étape 4, quand vous importez le module `plural4`, il lit tout le fichier de motifs et construits une liste de toute les règles possibles, avant mème que ne vous pensiez à appeler la fonction `plural()`. Avec les générateurs, vous pouvez tout faire de façon paresseuse : vous lisez la première règles et créez les fonctions et les testez, et si ça fonctionne vous ne lisez même pas le reste du fichier ou créez d'autres fonctions.
+Qu'avez-vous gagné par rapport à l’étape 4 ? Temps de démarrage. A l’étape 4, quand vous importez le module `plural4`, il lit tout le fichier de motifs et construit une liste de toutes les règles possibles, avant mème que ne vous pensiez à appeler la fonction `plural()`. Avec les générateurs, vous pouvez tout faire de façon paresseuse : vous lisez la première règle et créez les fonctions et les testez, et si ça fonctionne vous ne lisez même pas le reste du fichier ou créez d'autres fonctions.
 
 Qu'avez-vous perdu ? Performance ! Chaque fois que vous appelez la fonction `plural()`, le générateur `rules` recommence depuis le début — ce qui signifie rouvrir le fichier de motifs et lire depuis le début, une ligne à la fois.
 
@@ -393,7 +393,11 @@ Pour faire cela, vous allez devoir construire un nouveau générateur. Mais avan
 ## Pour aller plus loin (en anglais)
 
 * [PEP 255: Simple Generators](https://www.python.org/dev/peps/pep-0255/)
+
 * [Understanding Python’s “with” statement](http://effbot.org/zone/python-with-statement.htm)
+
 * [Closures in Python](http://ynniv.com/blog/2007/08/closures-in-python.html)
+
 * [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number)
 
+  
