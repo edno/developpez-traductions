@@ -43,13 +43,13 @@ Dans le contexte de la programmation, ces types de vocabulaires sont habituellem
 
 Pour analogie, comparez ces deux recettes pour une recette de soupe aux pois cassés. La première est ainsi :
 
-> "Mettre 1 tasse de pois cassés par personne dans un récipient. Ajouter de l'eau jusqu'à ce que les pois soient complément recouverts. Laisser les pois dans l'eau pour au moins 12 heures. Enlever les pois de l'eau et les mettre dans une casserole. Ajouter 4 tasses d'eau par personne. Couvrir la casserole et laisser les pois mijoter pendant deux heures. Prendre un demi-oignon par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une branche de céleri par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une carotte par personne. Le couper en morceaux. Avec un couteau ! L'ajouter aux pois. Cuire pendant 10 minutes supplémentaires."
+> Mettre 1 tasse de pois cassés par personne dans un récipient. Ajouter de l'eau jusqu'à ce que les pois soient complément recouverts. Laisser les pois dans l'eau pour au moins 12 heures. Enlever les pois de l'eau et les mettre dans une casserole. Ajouter 4 tasses d'eau par personne. Couvrir la casserole et laisser les pois mijoter pendant deux heures. Prendre un demi-oignon par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une branche de céleri par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une carotte par personne. Le couper en morceaux. Avec un couteau ! L'ajouter aux pois. Cuire pendant 10 minutes supplémentaires.
 
 Et voilà la seconde recette :
 
-> "Par personne: 1 tasse de pois cassés, un demi-oignon, une branche de céleri, et une carotte.
+> Par personne: 1 tasse de pois cassés, un demi-oignon, une branche de céleri, et une carotte.
 >
-> Faire tremper les pois pendant 12 heures. Faire mijoter pendant 2 heures dans 4 tasses d'eau (par personne). Hacher et ajouter les légumes. Cuire pendant 10 minutes supplémentaires."
+> Faire tremper les pois pendant 12 heures. Faire mijoter pendant 2 heures dans 4 tasses d'eau (par personne). Hacher et ajouter les légumes. Cuire pendant 10 minutes supplémentaires.
 
 La seconde est plus courte et plus facile à interpréter. Mais vous devez comprendre quelques mots de cuisine supplémentaires comme *faire tremper*, *mijoter*, *hacher*, et, je suppose, *légumes*.
 
