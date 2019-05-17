@@ -362,7 +362,7 @@ console.log(characterScript(121));
 // → {name: "Latin", …}
 ```
 
-La méthode `some` est une autre fonction d'ordre supérieur. Elle prend une fonction test et vous indique si la fonction retourne `true` pour n'importe quel élément dans le tableau.
+La méthode `some` est une autre fonction d'ordre supérieur. Elle prend une fonction prédicat et vous indique si la fonction retourne `true` pour n'importe quel élément dans le tableau.
 
 Mais comment est-ce que l'on récupère les codes caractère dans une chaîne de caractères ?
 
@@ -450,7 +450,81 @@ console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
 
 La fonction compte d'abord les caractères par noms, utilisant `characterScript` pour leur assigner un nom et, à défaut, utilise la chaîne `none` pour les caractères ne faisant pas partie d'un script. L'appel à `filter` supprime l’entrée correspondante à `none` du tableau de résultats, puisque nous ne sommes pas intéressés par ces caractères.
 
-Pour être capable de calculer des pourcentages, nous avons d'abord besoin du nombre total de caractères qui appartiennent à un script, ce que nous pouvons calculer avec `reduce`. Si elle ne trouve pas de tels caractères, la fonction retourne une chaîne de caractères spécifique. Sinon, elle transforme le compte des entrées en chaînes de caractères lisibles avec `map` et les combine ensemble avec `join`.
+Pour être capable de calculer des pourcentages, nous avons d'abord besoin du nombre total de caractères qui appartiennent à un script, ce que nous pouvons calculer avec `reduce`. Si elle ne trouve pas de tels caractères, la fonction retourne une chaîne de caractères spécifique. Sinon, elle transforme le compte des entrées en chaînes de caractères lisibles avec `map`, et puis les combine ensemble avec `join`.
 
 ## Résumé
 
+Être capable de passer des valeurs de fonctions a d'autres fonction est un aspect extrêmement utile de JavaScript. Il permet d’écrire des fonction qui modélise des opérations avec des "manques" dedans. Le code qui appelle ces fonctions peut combler ces manques en fournissant les valeurs de fonction.
+
+Les tableaux fournissent un bon nombre de fonctions d'ordre supérieur pratiques. Vous pouvez utiliser `forEach` pour parcourir les éléments d'un tableau. La méthode `filter` retourne un nouveau tableau contenant uniquement les éléments qui satisfont la fonction prédicat. Transformer un tableau en faisant passer chaque élément au travers d'une fonction est réalisé avec `map`. Vous pouvez utiliser `reduce` pour combiner tous les éléments d'un tableau en une seule valeur. La méthode `some` teste si n'importe quelle élément correspond à une fonction prédicat. Et `findIndex` trouve la position du premier élément qui satisfait un prédicat.
+
+## Exercices
+
+### Aplatissement
+
+Utilisez la méthode `reduce` en combinaison avec la méthode `concat` pour "aplatir" un tableau de tableaux en un seule tableau qui contient tous les éléments des tableaux d'origine.
+
+```javascript
+let arrays = [[1, 2, 3], [4, 5], [6]];
+// Your code here.
+// → [1, 2, 3, 4, 5, 6]
+```
+
+### Votre propre boucle
+
+Écrire une fonction d'ordre supérieur `loop` qui fournit quelque chose comme une instruction de boucle `for`. Elle prend une valeur, une fonction prédicat, une fonction de mise à jour, et une fonction de contenu. A chaque itération, elle exécute la fonction prédicat sur la valeur courante de la boucle et stoppe si elle retourne `false`. Alors elle appelle la fonction de contenu, lui passant sa valeur actuelle. Finalement, elle appelle la fonction de mise à jour pour créer une nouvelle valeur et recommence depuis le début.
+
+Au moment de définir la fonction, vous pouvez utiliser une boucle normale pour faire le vrai bouclage.
+
+```javascript
+// Your code here.
+
+loop(3, n => n > 0, n => n - 1, console.log);
+// → 3
+// → 2
+// → 1
+```
+
+### Tout
+
+Analogue la méthode `some`, les tableaux on aussi une méthode `every`. Celle-ci retourne `true` quand la fonction donnée retourne `true` pour *tous* les éléments dans le tableau. D'une certaine façon, `some` est une version de l’opérateur `||` qui agit sur les tableaux, et `every` est comme l’opérateur `&&`.
+
+Implémentez `every` comme une fonction qui prend un tableau et une fonction prédicat en paramètres. Écrivez deux versions, une utilisant une boucle et une utilisant la méthode `some`.
+
+```javascript
+function every(array, test) {
+  // Your code here.
+}
+
+console.log(every([1, 3, 5], n => n < 10));
+// → true
+console.log(every([2, 4, 16], n => n < 10));
+// → false
+console.log(every([], n => n < 10));
+// → true
+```
+
+> Comme l’opérateur `&&`, la méthode `every` peut arrêter d’évaluer des éléments plus en avant dès qu'elle en a trouvé un qui ne correspond pas. Donc la version basée sur la boucle peut sortir de la boucle — avec `break` ou `return` — dès lors qu'elle rencontre un élément pour lequel la fonction prédicat retourne `false`. Si la boucle arrive à sa fin sans trouver un tel élément, nous savons alors que tous les éléments concordent et nous pouvons retourner `true`.
+>
+> Pour construire `every` à partir de `some`, nous pouvons appliquer les *lois de De Morgan* qui énoncent que `a && b` égale `!(!a || !b)`. Ce qui peut être généralisé aux tableaux, où tous les éléments d'un tableau concordent, s'il n'existe pas d’élément du tableau qui ne concorde pas.
+
+### Direction d’écriture dominante
+
+Écrire une fonction qui détermine la direction dominante d’écriture dans une chaîne d'un texte. Souvenez-vous que chaque objet script a une propriété `direction` qui peut être "`ltr`" (gauche a droite), "`rtl`" (droite a gauche),  ou "`ttb`" (haut en bas).
+
+La direction dominante est la direction avec une majorité de caractères qui ont un script qui leur est associé. Les fonctions `characterScript` et `countBy` définies plus tôt dans ce chapitre sont probablement utiles ici.
+
+```javascript
+function dominantDirection(text) {
+  // Your code here.
+}
+
+console.log(dominantDirection("Hello!"));
+// → ltr
+console.log(dominantDirection("Hey, مساء الخير"));
+// → rtl
+```
+
+> Votre solution pourrait ressembler beaucoup à la première moitié de l'exemple `textScript`. Vous devez encore compter des caractères avec un critère basé sur `charactereScript`, et puis enlever la partie des résultats qui fait référence aux caractères sans intérêt (sans script).
+>
+> Trouver la direction avec le plus grand compte de caractères peut être fait avec `reduce`. Si le comment n'est pas clair, référez-vous à l'exemple plus haut dans ce chapitre, où `reduce` a été utilisé pour trouver le script avec le plus de caractères.
