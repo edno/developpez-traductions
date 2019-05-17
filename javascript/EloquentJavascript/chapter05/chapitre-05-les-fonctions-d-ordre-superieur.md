@@ -1,6 +1,6 @@
 # Les fonction d'ordre supérieur
 
-> Tzu-li et Tzu-ssu se vantaient de la taille de leur derniers programmes. 'Deux cents mille lignes', dit Tzu-li, 'sans compter les commentaires !' Tzu-su" Tzu-ssu répondit, ''Pfff, le mien à au moins un *million* de lignes déjà.' Maître Yuan-Ma dit 'Mon meilleur programme a cinq cent lignes.' En entendant cela, Tzu-li et Tzu-ssu ont été éclairés.'
+> Tzu-li et Tzu-ssu se vantaient de la taille de leurs derniers programmes. 'Deux cents mille lignes', dit Tzu-li, 'sans compter les commentaires !' Tzu-su" Tzu-ssu répondit, ''Pff, le mien à au moins un *million* de lignes déjà.' Maître Yuan-Ma dit 'Mon meilleur programme a cinq cent lignes.' En entendant cela, Tzu-li et Tzu-ssu ont été éclairés.'
 >
 > — Master Yuan-Ma, *The Book of Programming*
 
@@ -211,7 +211,7 @@ La fonction utilise l'argument appelé `test`, une valeur de fonction, pour comp
 
 Notez comment la fonction `filter`, plutôt que de supprimer des éléments du tableau existant, construit un nouveau tableau avec seulement les éléments qui satisfont la condition `test`. Cette fonction est *pure*. Elle ne modifie pas le tableau qui lui est donné.
 
-Comme `forEach`, `filter` est une méthode standard pour les tableaux. L'exemple définit la fonction seulement pour montrer ce qui se passe a l’intérieur. A partir de maintenant, nous l'utiliserons plutôt de comme cela :
+Comme `forEach`, `filter` est une méthode standard pour les tableaux. L'exemple définit la fonction seulement pour montrer ce qui se passe à l’intérieur. A partir de maintenant, nous l'utiliserons plutôt de comme cela :
 
 ```javascript
 console.log(SCRIPTS.filter(s => s.direction == "ttb"));
@@ -222,7 +222,7 @@ console.log(SCRIPTS.filter(s => s.direction == "ttb"));
 
 Assumons que nous avons un tableau d'objet représentant des scripts, produit en filtrant le tableau `SCRIPT` de quelque façon. Mais nous voulons un tableau de noms, qui est plus simple à parcourir.
 
-La méthode `map` transforme un tableau en appliquant une fonction a tous ses éléments et construit un nouveau tableau avec les valeurs résultantes. Le nouveau tableau aura la même longueur que le tableau d’entrée, mais son contenu sera *associé* (*mapped*) à une nouvelle structure par la fonction.
+La méthode `map` transforme un tableau en appliquant une fonction à tous ses éléments et construit un nouveau tableau avec les valeurs résultantes. Le nouveau tableau aura la même longueur que le tableau d’entrée, mais son contenu sera *associé* (*mapped*) à une nouvelle structure par la fonction.
 
 ``` javascript
 function map(array, transform) {
@@ -242,4 +242,50 @@ Comme `forEach` et `filter`, `map` est une méthode standard pour les tableaux.
 
 ## Résumer avec *reduce*
 
-Une autre
+Une autre chose commune à faire avec des tableaux est d'en calculer une valeur unique. Notre exemple récurrent, sommer une collection de nombre, en est un exemple. Un autre exemple est de trouver le script avec le plus de caractères.
+
+L’opération d'ordre supérieur qui représente ce modèle est appelée *reduce* (quelquefois aussi appelée *fold*). Elle construit une valeur en prenant de manière répétitive un unique élément du tableau et en le combinant avec la valeur actuelle. En sommant des nombres, vous commencez avec le nombre zéro et, pour chaque élément, l'ajouter à la somme.
+
+Les paramètres de `reduce` sont, à part le tableau, une fonction de combinaison et une valeur de départ. Cette fonction est un peu moins simple que `filter` et `map`, donc regardez-la de près :
+
+```javascript
+function reduce(array, combine, start) {
+    let current = start;
+    for (let element of array) {
+        current = combine(current, element);
+    }
+    return current;
+}
+
+console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+// → 10
+```
+
+La méthode standard pour les tableaux `reduce`, qui bien sur correspond a cette fonction a un avantage supplémentaire. Si votre tableau contient au moins un élément, vous pouvez omettre l'argument `start`. Cette méthode prendra le premier élément du tableau comment sa valeur de départ et commencera la réduction à partir du second élément.
+
+```javascript
+console.log([1, 2, 3, 4].reduce((a, b) => a + b));
+// → 10
+```
+
+Pour utiliser `reduce` (deux fois) pour utiliser le script avec le plus de caractères, on peut écrire quelque chose comme :
+
+```javascript
+function characterCount(script) {
+    return script.ranges.reduce((count, [from, to]) =>{
+        return count + (to - from);
+    }, 0);
+}
+
+console.log(SCRIPTS.reduce((a, b) => {
+  return characterCount(a) < characterCount(b) ? b : a;
+}));
+// → {name: "Han", …}
+```
+
+La fonction `characterCount` réduit les intervalles assignés à un script en sommant leurs tailles. Notez l'utilisation de la déstructuration dans la liste de paramètres de la fonction de réduction. Le deuxième appel à `reduce` utilise alors ça pour trouver le script le plus grand en comparant de manière répétitive deux scripts et retournant le plus grand.
+
+Le script han a plus de 89 000 caractères qui lui sont assignés dans la norme Unicode, en faisant de loin le plus grand système d’écriture dans le jeu de données. Han est un script (quelques fois) utilisé pour les textes chinois, japonais, et coréens. Ce langues partagent beaucoup de caractères, cependant elles tendent à les écrire différemment. Le consortium Unicode (basé aux États-Unis) a décidé de les traiter comme un unique système d’écriture pour sauver des codes caractères. On l'appelle unification han et cela continue de faire des mécontents.
+
+## Composabilité
+
