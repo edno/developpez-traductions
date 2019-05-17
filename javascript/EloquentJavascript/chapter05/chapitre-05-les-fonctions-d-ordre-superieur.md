@@ -1,4 +1,4 @@
-# Les fonction d'ordre supérieur
+# Les fonctions d'ordre supérieur
 
 > Tzu-li et Tzu-ssu se vantaient de la taille de leurs derniers programmes. 'Deux cents mille lignes', dit Tzu-li, 'sans compter les commentaires !' Tzu-su" Tzu-ssu répondit, ''Pff, le mien à au moins un *million* de lignes déjà.' Maître Yuan-Ma dit 'Mon meilleur programme a cinq cent lignes.' En entendant cela, Tzu-li et Tzu-ssu ont été éclairés.'
 >
@@ -35,7 +35,7 @@ Si on compte la taille des définitions de `sum` et `range`, le second programme
 
 Il est plus probable qu'il soit correcte car la solution est exprime dans un vocabulaire qui correspond au problème résolu. Faire la somme d'un intervalle de nombres n'a rien à voir avec des boucles et des compteurs. Il s'agit d'intervalles et de sommes.
 
-Les définitions de ces vocabulaires (les fonctions `sum` et `range`) impliqueront bien sur des boucles, compteurs, et autres détails secondaires. Mais parce qu'elles expriment des concepts plus simples que le programme en entier, elles sont plus faciles à faire correctement.
+Les définitions de ces vocabulaires (les fonctions `sum` et `range`) impliqueront bien sûr des boucles, compteurs, et autres détails secondaires. Mais parce qu'elles expriment des concepts plus simples que le programme en entier, elles sont plus faciles à faire correctement.
 
 ## Abstraction
 
@@ -61,7 +61,7 @@ C'est une compétence utile, en programmation, que de remarquer quand vous trava
 
 Les fonctions simples, comme nous en avons vu jusque là, sont de bonnes façons de construire des abstractions. Mais des fois elles se révèlent insuffisantes.
 
-Il est courant pour un programme de faire quelque chose un certain nombre de fois. Vous pouvez écrire une boucle `for` pour cela, comme :
+Il est courant pour un programme de faire quelque chose un certain nombre de fois. Pour cela, vous pouvez écrire une boucle `for`, comme :
 
 ```javascript
 for (let i = 0; i < 10; i++) {
@@ -79,7 +79,7 @@ function repeatLog(n) {
 }
 ```
 
-Mais qu'en est-il si on veut faire quelque chose d'autre qu'écrire les nombres dans des messages de journalisation ? Puisque "faire quelque chose" peut être représente comme une fonction et que les fonctions ne sont que des valeurs, on peut passer nos actions comme une valeur de fonction.
+Mais qu'en est-il si on veut faire quelque chose d'autre qu'écrire les nombres dans des messages de journalisation ? Puisque "faire quelque chose" peut être représenté comme une fonction et que les fonctions ne sont que des valeurs, on peut passer notre action comme une valeur de fonction.
 
 ```javascript
 function repeat(n, action) {
@@ -94,7 +94,7 @@ repeat(3, console.log);
 // → 2
 ```
 
-Il n'est pas nécessaire de passer une fonction prédéfinie a `repeat`. Souvent, il est plus simple de créer une valeur de fonction sur le coup à la place.
+Il n'est pas nécessaire de passer une fonction prédéfinie à `repeat`. Souvent, il est plus simple de créer une valeur de fonction sur le coup à la place.
 
 ```javascript
 let labels = [];
@@ -111,7 +111,7 @@ Cette structure est un peu comme un boucle `for` — elle décrit d'abord le typ
 
 Les fonctions qui opèrent sur d'autres fonctions, soit en les prenant en tant qu'arguments ou en les retournant, sont appelées *fonctions d'ordre supérieur*. Puisque nous avons déjà vue que les fonctions sont des valeurs régulières, il n'y a rien de remarquable dans le fait que de telles fonctions existent. Le terme vient des mathématiques, où la différence entre fonctions et autres valeurs est pris plus au sérieux.
 
-Les fonction d'ordre supérieur nous permettent d'abstraire les *actions*, pas seulement des valeurs. Elles existent sous différentes formes. Par exemple, vous pouvez avoir des fonctions qui créent de nouvelles fonctions.
+Les fonctions d'ordre supérieur nous permettent d'abstraire les *actions*, pas seulement des valeurs. Elles existent sous différentes formes. Par exemple, nous pouvons avoir des fonctions qui créent de nouvelles fonctions.
 
 ```javascript
 function greaterThan(n) {
@@ -122,7 +122,7 @@ console.log(greaterThan10(11));
 // → true
 ```
 
-Et nous pouvons avoir des fonction qui modifient d'autres fonctions.
+Et nous pouvons avoir des fonctions qui modifient d'autres fonctions.
 
 ```javascript
 function noisy(f) {
@@ -167,7 +167,7 @@ Un domaine où les fonctions d'ordre supérieur excellent est le traitement de d
 
 Vous souvenez-vous d'Unicode vu au [Chapitre 1](#), le système assigne un nombre à chaque caractère d'une langue écrite ? La plupart de ces caractères sont associés à un script particulier. La norme contient 140 scripts différents — 81 sont toujours utilisés aujourd'hui, 59 sont historiques.
 
-Bien que je ne sache que lire les caractères latins, j’apprécie le fait que des gens écrivent des textes dans au moins 80 autres systèmes d’écriture, beaucoup d'entre eux que je ne pourrait pas reconnaître. Par exemple, voici un échantillon d’écriture manuscrite tamile. 
+Bien que je ne sache que lire les caractères latins, j'ai conscience du fait que des gens écrivent des textes dans au moins 80 autres systèmes d’écriture, beaucoup d'entre eux que je ne pourrait pas reconnaître. Par exemple, voici un échantillon d’écriture manuscrite tamile. 
 
 ![Écriture manuscrite tamile](https://eloquentjavascript.net/img/tamil.png)
 
@@ -186,11 +186,11 @@ Le jeu de données d'exemple contient des morceaux d'information relatifs aux 14
 
 Un tel objet nous fournit le nom du script, les intervalles Unicode qui lui sont assignés, la direction dans laquelle il est écrit, la date (approximative) d'origine, s'il est toujours utilisé, et un lien vers plus d'informations. La direction peut être "`ltr`" pour de gauche à droite (*left to right*), "`rtl`" pour de droite à gauche (*right to left*) (la façon dont les textes arabes et hébreux sont écrits), ou "`ttb`" pour de haut en bas (*top to bottom*) (comme dans l’écriture mongole).
 
-La propriété `ranges` contient un tableau d'intervalles de caractères Unicode, chacun d'entre-eux étant un tableau a deux éléments contenant une limite inférieure et une limite supérieure. N'importe quel code caractère compris dans ces intervalles sont assignés au script. La limite inférieure est inclusive (code 994 est un caractère copte), et la limite supérieure est non inclusive (le code 1008 n'est pas un caractère copte).
+La propriété `ranges` contient un tableau d'intervalles de caractères Unicode, chacun d'entre-eux étant un tableau à deux éléments contenant une limite inférieure et une limite supérieure. N'importe quel code de caractère compris dans ces intervalles est assigné au script. La limite inférieure est inclusive (code 994 est un caractère copte), et la limite supérieure est non inclusive (le code 1008 n'est pas un caractère copte).
 
 ## Filtrer les tableaux
 
-Pour trouver les scripts, dans le jeu de données, qui sont toujours utilises, la fonction suivante peut être utile. Elle retire les éléments d'un tableau, qui ne satisfont pas une condition.
+Pour trouver les scripts, dans le jeu de données, qui sont toujours utilisés, la fonction suivante peut être utile. Elle retire les éléments d'un tableau, qui ne satisfont pas une condition.
 
 ```javascript
 function filter(array, test) {
@@ -261,14 +261,14 @@ console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));
 // → 10
 ```
 
-La méthode standard pour les tableaux `reduce`, qui bien sur correspond a cette fonction a un avantage supplémentaire. Si votre tableau contient au moins un élément, vous pouvez omettre l'argument `start`. Cette méthode prendra le premier élément du tableau comment sa valeur de départ et commencera la réduction à partir du second élément.
+La méthode standard pour les tableaux `reduce`, qui bien sûr correspond à cette fonction a un avantage supplémentaire. Si votre tableau contient au moins un élément, vous pouvez omettre l'argument `start`. Cette méthode prendra le premier élément du tableau comment sa valeur de départ et commencera la réduction à partir du second élément.
 
 ```javascript
 console.log([1, 2, 3, 4].reduce((a, b) => a + b));
 // → 10
 ```
 
-Pour utiliser `reduce` (deux fois) pour utiliser le script avec le plus de caractères, on peut écrire quelque chose comme :
+Pour utiliser `reduce` (deux fois) pour trouver le script avec le plus de caractères, on peut écrire quelque chose comme :
 
 ```javascript
 function characterCount(script) {
@@ -283,9 +283,174 @@ console.log(SCRIPTS.reduce((a, b) => {
 // → {name: "Han", …}
 ```
 
-La fonction `characterCount` réduit les intervalles assignés à un script en sommant leurs tailles. Notez l'utilisation de la déstructuration dans la liste de paramètres de la fonction de réduction. Le deuxième appel à `reduce` utilise alors ça pour trouver le script le plus grand en comparant de manière répétitive deux scripts et retournant le plus grand.
+La fonction `characterCount` réduit les intervalles assignés à un script en sommant leurs tailles. Notez l'utilisation de la déstructuration dans la liste de paramètres de la fonction de réduction. Le deuxième appel à `reduce` utilise alors cela pour trouver le script le plus grand en comparant de manière répétitive deux scripts et retournant le plus grand.
 
-Le script han a plus de 89 000 caractères qui lui sont assignés dans la norme Unicode, en faisant de loin le plus grand système d’écriture dans le jeu de données. Han est un script (quelques fois) utilisé pour les textes chinois, japonais, et coréens. Ces langues partagent beaucoup de caractères, cependant elles tendent à les écrire différemment. Le consortium Unicode (basé aux États-Unis) a décidé de les traiter comme un unique système d’écriture pour sauver des codes caractères. On l'appelle unification han et cela continue de faire des mécontents.
+Le script han a plus de 89 000 caractères qui lui sont assignés dans la norme Unicode, en faisant de loin le plus grand système d’écriture dans le jeu de données. Han est un script (quelques fois) utilisé pour les textes chinois, japonais, et coréens. Ces langues partagent beaucoup de caractères, cependant elles tendent à les écrire différemment. Le consortium Unicode (basé aux États-Unis) a décidé de les traiter comme un unique système d’écriture pour sauver des codes caractère. On l'appelle *unification han* et cela continue de faire des mécontents.
 
 ## Composabilité
+
+Considérez comment nous aurions écrit l'exemple précédent (trouver le plus large script) sans les fonctions d'ordre supérieur. Le code n'est pas bien pire.
+
+```javascript
+let biggest = null;
+for (let script of SCRIPTS) {
+    if (biggest == null || 
+       characterCount(biggest) < characterCount(script)) {
+        biggest = script;
+    }
+}
+console.log(biggest);
+// → {name: "Han", …}
+```
+
+Il y a quelques bindings de plus, et le programme est 4 lignes plus long. Mais il reste très lisible.
+
+Les fonctions d'ordre supérieur commencent a briller quand vous avez besoin de *composer* des opérations. En tant qu'exemple, écrivons le code qui trouve l’année moyenne d'origine pour les scripts vivants et morts dans le jeu de données.
+
+```javascript
+function average(array) {
+    return array.reduce((a, b) => a + b) / array.length;
+}
+
+console.log(Math.round(average(
+  SCRIPTS.filter(s => s.living).map(s => s.year))));
+// → 1188
+console.log(Math.round(average(
+  SCRIPTS.filter(s => !s.living).map(s => s.year))));
+// → 188
+```
+
+Donc les scripts morts dans Unicode sont, en moyenne, plus anciens que les vivants. Ce n'est pas vraiment une statistique significative ni surprenante. Mais j’espère que vous serez d'accord que le code utilisé pour calculer cela n'est pas difficile à lire. Vous pouvez le voir comme un pipeline : on commence avec tous les scripts, on extrait les vivants (ou les morts),  récupère leur années, les moyenne, et arrondi le résultat.
+
+Vous pouvez bien sûr aussi écrire ce calcule comme une large boucle.
+
+```javascript
+let total = 0, count = 0;
+for (let script of SCRIPTS) {
+  if (script.living) {
+    total += script.year;
+    count += 1;
+  }
+}
+console.log(Math.round(total / count));
+// → 1188
+```
+
+Mais il est difficile de voir ce qui est calculé et comment. Et parce que les résultats intermédiaires ne sont pas représentés comme des valeurs cohérentes, cela demandera plus de travaille pour extraire quelque-chose comme `average` dans une fonction séparée.
+
+En termes de ce que l'ordinateur fait vraiment, ces deux approches sont aussi très différentes. La première construira de nouveaux tableau lors de l’exécution de `filter` et `map`, alors que la seconde calcule seulement quelques nombres, faisant moins de travail. Vous pouvez généralement vous permettre l'approche lisible, mais si vous traitez des tableaux énormes, et le faites plusieurs fois, le style moins abstrait pourrait valoir la vitesse supplémentaire.
+
+## Chaînes de caractères et codage des caractères
+
+Une utilisation du jeu de données serait de trouver quel script est utilisé dans un morceau de texte. Examinons un programme qui fait cela.
+
+Souvenez-vous que chaque script a un tableau de codes de caractère qui lui est associé. Donc étant donne un code de caractère, nous pouvons utiliser une fonction comme la suivante pour trouver le script correspondant (s'il existe).
+
+```javascript
+function characterScript(code) {
+    for (let script of SCRIPTS) {
+        if (script.ranges.some(([from, to]) => {
+            return code >= from && code < to;
+        })) {
+            return script;
+        }
+    }
+    return null;
+}
+
+console.log(characterScript(121));
+// → {name: "Latin", …}
+```
+
+La méthode `some` est une autre fonction d'ordre supérieur. Elle prend une fonction test et vous indique si la fonction retourne vrai pour n'importe quel élément dans le tableau.
+
+Mais comment est-ce que l'on récupère les codes caractère dans une chaîne de caractères ?
+
+Dans le [Chapitre 1](), j'ai mentionné que les chaînes de caractères JavaScript sont encodées comme une séquence de nombres de 16 octets. Ils sont appelés points de code. Un code de caractère Unicode était initialement supposé tenir dans une telle unité (ce qui vous donne un peu plus de 65 000 caractères). Quand il est devenu clair que cela ne sera pas suffisant, beaucoup de gens ont hésité à utiliser plus de mémoire par caractère. Pour adresser ces inquiétudes, UTF-16, le format utilisé par les chaînes de caractères JavaScript, a été inventé. Il décrit les caractères les plus communs en utilisant un unique point de code de 16 octets mais utilise une paire de deux de ces unités pour les autres.
+
+UTF-16 est généralement considéré comme une mauvaise idée de nos jours. Il semble presque avoir été intentionnellement conçu pour faire des erreurs. Il est facile d’écrire des programmes qui prétendent que les points de code et les caractères sont la mème chose. Et si votre langue n'utilise pas les caractères à deux points de code, alors cela semblera fonctionner très bien. Mais dès que quelqu'un essaye d'utiliser un tel programme avec des des caractères chinois moins commun, ça casse. Heureusement, avec l’avènement des émoticônes, tout le monde a commencé à utiliser les caractères à deux points de code, et le fardeau de traiter de tels problèmes est plus équitablement réparti.
+
+Malheureusement, les opérations courantes sur les chaînes de caractères JavaScript, telles que récupérer leur longueur avec la propriété `length` et accéder à leur contenu utilisant les crochets, gèrent uniquement les points de code.
+
+```javascript
+// Deux caractères émoticônes, cheval et chaussure
+let horseShoe = "🐴👟";
+console.log(horseShoe.length);
+// → 4
+console.log(horseShoe[0]);
+// → (Demi-caractère invalide)
+console.log(horseShoe.charCodeAt(0));
+// → 55357 (Point de code du demi-caractère)
+console.log(horseShoe.codePointAt(0));
+// → 128052 (Réel point de code pour l'émoticône cheval)
+```
+
+La méthode JavaScript `charCodeAt` vous retourne un point de code, et non pas le code de caractère complet. La méthode `codePointAt`, ajoutée plus tard, retourne un caractère Unicode complet. Donc, nous pouvons l'utiliser pour récupérer les caractères d'une chaîne de caractères. Mais l'argument passé à `codePointAt` reste un index dans la séquence d’unité de code. Donc, pour parcourir tous les caractères dans une chaîne de caractères, nous aurons toujours besoin de savoir si un caractère prend un ou deux points de code.
+
+Dans le [chapitre précédent](), j'ai mentionné qu'une boucle `for/of` peut aussi être utilisée avec les chaînes de caractères. Comme `codePointAt`, ce type de boucle a été introduit a un moment où les gens étaient très au fait des problèmes liés à UTF-16. Quand vous l'utilisez pour parcourir la chaîne de caractères, elle retourne de vrais caractères, et non pas des points de code.
+
+```javascript
+let roseDragon = "🌹🐉";
+for (let char of roseDragon) {
+  console.log(char);
+}
+// → 🌹
+// → 🐉
+```
+
+Si vous avez un caractère (qui sera une chaîne de caractères d'un ou deux point de code), vous pouvez utiliser `codePointAt(0)` pour retrouver son code.
+
+## Reconnaître du texte
+
+Vous avez une fonction `characterScript` et une manière de parcourir correctement les caractères. La prochaine étape est de compter les caractères qui appartiennent à chaque script. L'abstraction de comptage suivante sera utile ici :
+
+```javascript
+function countBy(items, groupName) {
+    let counts = [];
+    for (let item of items) {
+        let name = groupName[item];
+        let known = counts.findIndex(c => c.name == name);
+        if (known == -1) {
+            count.push({name, count: 1}):
+        } else {
+            counts[known].count++
+        }
+    }
+    return counts;
+}
+
+console.log(countBy([1, 2, 3, 4, 5], n => n > 2));
+// → [{name: false, count: 2}, {name: true, count: 3}]
+```
+
+La fonction `countBy` attend une collection (n'importe quoi que nous pouvons parcourir avec `for/of`) et une fonction qui détermine un nom de groupe pour un élément donné. Elle retourne un tableau d'objets, chaque objet désigne un groupe et vous indique le nombre d’éléments qui ont été trouvés pour ce groupe.
+
+Elle utilise une autre méthode de tableaux — `findIndex`. Cette méthode est similaire à `indexOf`, mais au lieu de chercher pour une particulière valeur, elle cherche la première valeur pour laquelle la fonction fournit retourne `true`. Comme `indexOf`, elle retourne `-1` quand aucun élément n'est trouvé.
+
+Utilisant `countBy`, nous pouvons écrire la fonction qui nous indique quels scripts sont utilisés dans un morceau de texte.
+
+```javascript
+function textScripts(text) {
+    let scripts = countBy(text, char => {
+        let script = characterScript(char.codePointAt(0));
+        return script ? script.name : "none";
+    }).filter(({name}) => name != "none");
+    
+    let total = scripts.reduce((n, {count}) => n + count, 0);
+    if (total == 0) return "No scripts found";
+    
+    return scripts.map(({name, count}) => {
+        return `${Math.round(count * 100 / total)}% ${name}`;
+    }).join(", ");
+}
+
+console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
+// → 61% Han, 22% Latin, 17% Cyrillic
+```
+
+La fonction compte d'abord les caractères par noms, utilisant `characterScript` pour leur assigner un nom et, à défaut, utilise la chaîne `none` pour les caractères ne faisant pas partie d'un script. L'appel à `filter` supprime l’entrée correspondant à `none` du tableau de résultats, puisque nous ne sommes pas intéressés par ces caractères.
+
+Pour être capable de calculer des pourcentages, nous avons d'abord besoin du nombre total de caractères qui appartiennent à un script, ce que nous pouvons calculer avec `reduce`. Si elle ne trouve pas de tels caractères, la fonction retourne une chaîne de caractère spécifique. Sinon, elle transforme le compte des entrées en chaînes de caractères lisibles avec `map` et les combine ensemble avec `join`.
+
+## Résumé
 
