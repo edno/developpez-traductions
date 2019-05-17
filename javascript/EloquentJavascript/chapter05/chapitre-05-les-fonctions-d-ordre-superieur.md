@@ -171,7 +171,7 @@ Bien que je ne sache que lire les caractères latins, j'ai conscience du fait qu
 
 ![Écriture manuscrite tamile](https://eloquentjavascript.net/img/tamil.png)
 
-Le jeu de données d'exemple contient des morceaux d'information relatifs aux 140 scripts définis dans Unicode. Il est disponible dans le bac-à-sable de codage de ce chapitre en que `SCRIPTS` binding. Le binding contient un tableau d'objets, chacun d'entre-eux décrivant un script.
+Le jeu de données d'exemple contient des morceaux d'information relatifs aux 140 scripts définis dans Unicode. Il est disponible dans le [bac-à-sable de codage](https://eloquentjavascript.net/code/#5) de ce chapitre en que `SCRIPTS` binding. Le binding contient un tableau d'objets, chacun d'entre-eux décrivant un script.
 
 ```javascript
 {
