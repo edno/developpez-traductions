@@ -2,7 +2,7 @@
 
 > Tzu-li et Tzu-ssu se vantaient de la taille de leurs derniers programmes. 'Deux cents mille lignes', dit Tzu-li, 'sans compter les commentaires !' Tzu-su" Tzu-ssu répondit, ''Pff, le mien à au moins un *million* de lignes déjà.' Maître Yuan-Ma dit 'Mon meilleur programme a cinq cent lignes.' En entendant cela, Tzu-li et Tzu-ssu ont été éclairés.'
 >
-> — Master Yuan-Ma, *The Book of Programming*
+> — Maître Yuan-Ma, *Le Livre de la Programmation*
 
 > Il y a deux façons de construire un logiciel : une façon est de le faire si simple qu'il n'y pas pas de défauts flagrants, et l'autre façon est de le faire si complexe qu'il n'y a pas de défauts flagrants. "
 >
@@ -10,7 +10,7 @@
 
 ![Lettres de differents scripts](https://eloquentjavascript.net/img/chapter_picture_5.jpg)
 
-Un long programme est un programme coûteux, et pas seulement à cause du temps qu'il faut pour le construire. Taille implique presque toujours complexité, et complexité rend les programmeurs confus. Des programmeurs confus, à leur tour, introduisent des erreurs (bugs) dans les programmes. Un long programme fournit beaucoup de place a ces bugs pour se cacher, les rendant difficiles a trouver.
+Un long programme est un programme coûteux, et pas seulement à cause du temps qu'il faut pour le construire. Taille implique presque toujours complexité, et complexité rend les programmeurs confus. Des programmeurs confus, à leur tour, introduisent des erreurs (bugs) dans les programmes. Un long programme fournit beaucoup de place à ces bugs pour se cacher, les rendant difficiles a trouver.
 
 Revenons aux deux derniers exemples de l'introduction. Le premier est autonome et long de six lignes.
 
@@ -35,15 +35,15 @@ Si on compte la taille des définitions de `sum` et `range`, le second programme
 
 Il est plus probable qu'il soit correcte car la solution est exprime dans un vocabulaire qui correspond au problème résolu. Faire la somme d'un intervalle de nombres n'a rien à voir avec des boucles et des compteurs. Il s'agit d'intervalles et de sommes.
 
-Les définitions de ce vocabulaires (les fonctions `sum` et `range`) impliqueront bien sur des boucles, compteurs, et autres détails secondaires. Mais parce qu'elles expriment des concepts plus simples que le programme en entier, elles sont plus faciles à faire correctement.
+Les définitions de ces vocabulaires (les fonctions `sum` et `range`) impliqueront bien sur des boucles, compteurs, et autres détails secondaires. Mais parce qu'elles expriment des concepts plus simples que le programme en entier, elles sont plus faciles à faire correctement.
 
 ## Abstraction
 
 Dans le contexte de la programmation, ces types de vocabulaires sont habituellement appelés *abstraction*s. Les abstractions masquent les détails et donnent la possibilité de discuter des problèmes à un niveau plus élevé (ou plus abstrait).
 
-Pour analogie, comparez ces deux recettes pour une recette de soupe aux pois. La première est ainsi :
+Pour analogie, comparez ces deux recettes pour une recette de soupe aux pois cassés. La première est ainsi :
 
-> "Mettre 1 tasse de pois secs par personne dans un récipient. Ajouter de l'eau jusqu'à ce que les pois soient complément recouverts. Laisser les pois dans l'eau pour au moins 12 heures. Enlever les pois de l'eau et les mettre dans une casserole. Ajouter 4 tasses d'eau par personne. Couvrir la casserole et laisser les pois mijoter pendant deux heures. Prendre un demi-oignon par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une branche de céleri par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une carotte par personne. Le couper en morceaux. Avec un couteau ! L'ajouter aux pois. Cuire pendant 10 minutes supplémentaires."
+> "Mettre 1 tasse de pois cassés par personne dans un récipient. Ajouter de l'eau jusqu'à ce que les pois soient complément recouverts. Laisser les pois dans l'eau pour au moins 12 heures. Enlever les pois de l'eau et les mettre dans une casserole. Ajouter 4 tasses d'eau par personne. Couvrir la casserole et laisser les pois mijoter pendant deux heures. Prendre un demi-oignon par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une branche de céleri par personne. Le couper en morceaux avec un couteau. L'ajouter aux pois. Prendre une carotte par personne. Le couper en morceaux. Avec un couteau ! L'ajouter aux pois. Cuire pendant 10 minutes supplémentaires."
 
 Et voilà la seconde recette :
 
@@ -53,7 +53,7 @@ Et voilà la seconde recette :
 
 La seconde est plus courte et plus facile à interpréter. Mais vous devez comprendre quelques mots de cuisine supplémentaires comme *faire tremper*, *mijoter*, *hacher*, et, je suppose, *légumes*.
 
-Lorsque l'on programme, on ne peut pas s'attendre à trouver tous les mots dont on a besoin dans le dictionnaire. Et donc, on peut tomber dans le cas de la première recette — identifier précisément les étapes que l'ordinateur doit exécuter, une par une, aveugle aux concepts de haut niveau qu'elles expriment.
+Lorsque l'on programme, on ne peut pas s'attendre à trouver tous les mots dont on a besoin dans le dictionnaire. Et donc, on peut se retrouver dans le cas de la première recette — identifier précisément les étapes que l'ordinateur doit exécuter, une par une, aveugle aux concepts de haut niveau qu'elles expriment.
 
 C'est une compétence utile, en programmation, que de remarquer quand vous travaillez à un niveau d’abstraction trop bas.
 
@@ -61,7 +61,7 @@ C'est une compétence utile, en programmation, que de remarquer quand vous trava
 
 Les fonctions simples, comme nous en avons vu jusque là, sont de bonnes façons de construire des abstractions. Mais des fois elles se révèlent insuffisantes.
 
-Il est courant pour un programme de faire quelque choses un certain nombre de fois. Pour pouvez écrire une boucle `for` pour cela, comme :
+Il est courant pour un programme de faire quelque chose un certain nombre de fois. Vous pouvez écrire une boucle `for` pour cela, comme :
 
 ```javascript
 for (let i = 0; i < 10; i++) {
@@ -285,7 +285,7 @@ console.log(SCRIPTS.reduce((a, b) => {
 
 La fonction `characterCount` réduit les intervalles assignés à un script en sommant leurs tailles. Notez l'utilisation de la déstructuration dans la liste de paramètres de la fonction de réduction. Le deuxième appel à `reduce` utilise alors ça pour trouver le script le plus grand en comparant de manière répétitive deux scripts et retournant le plus grand.
 
-Le script han a plus de 89 000 caractères qui lui sont assignés dans la norme Unicode, en faisant de loin le plus grand système d’écriture dans le jeu de données. Han est un script (quelques fois) utilisé pour les textes chinois, japonais, et coréens. Ce langues partagent beaucoup de caractères, cependant elles tendent à les écrire différemment. Le consortium Unicode (basé aux États-Unis) a décidé de les traiter comme un unique système d’écriture pour sauver des codes caractères. On l'appelle unification han et cela continue de faire des mécontents.
+Le script han a plus de 89 000 caractères qui lui sont assignés dans la norme Unicode, en faisant de loin le plus grand système d’écriture dans le jeu de données. Han est un script (quelques fois) utilisé pour les textes chinois, japonais, et coréens. Ces langues partagent beaucoup de caractères, cependant elles tendent à les écrire différemment. Le consortium Unicode (basé aux États-Unis) a décidé de les traiter comme un unique système d’écriture pour sauver des codes caractères. On l'appelle unification han et cela continue de faire des mécontents.
 
 ## Composabilité
 
