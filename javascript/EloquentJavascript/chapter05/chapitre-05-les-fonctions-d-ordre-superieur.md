@@ -362,13 +362,13 @@ console.log(characterScript(121));
 // → {name: "Latin", …}
 ```
 
-La méthode `some` est une autre fonction d'ordre supérieur. Elle prend une fonction test et vous indique si la fonction retourne vrai pour n'importe quel élément dans le tableau.
+La méthode `some` est une autre fonction d'ordre supérieur. Elle prend une fonction test et vous indique si la fonction retourne `true` pour n'importe quel élément dans le tableau.
 
 Mais comment est-ce que l'on récupère les codes caractère dans une chaîne de caractères ?
 
-Dans le [Chapitre 1](), j'ai mentionné que les chaînes de caractères JavaScript sont encodées comme une séquence de nombres de 16 octets. Ils sont appelés points de code. Un code de caractère Unicode était initialement supposé tenir dans une telle unité (ce qui vous donne un peu plus de 65 000 caractères). Quand il est devenu clair que cela ne sera pas suffisant, beaucoup de gens ont hésité à utiliser plus de mémoire par caractère. Pour adresser ces inquiétudes, UTF-16, le format utilisé par les chaînes de caractères JavaScript, a été inventé. Il décrit les caractères les plus communs en utilisant un unique point de code de 16 octets mais utilise une paire de deux de ces unités pour les autres.
+Dans le [Chapitre 1](), j'ai mentionné que les chaînes de caractères JavaScript sont encodées comme une séquence de nombres de 16 octets. Ils sont appelés points de code. Un code de caractère Unicode était initialement supposé tenir dans une telle unité (ce qui vous donne un peu plus de 65 000 caractères). Quand il est devenu clair que cela ne sera pas suffisant, beaucoup de personnes ont hésité à utiliser plus de mémoire par caractère. Pour adresser ces inquiétudes, UTF-16, le format utilisé par les chaînes de caractères JavaScript, a été inventé. Il décrit les caractères les plus communs en utilisant un unique point de code de 16 octets, mais utilise une paire de deux de ces unités pour les autres.
 
-UTF-16 est généralement considéré comme une mauvaise idée de nos jours. Il semble presque avoir été intentionnellement conçu pour faire des erreurs. Il est facile d’écrire des programmes qui prétendent que les points de code et les caractères sont la mème chose. Et si votre langue n'utilise pas les caractères à deux points de code, alors cela semblera fonctionner très bien. Mais dès que quelqu'un essaye d'utiliser un tel programme avec des des caractères chinois moins commun, ça casse. Heureusement, avec l’avènement des émoticônes, tout le monde a commencé à utiliser les caractères à deux points de code, et le fardeau de traiter de tels problèmes est plus équitablement réparti.
+UTF-16 est généralement considéré comme une mauvaise idée de nos jours. Il semble presque avoir été intentionnellement conçu pour faire des erreurs. Il est facile d’écrire des programmes qui prétendent que les points de code et les caractères sont la mème chose. Et si votre langue n'utilise pas les caractères à deux points de code, alors il semblera fonctionner très bien. Mais dès que quelqu'un essaye d'utiliser un tel programme avec des des caractères chinois moins commun, ça casse. Heureusement, avec l’avènement des émoticônes, tout le monde a commencé à utiliser les caractères à deux points de code, et le fardeau de traiter de tels problèmes est plus équitablement réparti.
 
 Malheureusement, les opérations courantes sur les chaînes de caractères JavaScript, telles que récupérer leur longueur avec la propriété `length` et accéder à leur contenu utilisant les crochets, gèrent uniquement les points de code.
 
@@ -402,7 +402,7 @@ Si vous avez un caractère (qui sera une chaîne de caractères d'un ou deux poi
 
 ## Reconnaître du texte
 
-Vous avez une fonction `characterScript` et une manière de parcourir correctement les caractères. La prochaine étape est de compter les caractères qui appartiennent à chaque script. L'abstraction de comptage suivante sera utile ici :
+Vous avez une fonction `characterScript` et un moyen de parcourir correctement les caractères. La prochaine étape est de compter les caractères qui appartiennent à chaque script. L'abstraction de comptage suivante sera utile ici :
 
 ```javascript
 function countBy(items, groupName) {
@@ -425,9 +425,9 @@ console.log(countBy([1, 2, 3, 4, 5], n => n > 2));
 
 La fonction `countBy` attend une collection (n'importe quoi que nous pouvons parcourir avec `for/of`) et une fonction qui détermine un nom de groupe pour un élément donné. Elle retourne un tableau d'objets, chaque objet désigne un groupe et vous indique le nombre d’éléments qui ont été trouvés pour ce groupe.
 
-Elle utilise une autre méthode de tableaux — `findIndex`. Cette méthode est similaire à `indexOf`, mais au lieu de chercher pour une particulière valeur, elle cherche la première valeur pour laquelle la fonction fournit retourne `true`. Comme `indexOf`, elle retourne `-1` quand aucun élément n'est trouvé.
+Elle utilise une autre méthode de tableaux — `findIndex`. Cette méthode est similaire à `indexOf`, mais au lieu de chercher une particulière valeur, elle cherche la première valeur pour laquelle la fonction fournie retourne `true`. Comme `indexOf`, elle retourne `-1` quand aucun élément n'est trouvé.
 
-Utilisant `countBy`, nous pouvons écrire la fonction qui nous indique quels scripts sont utilisés dans un morceau de texte.
+En utilisant `countBy`, nous pouvons écrire la fonction qui nous indique quels scripts sont utilisés dans un morceau de texte.
 
 ```javascript
 function textScripts(text) {
@@ -448,9 +448,9 @@ console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
 // → 61% Han, 22% Latin, 17% Cyrillic
 ```
 
-La fonction compte d'abord les caractères par noms, utilisant `characterScript` pour leur assigner un nom et, à défaut, utilise la chaîne `none` pour les caractères ne faisant pas partie d'un script. L'appel à `filter` supprime l’entrée correspondant à `none` du tableau de résultats, puisque nous ne sommes pas intéressés par ces caractères.
+La fonction compte d'abord les caractères par noms, utilisant `characterScript` pour leur assigner un nom et, à défaut, utilise la chaîne `none` pour les caractères ne faisant pas partie d'un script. L'appel à `filter` supprime l’entrée correspondante à `none` du tableau de résultats, puisque nous ne sommes pas intéressés par ces caractères.
 
-Pour être capable de calculer des pourcentages, nous avons d'abord besoin du nombre total de caractères qui appartiennent à un script, ce que nous pouvons calculer avec `reduce`. Si elle ne trouve pas de tels caractères, la fonction retourne une chaîne de caractère spécifique. Sinon, elle transforme le compte des entrées en chaînes de caractères lisibles avec `map` et les combine ensemble avec `join`.
+Pour être capable de calculer des pourcentages, nous avons d'abord besoin du nombre total de caractères qui appartiennent à un script, ce que nous pouvons calculer avec `reduce`. Si elle ne trouve pas de tels caractères, la fonction retourne une chaîne de caractères spécifique. Sinon, elle transforme le compte des entrées en chaînes de caractères lisibles avec `map` et les combine ensemble avec `join`.
 
 ## Résumé
 
