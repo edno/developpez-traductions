@@ -1,16 +1,16 @@
 # Les fonctions d'ordre supérieur
 
-> Tzu-li et Tzu-ssu se vantaient de la taille de leurs derniers programmes. 'Deux cents mille lignes', dit Tzu-li, 'sans compter les commentaires !' Tzu-su" Tzu-ssu répondit, ''Pff, le mien à au moins un *million* de lignes déjà.' Maître Yuan-Ma dit 'Mon meilleur programme a cinq cent lignes.' En entendant cela, Tzu-li et Tzu-ssu ont été éclairés.'
+> Tzu-li et Tzu-ssu se vantaient de la taille de leurs derniers programmes. 'Deux cent mille lignes', dit Tzu-li, 'sans compter les commentaires !' Tzu-su" Tzu-ssu répondit, ''Pff, le mien à au moins un *million* de lignes déjà.' Maître Yuan-Ma dit 'Mon meilleur programme a cinq cent lignes.' En entendant cela, Tzu-li et Tzu-ssu ont été éclairés.'
 >
 > — Maître Yuan-Ma, *Le Livre de la Programmation*
 
-> Il y a deux façons de construire un logiciel : une façon est de le faire si simple qu'il n'y pas pas de défauts flagrants, et l'autre façon est de le faire si complexe qu'il n'y a pas de défauts flagrants. "
+> Il y a deux façons de construire un logiciel : une façon est de le faire si simple qu'il n'y a pas pas de défauts flagrants, et l'autre façon est de le faire si complexe qu'il n'y a pas de défauts flagrants. "
 >
 > — C.A.R. Hoare, *1980 ACM Turing Award Lecture*
 
 ![Lettres de differents scripts](https://eloquentjavascript.net/img/chapter_picture_5.jpg)
 
-Un long programme est un programme coûteux, et pas seulement à cause du temps qu'il faut pour le construire. Taille implique presque toujours complexité, et complexité rend les programmeurs confus. Des programmeurs confus, à leur tour, introduisent des erreurs (bugs) dans les programmes. Un long programme fournit beaucoup de place à ces bugs pour se cacher, les rendant difficiles a trouver.
+Un long programme est un programme coûteux, et pas seulement à cause du temps qu'il faut pour le construire. Taille implique presque toujours complexité, et complexité rend les programmeurs confus. Des programmeurs confus, à leur tour, introduisent des erreurs (bugs) dans les programmes. Un long programme fournit beaucoup de place à ces bugs pour se cacher, les rendant difficiles à trouver.
 
 Revenons aux deux derniers exemples de l'introduction. Le premier est autonome et long de six lignes.
 
@@ -33,7 +33,7 @@ Lequel contiendra plus probablement un bug?
 
 Si on compte la taille des définitions de `sum` et `range`, le second programme est aussi grand — même plus grand que le premier. Mais je dirais quand même qu’il est plus probable qu'il soit correct.
 
-Il est plus probable qu'il soit correcte car la solution est exprime dans un vocabulaire qui correspond au problème résolu. Faire la somme d'un intervalle de nombres n'a rien à voir avec des boucles et des compteurs. Il s'agit d'intervalles et de sommes.
+Il est plus probable qu'il soit correct, car la solution est exprime dans un vocabulaire qui correspond au problème résolu. Faire la somme d'un intervalle de nombres n'a rien à voir avec des boucles et des compteurs. Il s'agit d'intervalles et de sommes.
 
 Les définitions de ces vocabulaires (les fonctions `sum` et `range`) impliqueront bien sûr des boucles, compteurs, et autres détails secondaires. Mais parce qu'elles expriment des concepts plus simples que le programme en entier, elles sont plus faciles à faire correctement.
 
@@ -59,7 +59,7 @@ C'est une compétence utile, en programmation, que de remarquer quand vous trava
 
 ## Abstraire la répétition
 
-Les fonctions simples, comme nous en avons vu jusque là, sont de bonnes façons de construire des abstractions. Mais des fois elles se révèlent insuffisantes.
+Les fonctions simples, comme nous en avons vu jusque-là, sont de bonnes façons de construire des abstractions. Mais des fois elles se révèlent insuffisantes.
 
 Il est courant pour un programme de faire quelque chose un certain nombre de fois. Pour cela, vous pouvez écrire une boucle `for`, comme :
 
@@ -105,11 +105,11 @@ console.log(labels);
 // → ["Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"]
 ```
 
-Cette structure est un peu comme un boucle `for` — elle décrit d'abord le type de boucle puis fournit un contenu. Cependant, le contenu est maintenant écrit comme une valeur de fonction, qui est comprise entre les parenthèses de l'appel à `repeat`. C'est pourquoi elle doit être terminée par une accolade fermante *et* une parenthèse fermante. Pour des cas simples comme celui-ci, où le contenu est une unique petite expression, vous pouvez aussi omettre les accolades et écrire la boucle sur une seule ligne.
+Cette structure est un peu comme une boucle `for` — elle décrit d'abord le type de boucle puis fournit un contenu. Cependant, le contenu est maintenant écrit comme une valeur de fonction, qui est comprise entre les parenthèses de l'appel à `repeat`. C'est pourquoi elle doit être terminée par une accolade fermante *et* une parenthèse fermante. Pour des cas simples comme celui-ci, où le contenu est une unique petite expression, vous pouvez aussi omettre les accolades et écrire la boucle sur une seule ligne.
 
 ## Les fonctions d'ordre supérieur
 
-Les fonctions qui opèrent sur d'autres fonctions, soit en les prenant en tant qu'arguments ou en les retournant, sont appelées *fonctions d'ordre supérieur*. Puisque nous avons déjà vue que les fonctions sont des valeurs régulières, il n'y a rien de remarquable dans le fait que de telles fonctions existent. Le terme vient des mathématiques, où la différence entre fonctions et autres valeurs est pris plus au sérieux.
+Les fonctions qui opèrent sur d'autres fonctions, soit en les prenant en tant qu'arguments ou en les retournant, sont appelées *fonctions d'ordre supérieur*. Puisque nous avons déjà vu que les fonctions sont des valeurs régulières, il n'y a rien de remarquable dans le fait que de telles fonctions existent. Le terme vient des mathématiques, où la différence entre fonctions et autres valeurs est pris plus au sérieux.
 
 Les fonctions d'ordre supérieur nous permettent d'abstraire les *actions*, pas seulement des valeurs. Elles existent sous différentes formes. Par exemple, nous pouvons avoir des fonctions qui créent de nouvelles fonctions.
 
@@ -167,7 +167,7 @@ Un domaine où les fonctions d'ordre supérieur excellent est le traitement de d
 
 Vous souvenez-vous d'Unicode vu au [Chapitre 1](#), le système assigne un nombre à chaque caractère d'une langue écrite ? La plupart de ces caractères sont associés à un script particulier. La norme contient 140 scripts différents — 81 sont toujours utilisés aujourd'hui, 59 sont historiques.
 
-Bien que je ne sache que lire les caractères latins, j'ai conscience du fait que des gens écrivent des textes dans au moins 80 autres systèmes d’écriture, beaucoup d'entre eux que je ne pourrait pas reconnaître. Par exemple, voici un échantillon d’écriture manuscrite tamile. 
+Bien que je ne sache que lire les caractères latins, j'ai conscience du fait que des gens écrivent des textes dans au moins 80 autres systèmes d’écriture, beaucoup d'entre eux que je ne pourrais pas reconnaître. Par exemple, voici un échantillon d’écriture manuscrite tamile. 
 
 ![Écriture manuscrite tamile](https://eloquentjavascript.net/img/tamil.png)
 
@@ -186,7 +186,7 @@ Le jeu de données d'exemple contient des morceaux d'information relatifs aux 14
 
 Un tel objet nous fournit le nom du script, les intervalles Unicode qui lui sont assignés, la direction dans laquelle il est écrit, la date (approximative) d'origine, s'il est toujours utilisé, et un lien vers plus d'informations. La direction peut être "`ltr`" pour de gauche à droite (*left to right*), "`rtl`" pour de droite à gauche (*right to left*) (la façon dont les textes arabes et hébreux sont écrits), ou "`ttb`" pour de haut en bas (*top to bottom*) (comme dans l’écriture mongole).
 
-La propriété `ranges` contient un tableau d'intervalles de caractères Unicode, chacun d'entre-eux étant un tableau à deux éléments contenant une limite inférieure et une limite supérieure. N'importe quel code de caractère compris dans ces intervalles est assigné au script. La limite inférieure est inclusive (code 994 est un caractère copte), et la limite supérieure est non inclusive (le code 1008 n'est pas un caractère copte).
+La propriété `ranges` contient un tableau d'intervalles de caractères Unicode, chacun d'entre eux étant un tableau à deux éléments contenant une limite inférieure et une limite supérieure. N'importe quel code de caractère compris dans ces intervalles est assigné au script. La limite inférieure est inclusive (code 994 est un caractère copte), et la limite supérieure est non inclusive (le code 1008 n'est pas un caractère copte).
 
 ## Filtrer les tableaux
 
@@ -211,7 +211,7 @@ La fonction utilise l'argument appelé `test`, une valeur de fonction, pour comp
 
 Notez comment la fonction `filter`, plutôt que de supprimer des éléments du tableau existant, construit un nouveau tableau avec seulement les éléments qui satisfont la condition `test`. Cette fonction est *pure*. Elle ne modifie pas le tableau qui lui est donné.
 
-Comme `forEach`, `filter` est une méthode standard pour les tableaux. L'exemple définit la fonction seulement pour montrer ce qui se passe à l’intérieur. A partir de maintenant, nous l'utiliserons plutôt de comme cela :
+Comme `forEach`, `filter` est une méthode standard pour les tableaux. L'exemple définit la fonction seulement pour montrer ce qui se passe à l’intérieur. À partir de maintenant, nous l'utiliserons plutôt de comme cela :
 
 ```javascript
 console.log(SCRIPTS.filter(s => s.direction == "ttb"));
@@ -305,7 +305,7 @@ console.log(biggest);
 
 Il y a quelques bindings de plus, et le programme est 4 lignes plus long. Mais il reste très lisible.
 
-Les fonctions d'ordre supérieur commencent a briller quand vous avez besoin de *composer* des opérations. En tant qu'exemple, écrivons le code qui trouve l’année moyenne d'origine pour les scripts vivants et morts dans le jeu de données.
+Les fonctions d'ordre supérieur commencent à briller quand vous avez besoin de *composer* des opérations. En tant qu'exemple, écrivons le code qui trouve l’année moyenne d'origine pour les scripts vivants et morts dans le jeu de données.
 
 ```javascript
 function average(array) {
@@ -320,9 +320,9 @@ console.log(Math.round(average(
 // → 188
 ```
 
-Donc les scripts morts dans Unicode sont, en moyenne, plus anciens que les vivants. Ce n'est pas vraiment une statistique significative ni surprenante. Mais j’espère que vous serez d'accord que le code utilisé pour calculer cela n'est pas difficile à lire. Vous pouvez le voir comme un pipeline : on commence avec tous les scripts, on extrait les vivants (ou les morts),  récupère leur années, les moyenne, et arrondi le résultat.
+Donc les scripts morts dans Unicode sont, en moyenne, plus anciens que les vivants. Ce n'est pas vraiment une statistique significative ni surprenante. Mais j’espère que vous serez d'accord que le code utilisé pour calculer cela n'est pas difficile à lire. Vous pouvez le voir comme un pipeline : on commence avec tous les scripts, on extrait les vivants (ou les morts),  récupère leurs années, les moyenne, et arrondi le résultat.
 
-Vous pouvez bien sûr aussi écrire ce calcule comme une large boucle.
+Vous pouvez bien sûr aussi écrire ce calcul comme une large boucle.
 
 ```javascript
 let total = 0, count = 0;
@@ -336,9 +336,9 @@ console.log(Math.round(total / count));
 // → 1188
 ```
 
-Mais il est difficile de voir ce qui est calculé et comment. Et parce que les résultats intermédiaires ne sont pas représentés comme des valeurs cohérentes, cela demandera plus de travaille pour extraire quelque-chose comme `average` dans une fonction séparée.
+Mais il est difficile de voir ce qui est calculé et comment. Et parce que les résultats intermédiaires ne sont pas représentés comme des valeurs cohérentes, cela demandera plus de travail pour extraire quelque-chose comme `average` dans une fonction séparée.
 
-En termes de ce que l'ordinateur fait vraiment, ces deux approches sont aussi très différentes. La première construira de nouveaux tableau lors de l’exécution de `filter` et `map`, alors que la seconde calcule seulement quelques nombres, faisant moins de travail. Vous pouvez généralement vous permettre l'approche lisible, mais si vous traitez des tableaux énormes, et le faites plusieurs fois, le style moins abstrait pourrait valoir la vitesse supplémentaire.
+En termes de ce que l'ordinateur fait vraiment, ces deux approches sont aussi très différentes. La première construira de nouveaux tableaux lors de l’exécution de `filter` et `map`, alors que la seconde calcule seulement quelques nombres, faisant moins de travail. Vous pouvez généralement vous permettre l'approche lisible, mais si vous traitez des tableaux énormes, et le faites plusieurs fois, le style moins abstrait pourrait valoir la vitesse supplémentaire.
 
 ## Chaînes de caractères et codage des caractères
 
@@ -368,7 +368,7 @@ Mais comment est-ce que l'on récupère les codes caractère dans une chaîne de
 
 Dans le [Chapitre 1](), j'ai mentionné que les chaînes de caractères JavaScript sont encodées comme une séquence de nombres de 16 octets. Ils sont appelés points de code. Un code de caractère Unicode était initialement supposé tenir dans une telle unité (ce qui vous donne un peu plus de 65 000 caractères). Quand il est devenu clair que cela ne sera pas suffisant, beaucoup de personnes ont hésité à utiliser plus de mémoire par caractère. Pour adresser ces inquiétudes, UTF-16, le format utilisé par les chaînes de caractères JavaScript, a été inventé. Il décrit les caractères les plus communs en utilisant un unique point de code de 16 octets, mais utilise une paire de deux de ces unités pour les autres.
 
-UTF-16 est généralement considéré comme une mauvaise idée de nos jours. Il semble presque avoir été intentionnellement conçu pour faire des erreurs. Il est facile d’écrire des programmes qui prétendent que les points de code et les caractères sont la mème chose. Et si votre langue n'utilise pas les caractères à deux points de code, alors il semblera fonctionner très bien. Mais dès que quelqu'un essaye d'utiliser un tel programme avec des des caractères chinois moins commun, ça casse. Heureusement, avec l’avènement des émoticônes, tout le monde a commencé à utiliser les caractères à deux points de code, et le fardeau de traiter de tels problèmes est plus équitablement réparti.
+UTF-16 est généralement considéré comme une mauvaise idée de nos jours. Il semble presque avoir été intentionnellement conçu pour faire des erreurs. Il est facile d’écrire des programmes qui prétendent que les points de code et les caractères sont la même chose. Et si votre langue n'utilise pas les caractères à deux points de code, alors il semblera fonctionner très bien. Mais dès que quelqu'un essaye d'utiliser un tel programme avec des caractères chinois moins commun, ça casse. Heureusement, avec l’avènement des émoticônes, tout le monde a commencé à utiliser les caractères à deux points de code, et le fardeau de traiter de tels problèmes est plus équitablement réparti.
 
 Malheureusement, les opérations courantes sur les chaînes de caractères JavaScript, telles que récupérer leur longueur avec la propriété `length` et accéder à leur contenu utilisant les crochets, gèrent uniquement les points de code.
 
@@ -454,15 +454,15 @@ Pour être capable de calculer des pourcentages, nous avons d'abord besoin du no
 
 ## Résumé
 
-Être capable de passer des valeurs de fonctions a d'autres fonction est un aspect extrêmement utile de JavaScript. Il permet d’écrire des fonction qui modélise des opérations avec des "manques" dedans. Le code qui appelle ces fonctions peut combler ces manques en fournissant les valeurs de fonction.
+Être capable de passer des valeurs de fonctions a d'autres fonction est un aspect extrêmement utile de JavaScript. Il permet d’écrire des fonctions qui modélisent des opérations avec des "manques" dedans. Le code qui appelle ces fonctions peut combler ces manques en fournissant les valeurs de fonction.
 
-Les tableaux fournissent un bon nombre de fonctions d'ordre supérieur pratiques. Vous pouvez utiliser `forEach` pour parcourir les éléments d'un tableau. La méthode `filter` retourne un nouveau tableau contenant uniquement les éléments qui satisfont la fonction prédicat. Transformer un tableau en faisant passer chaque élément au travers d'une fonction est réalisé avec `map`. Vous pouvez utiliser `reduce` pour combiner tous les éléments d'un tableau en une seule valeur. La méthode `some` teste si n'importe quelle élément correspond à une fonction prédicat. Et `findIndex` trouve la position du premier élément qui satisfait un prédicat.
+Les tableaux fournissent un bon nombre de fonctions d'ordre supérieur pratiques. Vous pouvez utiliser `forEach` pour parcourir les éléments d'un tableau. La méthode `filter` retourne un nouveau tableau contenant uniquement les éléments qui satisfont la fonction prédicat. Transformer un tableau en faisant passer chaque élément au travers d'une fonction est réalisé avec `map`. Vous pouvez utiliser `reduce` pour combiner tous les éléments d'un tableau en une seule valeur. La méthode `some` teste si n'importe quel élément correspond à une fonction prédicat. Et `findIndex` trouve la position du premier élément qui satisfait un prédicat.
 
 ## Exercices
 
 ### Aplatissement
 
-Utilisez la méthode `reduce` en combinaison avec la méthode `concat` pour "aplatir" un tableau de tableaux en un seule tableau qui contient tous les éléments des tableaux d'origine.
+Utilisez la méthode `reduce` en combinaison avec la méthode `concat` pour "aplatir" un tableau de tableaux en un seul tableau qui contient tous les éléments des tableaux d'origine.
 
 ```javascript
 let arrays = [[1, 2, 3], [4, 5], [6]];
@@ -472,7 +472,7 @@ let arrays = [[1, 2, 3], [4, 5], [6]];
 
 ### Votre propre boucle
 
-Écrire une fonction d'ordre supérieur `loop` qui fournit quelque chose comme une instruction de boucle `for`. Elle prend une valeur, une fonction prédicat, une fonction de mise à jour, et une fonction de contenu. A chaque itération, elle exécute la fonction prédicat sur la valeur courante de la boucle et stoppe si elle retourne `false`. Alors elle appelle la fonction de contenu, lui passant sa valeur actuelle. Finalement, elle appelle la fonction de mise à jour pour créer une nouvelle valeur et recommence depuis le début.
+Écrire une fonction d'ordre supérieur `loop` qui fournit quelque chose comme une instruction de boucle `for`. Elle prend une valeur, une fonction prédicat, une fonction de mise à jour, et une fonction de contenu. A chaque itération, elle exécute la fonction prédicat sur la valeur courante de la boucle et s'interrompt si la fonction retourne `false`. Elle appelle alors la fonction de contenu, lui passant sa valeur actuelle. Finalement, elle appelle la fonction de mise à jour pour créer une nouvelle valeur et recommence depuis le début.
 
 Au moment de définir la fonction, vous pouvez utiliser une boucle normale pour faire le vrai bouclage.
 
@@ -487,7 +487,7 @@ loop(3, n => n > 0, n => n - 1, console.log);
 
 ### Tout
 
-Analogue la méthode `some`, les tableaux on aussi une méthode `every`. Celle-ci retourne `true` quand la fonction donnée retourne `true` pour *tous* les éléments dans le tableau. D'une certaine façon, `some` est une version de l’opérateur `||` qui agit sur les tableaux, et `every` est comme l’opérateur `&&`.
+Analogue à la méthode `some`, les tableaux ont aussi une méthode `every`. Celle-ci retourne `true` quand la fonction donnée retourne `true` pour *tous* les éléments dans le tableau. D'une certaine façon, `some` est une version de l’opérateur `||` qui agit sur les tableaux, et `every` est comme l’opérateur `&&`.
 
 Implémentez `every` comme une fonction qui prend un tableau et une fonction prédicat en paramètres. Écrivez deux versions, une utilisant une boucle et une utilisant la méthode `some`.
 
@@ -504,13 +504,13 @@ console.log(every([], n => n < 10));
 // → true
 ```
 
-> Comme l’opérateur `&&`, la méthode `every` peut arrêter d’évaluer des éléments plus en avant dès qu'elle en a trouvé un qui ne correspond pas. Donc la version basée sur la boucle peut sortir de la boucle — avec `break` ou `return` — dès lors qu'elle rencontre un élément pour lequel la fonction prédicat retourne `false`. Si la boucle arrive à sa fin sans trouver un tel élément, nous savons alors que tous les éléments concordent et nous pouvons retourner `true`.
+> Comme l’opérateur `&&`, la méthode `every` peut arrêter d’évaluer les éléments plus en avant dès qu'elle en a trouvé un qui ne correspond pas. Donc la version basée sur la boucle peut sortir de la boucle — avec `break` ou `return` — dès lors qu'elle rencontre un élément pour lequel la fonction prédicat retourne `false`. Si la boucle arrive à sa fin sans trouver un tel élément, nous savons alors que tous les éléments concordent et nous pouvons retourner `true`.
 >
 > Pour construire `every` à partir de `some`, nous pouvons appliquer les *lois de De Morgan* qui énoncent que `a && b` égale `!(!a || !b)`. Ce qui peut être généralisé aux tableaux, où tous les éléments d'un tableau concordent, s'il n'existe pas d’élément du tableau qui ne concorde pas.
 
 ### Direction d’écriture dominante
 
-Écrire une fonction qui détermine la direction dominante d’écriture dans une chaîne d'un texte. Souvenez-vous que chaque objet script a une propriété `direction` qui peut être "`ltr`" (gauche a droite), "`rtl`" (droite a gauche),  ou "`ttb`" (haut en bas).
+Écrire une fonction qui détermine la direction dominante d’écriture dans une chaîne d'un texte. Souvenez-vous que chaque objet script a une propriété `direction` qui peut être "`ltr`" (gauche à droite), "`rtl`" (droite à gauche),  ou "`ttb`" (haut en bas).
 
 La direction dominante est la direction avec une majorité de caractères qui ont un script qui leur est associé. Les fonctions `characterScript` et `countBy` définies plus tôt dans ce chapitre sont probablement utiles ici.
 
