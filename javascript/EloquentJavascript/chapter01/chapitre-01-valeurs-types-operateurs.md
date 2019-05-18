@@ -17,7 +17,7 @@ Par exemple, nous pouvons exprimer le nombre 13 en bits. Cela fonctionne de la m
  128  64  32  16   8   4   2   1
 ```
 
-C'est donc le nombre binaire 000011001. Ses chiffres non nuls représentent 8, 4 et 1, et totalisent 13. 
+C'est donc le nombre binaire 00001101. Ses chiffres non nuls représentent 8, 4 et 1, et totalisent 13. 
 
 ## Valeurs
 
@@ -39,11 +39,11 @@ Les valeurs du type nombre sont, sans surprise, des valeurs numériques. Dans un
 
 Utilisez cela dans un programme, et cela entraînera la création du motif de bit pour le nombre 13 dans la mémoire de l’ordinateur.
 
-JavaScript utilise un nombre fixe de bits, 64 d'entre eux, pour stocker une seule valeur de nombre. Il existe seulement un certain nombres de motifs que vous pouvez faire avec 64 bits, ce qui signifie que le nombre de différents nombres qui peut être représenter est limité. Avec *N* nombres décimaux, vous pouvez représenter 10<sup>N</sup> nombres. De façon similaire, avec 64 chiffres binaires, vous pouvez représenter 2<sup>64</sup> nombres différents, ce qui est environ 18 quintillions (un 18 suivi de 18 zéros). C'est beaucoup.
+JavaScript utilise un nombre fixe de bits, 64 d'entre eux, pour stocker une seule valeur de nombre. Il existe seulement un certain nombres de motifs que vous pouvez faire avec 64 bits, ce qui signifie que le nombre de différents nombres qui peut être représenter est limité. Avec *N* nombres décimaux, vous pouvez représenter 10<sup>N</sup> nombres. De façon similaire, avec 64 chiffres binaires, vous pouvez représenter 2<sup>64</sup> nombres différents, ce qui vaut environ 18 quintillions (un 18 suivi de 18 zéros). C'est beaucoup.
 
-La mémoire d'ordinateur a été beaucoup plus petite, et les gens tendait à utiliser des groupes de 8 ou 16 bits pour représenter leur nombres. Il était facile de déborder (*overflow*) de si petits nombres par accident — pour finir avec un nombre qui ne rentre pas dans le nombre donné de bits. Aujourd'hui, même les ordinateurs qui rentrent dans votre poche ont plein de mémoire, donc vous êtes libres d'utiliser des morceaux de 64 bits, et vous devez seulement vous inquiéter quand vous traiter avec des nombres réellement astronomiques.
+La mémoire d'ordinateur a été beaucoup plus petite, et les gens tendaient à utiliser des groupes de 8 ou 16 bits pour représenter leurs nombres. Il était facile de déborder (*overflow*) de si petits nombres par accident — pour finir avec un nombre qui ne peut pas être contenu dans le nombre donné de bits. Aujourd'hui, même les ordinateurs qui rentrent dans votre poche ont plein de mémoire, donc vous êtes libres d'utiliser des morceaux de 64 bits, et vous devez seulement vous inquiéter quand vous traiter avec des nombres réellement astronomiques.
 
-Cependant, Tous les nombres moins de 18 quintillions ne peuvent pas tous être contenu dans un nombre JavaScript. Ces bits stockent aussi des nombres négatifs, donc un bit indique le signe du nombre. Un problème plus important est que les nombre non-entiers doivent aussi être représentés. Pour faire cela, certains bits sont utilises pour stocker la position du séparateur décimal. Le vrai nombre entier maximal qui peut être stocké est plus dans l'intervalle de 9 quadrillions (15 zéros) — ce qui est toujours plaisamment énorme.
+Cependant, Les nombres de moins de 18 quintillions ne peuvent pas tous être contenus dans un nombre JavaScript. Ces bits stockent aussi des nombres négatifs, donc un bit indique le signe du nombre. Un problème plus important est que les nombre non-entiers doivent aussi être représentés. Pour faire cela, certains bits sont utilisés pour stocker la position du séparateur décimal. Le vrai nombre entier maximal qui peut être stocké est plus autour de 9 quadrillions (15 zéros) — ce qui est toujours plaisamment énorme.
 
 Les nombres fractionnaires sont écrits avec un point.
 
@@ -59,7 +59,7 @@ Pour de très grands ou très petites nombres, vous pouvez aussi utiliser la not
 
 C'est 2.998 × 108 = 299 800 000.
 
-Les calculs avec les nombres entiers (aussi appeler *entiers*) plus petit que le précédemment mentionne 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est honteux, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. Ce qui est important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
+Les calculs avec les nombres entiers (aussi appelés *entiers*) plus petits que le précédemment mentionné 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est une honte, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. Ce qui est important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
 
 ## Arithmétique
 
@@ -79,23 +79,23 @@ Mais est-ce que l'exemple signifie "ajouter 4 et 100, et multiplier le résultat
 
 Pour la soustraction, il y a l’opérateur `-`, et la division peut être faite avec l’opérateur `/`.
 
-Quand les opérateurs apparaissent ensemble sans parenthèses, l'ordre dans lequel ils sont appliqués est déterminé par la *précédence* des opérateurs. L'exemple montre que la multiplication vient avant l'addition. L’opérateur `/` a la même précédence que `*`. De même pour `+` et `-`. Quand plusieurs opérateurs avec la même précédence apparaissent les uns après les autres, comme dans `1 - 2 + 1`, ils sont appliqués de gauche à droite : `(1 - 2) + 1`.
+Quand les opérateurs apparaissent ensemble sans parenthèses, l'ordre dans lequel ils sont appliqués est déterminé par la *précédence* des opérateurs. L'exemple montre que la multiplication vient avant l'addition. L’opérateur `/` à la même précédence que `*`. De même pour `+` et `-`. Quand plusieurs opérateurs avec la même précédence apparaissent les uns après les autres, comme dans `1 - 2 + 1`, ils sont appliqués de gauche à droite : `(1 - 2) + 1`.
 
 Ces règles de précédence ne sont pas quelque chose dont vous devez vous inquiéter. En cas de doute, ajouter simplement des parenthèses.
 
-Il y a un autre opérateur arithmétique, que vous ne reconnaîtrez peut être pas immédiatement. Le symbole `%` est utilise pour représenter l’opération de *reste*. `X % Y` est le reste de la division de `X` par `Y`. Par exemple, `314 % 100` produit `14`, et `144 % 12` retourne `0`. La précédence de l’opérateur de reste est le même que la multiplication et la division. Vous verrez aussi souvent cet opérateur être appelé *modulo*.
+Il y a un autre opérateur arithmétique, que vous ne reconnaîtrez peut être pas immédiatement. Le symbole `%` est utilisé pour représenter l’opération de *reste*. `X % Y` est le reste de la division de `X` par `Y`. Par exemple, `314 % 100` produit `14`, et `144 % 12` retourne `0`. La précédence de l’opérateur de reste est le même que pour la multiplication et la division. Vous verrez aussi souvent cet opérateur être appelé *modulo*.
 
 ## Nombres speciaux
 
 Il y a trois valeurs spéciales en JavaScript qui sont considérées comme des nombres mais ne se comportent pas comme des nombres normaux.
 
-Les deux premiers sont `Infinity` et `-Infinity` qui représentent les infinis positif et négatif. `Infinity - 1` est toujours `Infinity`, et ainsi de suite. Cependant, ne faites pas trop confiance aux calculs basés sur l’infini. Cela n'est pas mathématiquement correct, et cela mènera rapidement au prochain nombre spécial : `NaN`.
+Les deux premieres sont `Infinity` et `-Infinity` qui représentent les infinis positif et négatif. `Infinity - 1` est toujours `Infinity`, et ainsi de suite. Cependant, ne faites pas trop confiance aux calculs basés sur l’infini. Cela n'est pas mathématiquement correct, et cela mènera rapidement au prochain nombre spécial : `NaN`.
 
-`NaN` signifie "*not a number*" (pas un nombre), mais cependant *c'est* une valeur de type nombre. Vous obtiendrez ce résultat quand vous, par exemple, essayez de calculer `0 / 0` (zéro divise par zéro), `Infinity - Infinity`, ou n'importe quel nombre d'autre opération numérique qui ne retourne pas de résultat significatif.
+`NaN` signifie "*not a number*" (pas un nombre), mais cependant *c'est* une valeur de type nombre. Vous obtiendrez ce résultat quand, par exemple, vous essayez de calculer `0 / 0` (zéro divise par zéro), `Infinity - Infinity`, ou n'importe quelle autre opération numérique qui ne retourne pas de résultat significatif.
 
 ## Chaînes
 
-Le type de donne de base suivant est la chaîne (*string*). Les chaînes sont utilisées pour représenter du texte. Elle sont écrites en encadrant leur contenu avec des guillemets.
+Le type de donnée de base suivant est la chaîne (*string*). Les chaînes sont utilisées pour représenter du texte. Elle sont écrites en encadrant leur contenu avec des guillemets.
 
 ```javascript
 `Down on the sea`
@@ -107,7 +107,7 @@ Vous pouvez utiliser des guillemets simples, des guillemets doubles, ou des guil
 
 Presque tout peut être mis entre guillemets, et JavaScript en fera une chaîne. Mais quelques caractères sont plus difficiles.  Vous pouvez imaginer comment mettre des guillemets entre guillemets peut être compliqué. Les *sauts de ligne* (les caractères que vous avez quand vous pressez `ENTER`) peuvent être inclus sans échappement seulement si la chaîne est entre guillemets obliques (`` `).
 
-Pour rendre possible d'inclure de tels caractères dans une chaîne, la notation suivante est utilisée : des qu'un anti-slash (`\`) est trouvé dans un texte entre guillemets, il indique que le caractères suivant a une signification spéciale. Ceci est appelé échapper le caractère. Un guillemet qui est précédé par un anti-slash ne terminera pas la chaîne mais en fera parti. Quand un caractère `n` apparaît après un anti-slash, il est interprété comme un saut de ligne. De façon similaire, un `t` après un anti-slash signifie un caractère tabulation. Prenez la chaîne suivante :
+Pour rendre possible d'inclure de tels caractères dans une chaîne, la notation suivante est utilisée : dès qu'un anti-slash (`\`) est trouvé dans un texte entre guillemets, il indique que le caractères suivant a une signification spéciale. Ceci est appelé *échapper* le caractère. Un guillemet qui est précédé par un anti-slash ne terminera pas la chaîne mais en fera parti. Quand un caractère `n` apparaît après un anti-slash, il est interprété comme un saut de ligne. De façon similaire, un `t` après un anti-slash signifie un caractère tabulation. Prenez la chaîne suivante :
 
 ```javascript
 "This is the first line\nAnd this is the second"
@@ -120,19 +120,19 @@ This is the first line
 And this is the second
 ```
 
-Les chaînes, aussi, doivent être modelées comme des séries de bits pour pouvoir exister dans l'ordinateur. La façon dont JavaScript le fait est basé sur la norme *Unicode*. Cette norme virtuellement assigne un nombre à chaque caractère dont vous pourrez avoir besoin, incluant les caractères du grec, arabe, japonais, arménien, et ainsi de suite. Si nous avons un nombre pour chaque caractère, une chaîne peut être décrite comme une séquence de nombres.
+Les chaînes, aussi, doivent être modelées comme des séries de bits pour pouvoir exister dans l'ordinateur. La façon dont JavaScript le fait est basé sur la norme *Unicode*. Cette norme assigne virtuellement un nombre à chaque caractère dont vous pourrez avoir besoin, incluant les caractères du grec, arabe, japonais, arménien, et ainsi de suite. Si nous avons un nombre pour chaque caractère, une chaîne peut être décrite comme une séquence de nombres.
 
-Et c'est ce que JavaScript fait. Mais il y une complication : la représentation JavaScript utilise 16 bits par chaîne par élément de chaîne, ce qui décrit jusqu'a 2<sup>16</sup> caractères différents. Mais Unicode définis plus de caractères que cela — à peu près deux fois plus, a ce stade. Donc certains caractères, tels que beaucoup d’émoticônes, prennent jusqu'à deux "positions de caractère" dans les chaînes JavaScript. Nous y reviendrons au [Chapitre 5]().
+Et c'est ce que JavaScript fait. Mais il y a une complication : la représentation JavaScript utilise 16 bits par par élément de chaîne, ce qui décrit jusqu'a 2<sup>16</sup> caractères différents. Mais Unicode définis plus de caractères que cela — à peu près deux fois plus, à ce stade. Donc certains caractères, tels que beaucoup d’émoticônes, prennent jusqu'à deux "positions de caractère" dans les chaînes JavaScript. Nous y reviendrons au [Chapitre 5]().
 
-Les chaînes ne peuvent pas être divisées, multipliées, ou soustraites, mais l’opérateur `+` *peut* être utilisé sur elles. Il n'additionne pas, mais il concatène — il colle deux chaînes ensemble. La ligne suivante produira le chaîne "`concatène`" :
+Les chaînes ne peuvent pas être divisées, multipliées, ou soustraites, mais l’opérateur `+` *peut* être utilisé sur elles. Il n'additionne pas, mais il *concatène* — il colle deux chaînes ensemble. La ligne suivante produira le chaîne "`concatène`" :
 
 ```javascript
 "con" + "cat" + "è" + "ne"
 ```
 
-Les valeurs de chaîne on un nombre de fonctions (méthodes) qui leur sont associées et qui peuvent être utilisées pour réaliser des opération sur elles. J'en dirai plus à propos de celles-ci dans le [Chapitre 4]().
+Les valeurs de chaîne ont un nombre de fonctions (méthodes) qui leur sont associées et qui peuvent être utilisées pour réaliser des opération sur elles. J'en dirai plus à propos de celles-ci dans le [Chapitre 4]().
 
-Les chaînes écrites avec des guillemets simples ou doubles se comportent de façon très similaire — la seule différence est le type de guillemet que vous avez besoin d’échapper à l’intérieur. Les chaînes avec guillemets obliques, habituellement appelées *littéraux de gabarits*, peuvent faire quelques truc supplémentaires. En dehors de pouvoir étendre des lignes, elles peuvent aussi intégrer d'autres valeurs.
+Les chaînes écrites avec des guillemets simples ou doubles se comportent de façon très similaire — la seule différence est le type de guillemet que vous avez besoin d’échapper à l’intérieur. Les chaînes avec guillemets obliques, habituellement appelées *littéraux de gabarits*, peuvent faire quelques trucs supplémentaires. En dehors de pouvoir étendre des lignes, elles peuvent aussi intégrer d'autres valeurs.
 
 ```javascript
 `la moitié de 100 est ${100 / 2}`
