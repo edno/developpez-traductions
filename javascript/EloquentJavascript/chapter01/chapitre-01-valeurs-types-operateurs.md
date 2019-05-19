@@ -39,7 +39,7 @@ Les valeurs du type nombre sont, sans surprise, des valeurs numériques. Dans un
 
 Utilisez cela dans un programme, et cela entraînera la création du motif de bit pour le nombre 13 dans la mémoire de l’ordinateur.
 
-JavaScript utilise un nombre fixe de bits, 64 d'entre eux, pour stocker une seule valeur de nombre. Il existe seulement un certain nombres de motifs que vous pouvez faire avec 64 bits, ce qui signifie que le nombre de différents nombres pouvant représentés est limité. Avec *N* nombres décimaux, vous pouvez représenter 10<sup>N</sup> nombres. De façon similaire, avec 64 chiffres binaires, vous pouvez représenter 2<sup>64</sup> nombres différents, ce qui vaut environ 18 quintillions (un 18 suivi de 18 zéros). C'est beaucoup.
+JavaScript utilise un nombre fixe de bits, 64 d'entre eux, pour stocker une seule valeur nombre. Il existe seulement un certain nombres de motifs que vous pouvez faire avec 64 bits, ce qui signifie que le nombre de différents nombres pouvant être représentés est limité. Avec *N* nombres décimaux, vous pouvez représenter 10<sup>N</sup> nombres. De façon similaire, avec 64 chiffres binaires, vous pouvez représenter 2<sup>64</sup> nombres différents, ce qui vaut environ 18 quintillions (un 18 suivi de 18 zéros). C'est beaucoup.
 
 La mémoire d'ordinateur a été beaucoup plus petite, et les gens tendaient à utiliser des groupes de 8 ou 16 bits pour représenter leurs nombres. Il était facile de déborder (*overflow*) de si petits nombres par accident — pour finir avec un nombre qui ne peut pas être contenu dans le nombre donné de bits. Aujourd'hui, même les ordinateurs qui rentrent dans votre poche ont plein de mémoire, donc vous êtes libres d'utiliser des morceaux de 64 bits, et vous devez seulement vous inquiéter quand vous traiter avec des nombres réellement astronomiques.
 
@@ -59,11 +59,11 @@ Pour de très grands ou très petites nombres, vous pouvez aussi utiliser la not
 
 C'est 2.998 × 108 = 299 800 000.
 
-Les calculs avec les nombres entiers (aussi appelés *entiers*) plus petits que le précédemment mentionné 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est une honte, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. Ce qui est important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
+Les calculs avec les nombres entiers (aussi appelés *entiers*) plus petits que le susmentionné 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est une honte, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. Ce qui est important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
 
 ### Arithmétique
 
-La principale chose à faire avec les nombres c'est de l’arithmétique. Les opérations arithmétiques comme l'addition ou la multiplication prennent deux valeurs de nombre et produisent un nouveau nombre à partir d'eux. Voici à quoi cela ressemble en JavaScript :
+La principale chose à faire avec les nombres c'est de l’arithmétique. Les opérations arithmétiques comme l'addition ou la multiplication prennent deux valeurs nombre et produisent un nouveau nombre à partir d'eux. Voici à quoi cela ressemble en JavaScript :
 
 ```javascript
 100 + 4 * 11
@@ -130,7 +130,7 @@ Les chaînes ne peuvent pas être divisées, multipliées, ou soustraites, mais 
 "con" + "cat" + "è" + "ne"
 ```
 
-Les valeurs de chaîne ont un nombre de fonctions (méthodes) qui leur sont associées et qui peuvent être utilisées pour réaliser des opérations sur elles. J'en dirai plus à propos de celles-ci dans le [Chapitre 4]().
+Les valeurs chaîne ont un nombre de fonctions (méthodes) qui leur sont associées et qui peuvent être utilisées pour réaliser des opérations sur elles. J'en dirai plus à propos de celles-ci dans le [Chapitre 4]().
 
 Les chaînes écrites avec des guillemets simples ou doubles se comportent de façon très similaire — la seule différence est le type de guillemet que vous avez besoin d’échapper à l’intérieur. Les chaînes avec guillemets obliques, habituellement appelées *littéraux de gabarits*, peuvent faire quelques trucs supplémentaires. En dehors de pouvoir étendre des lignes, elles peuvent aussi intégrer d'autres valeurs.
 
@@ -142,7 +142,7 @@ Quand vous écrivez quelque chose à l’intérieur de `${}` dans un littéral d
 
 ## Opérateurs unaires
 
-Tous les opérateurs unaires ne sont pas des symboles. Certains sont écrits avec des mots. Un exemple est l’opérateur `typeof` qui produit une valeur de chaîne nommant le type de valeur que vous lui avez donnée.
+Tous les opérateurs unaires ne sont pas des symboles. Certains sont écrits avec des mots. Un exemple est l’opérateur `typeof` qui produit une valeur chaîne nommant le type de la valeur que vous lui avez donnée.
 
 ```javascript
 console.log(typeof 4.5)
@@ -151,9 +151,9 @@ console.log(typeof "x")
 // → string
 ```
 
-Nous utiliserons `console.log` dans le code de l'exemple pour indiquer que nous voulons voir le résultat de quelque chose qui a été évalué. Plus d'information à propos de cela dans le  [chapitre suivant]().
+Nous utiliserons `console.log` dans le code de l'exemple pour indiquer que nous voulons voir le résultat de quelque chose qui a été évalué. Plus d'information dans le  [chapitre suivant]().
 
-Les opérateurs qui ont été présentés opèrent tous avec deux valeurs, mais `typeof` n'en prend qu'une seule. Les opérateurs qui utilisent deux valeurs sont appelés opérateurs *binaires*, alors que ceux qui en prennent une sont appelés opérateurs *unaires*. L’opérateur moins peut être utilise à la fois comme un opérateur binaire et comme un opérateur unaire.
+Les opérateurs qui ont été présentés opèrent tous avec deux valeurs, mais `typeof` n'en prend qu'une seule. Les opérateurs qui utilisent deux valeurs sont appelés opérateurs *binaires*, alors que ceux qui en prennent une sont appelés opérateurs *unaires*. L’opérateur moins peut être utilisé à la fois comme un opérateur binaire et comme un opérateur unaire.
 
 ```javascript
 console.log(- (10 - 2))
@@ -162,7 +162,7 @@ console.log(- (10 - 2))
 
 ## Valeurs booléennes
 
-Il est souvent utile d'avoir une valeur qui distingue entre deux possibilités telles que "oui" et "non", ou "on" et "off". Pour ce faire, JavaScript a un type *booléen* qui a seulement deux valeurs, *true* (vrai) et *false* (faux) qui sont écrits tels quels.
+Il est souvent utile d'avoir une valeur qui distingue entre deux possibilités telles que "oui" et "non", ou "on" et "off". Pour ce faire, JavaScript a un type *booléen* qui a seulement deux valeurs, *true* (vrai) et *false* (faux) qui sont écrites telles quelles.
 
 ### Comparaison
 
@@ -175,7 +175,7 @@ console.log(3 < 2)
 // → false
 ```
 
-Les signes `>` et `<` sont respectivement les symboles traditionnels pour "plus grand que" et "plus petit que". Ce sont des opérateurs binaires. Leur application résulte une valeur booléenne indiquant si ils sont vrais ou non.
+Les signes `>` et `<` sont respectivement les symboles traditionnels pour "plus grand que" et "plus petit que". Ce sont des opérateurs binaires. Leur application résulte une valeur booléenne indiquant s'ils sont vrais ou non.
 
 Les chaînes peuvent être comparées de la même façon.
 
@@ -184,7 +184,7 @@ console.log("Aardvark" < "Zoroaster")
 // → true
 ```
 
-La manière dont les chaînes sont ordonnées est grosso-modo alphabétique, mais pas vraiment ce que vous vous attendriez a voir dans un dictionnaire : les lettres majuscules sont toujours "moins" que les minuscules, donc `"Z" < "a"`, et les caractères non alphabétiques (!,-, et autres) sont aussi inclus dans l'ordre. Lorsque de la comparaison de chaînes, JavaScript parcourt les caractères de gauche à droite, comparant les codes Unicode un par un.
+La manière dont les chaînes sont ordonnées est grosso-modo alphabétique, mais pas vraiment ce que vous vous attendriez à voir dans un dictionnaire : les lettres majuscules sont toujours "moins" que les minuscules, donc `"Z" < "a"`, et les caractères non alphabétiques (!,-, et autres) sont aussi inclus dans l'ordre. Lors de la comparaison de chaînes, JavaScript parcourt les caractères de gauche à droite, comparant les codes Unicode un par un.
 
 Les autres opérateurs similaires sont `>=` (plus grand ou égal à), `<=` (plus petit ou égal à), `==` (égal à), et `!=` (pas égal à).
 
@@ -195,14 +195,14 @@ console.log("Pomme" == "Orange")
 // → false
 ```
 
-Il y a seulement une valeur en JavaScript qui n'est pas égale à elle même, et c'est `NaN` ("not a number").
+Il y a seulement une valeur en JavaScript qui n'est pas égale à elle-même, et c'est `NaN` ("not a number").
 
 ```javascript
 console.log(NaN == NaN)
 // → false
 ```
 
-`NaN` est supposé représenter le résultat d'un calcul absurde, et en tant que tel, il n'est pas égal au résultat de quelconque autre calcul absurde.
+`NaN` est supposé représenter le résultat d'un calcul absurde, et en tant que tel, il n'est pas égal au résultat de quelqu'autre calcul absurde.
 
 ### Opérateurs logiques
 
@@ -228,7 +228,7 @@ console.log(false || false)
 
 *Non* est écrit avec un point d'exclamation (`!`). C'est un opérateur unaire qui inverse la valeur qui lui est passée —`!true` retourne `false` et `!false` retourne `true`.
 
-Lorsque l'on mélange ces opérateurs booléens avec les opérateurs arithmétiques et les autres, il n'est pas toujours évident de savoir quand les parenthèses sont nécessaires. En pratique, vous pour habituellement le savoir en connaissant les opérateurs que nous avons vu jusque-là, `||` a la précédence la plus basse, puis vient `&&`, et puis les opérateurs de comparaison (`>`, `==`, ainsi de suite), et puis le reste. Cet ordre a été choisi de telle manière que, dans une expression typique comme la suivante, aussi peu de parenthèses que possible sont nécessaires : 
+Lorsque l'on mélange ces opérateurs booléens avec les opérateurs arithmétiques et les autres, il n'est pas toujours évident de savoir quand les parenthèses sont nécessaires. En pratique, vous pour normalement le savoir en connaissant les opérateurs que nous avons vu jusque-là, `||` a la précédence la plus basse, puis vient `&&`, et puis les opérateurs de comparaison (`>`, `==`, ainsi de suite), et puis le reste. Cet ordre a été choisi de telle manière que, dans une expression typique comme la suivante, aussi peu de parenthèses que possible sont nécessaires : 
 
 ```javascript
 1 + 1 == 2 && 10 * 10 > 50
@@ -247,9 +247,9 @@ Celui-ci est appelé opérateur conditionnel (ou quelquefois juste opérateur te
 
 ## Valeurs vides
 
-Il y a deux valeurs spéciales, écrites `null` et `undefined`, qui sont utilisées pour dénoter l'absence de valeur *significative*. Elles sont elles-même des valeurs, mais elles ne portent pas d'information.
+Il y a deux valeurs spéciales, écrites `null` et `undefined`, qui sont utilisées pour dénoter l'absence de valeur *significative*. Elles sont elles-mêmes des valeurs, mais elles ne comportent pas d'information.
 
-Beaucoup d’opérations dans le langage qui ne produisent pas de valeur significative (vous verrez cela plus tard) retournent `undefined` simplement parce qu'elles doivent retourner *une* valeur.
+Beaucoup d’opérations du langage qui ne produisent pas de valeur significative (vous verrez cela plus tard) retournent `undefined` simplement parce qu'elles doivent retourner *une* valeur.
 
 La différence de sens entre `undefined` et `null` est un accident de conception de JavaScript, et cela n'a pas d'important la plupart du temps. Dans les cas où vous êtes effectivement concernés par ces valeurs, je recommande de les considérer comme interchangeables.
 
@@ -270,11 +270,11 @@ console.log(false == 0)
 // → true
 ```
 
-Quand un opérateur est appliqué sur le "mauvais" type de valeur, JavaScript va silencieusement convertir cette valeur dans le type dont il a besoin, utilisant un jeu de règles qui souvent ne sont pas ce que vous voulez ou attendez C'est appelé "*conversion de type*". Le `null` de la première expression devient `0`, et le `"5"` de la seconde expression devient `5` (d'une chaîne à un nombre). Mais dans la troisième expression, `+` essaye de concaténer avant de faire l’opération numérique, donc le `1` est converti en `"1"` (d'un nombre a une chaîne).
+Quand un opérateur est appliqué sur le "mauvais" type de valeur, JavaScript va discrètement convertir cette valeur dans le type dont il a besoin, utilisant un jeu de règles qui souvent ne sont pas celles que vous voulez ou attendez C'est appelé "*conversion de type*". Le `null` de la première expression devient `0`, et le `"5"` de la seconde expression devient `5` (d'une chaîne à un nombre). Mais dans la troisième expression, `+` essaye de concaténer avant de faire l’opération numérique, donc le `1` est converti en `"1"` (d'un nombre à une chaîne).
 
-Quand quelque chose qui ne correspond pas a un nombre de façon évidente (tel que `"five"` ou `undefined`) est converti en un nombre, vous obtenez la valeur `NaN`. De plus, les opérations arithmétiques sur `NaN` continuent de produire un `NaN`, donc si vous vous retrouvez à obtenir un de ceux-ci à un endroit inattendu, regardez pour les conversions de type accidentelles.
+Quand quelque chose qui ne correspond pas à un nombre de façon évidente (tel que `"five"` ou `undefined`) est converti en un nombre, vous obtenez la valeur `NaN`. De plus, les opérations arithmétiques sur `NaN` continuent de produire un `NaN`, donc si vous vous retrouvez à obtenir un de ceux-ci à un endroit inattendu, regardez pour les conversions de type accidentelles.
 
-Lors de la comparaison de valeurs de même type utilisant `==`, le résultat est facile à prédire : vous devriez obtenir `true` quand les deux valeurs sont les même, sauf dans le cas de `NaN`. Mais si les types diffèrent, JavaScript utilise un jeu de règles compliqué et confus pour déterminer quoi faire. Dans la plupart des cas, il essaie juste de convertir une des valeurs dans le type de l'autre valeur. Cependant, quand `null` ou `undefined` apparaissent de l'un ou l'autre côté de l’opérateur, il produit `true` seulement si les deux côtés sont soit `null` ou `undefined`.
+Lors de la comparaison de valeurs de même type utilisant `==`, le résultat est facile à prédire : vous devriez obtenir `true` quand les deux valeurs sont les même, sauf dans le cas de `NaN`. Mais si les types diffèrent, JavaScript utilise un jeu de règles compliqué et confus pour déterminer quoi faire. Dans la plupart des cas, il essaie juste de convertir une des valeurs dans le type de l'autre valeur. Cependant, quand `null` ou `undefined` apparaissent d'un côté ou de l'autre de l’opérateur, il produit `true` seulement si les deux côtés sont soit `null` ou `undefined`.
 
 ```javascript
 console.log(null == undefined);
@@ -285,13 +285,13 @@ console.log(null == 0);
 
 Ce comportement est souvent utile. Quand vous voulez tester si une valeur a une vraie valeur plutôt que `null` ou `undefined`, vous pouvez la comparer à `null` avec l’opérateur `==` (ou `!=`).
 
-Mais que faire si vous voulez tester si quelque chose réfère précisément à la valeur `false` ? Des expressions comme `0 == false` et `"" == false` sont aussi vraies à cause de la conversion de type automatique. Quand vous ne voulez *aucune* conversion de type se produire, il y a deux opérateurs additionnels : `===` et `!===`. Le premier teste si une valeur est précisément égale à l'autre, et le second tests si elle est précisément non égale. Donc `"" === false` est faux comme attendu.
+Mais que faire si vous voulez tester si quelque chose réfère précisément à la valeur `false` ? Des expressions comme `0 == false` et `"" == false` sont aussi vraies à cause de la conversion de type automatique. Quand vous ne voulez *aucune* conversion de type se produire, il y a deux opérateurs additionnels : `===` et `!===`. Le premier teste si une valeur est précisément égale à l'autre, et le second teste si elle est précisément non égale. Donc `"" === false` est faux comme attendu.
 
-Je recommande d'utiliser les opérateurs de comparaison à trois caractères de manière défensive pour prévenir les conversions de type inattendues de vous piéger. Mais quand vous êtes certains que les types de chaque côté sont les même, il n'y a pas de problème à utiliser les opérateurs plus courts.
+Je recommande d'utiliser les opérateurs de comparaison à trois caractères de manière défensive pour éviter d’être piéger par les conversions de type inattendues. Mais quand vous êtes certains que les types de chaque côté sont les même, il n'y a pas de problème à utiliser les opérateurs plus courts.
 
 ### Court-cicuiter les opérateurs logiques
 
-Les opérateurs `&&` et `||` gèrent les valeurs de types différents d'une façon particulière. Ils convertiront la valeur a leur gauche en type booléen afin de décider quoi faire, mais en fonction de l’opérateur et du résultat de cette conversion, ils retourneront soit la valeur *originale* de gauche ou la valeur de droite. 
+Les opérateurs `&&` et `||` gèrent les valeurs de types différents d'une façon particulière. Ils convertiront la valeur à leur gauche en type booléen afin de décider quoi faire, mais en fonction de l’opérateur et du résultat de cette conversion, ils retourneront soit la valeur *originale* de gauche ou la valeur de droite. 
 
 Par exemple, l’opérateur `||` retournera la valeur à sa gauche quand elle peut être convertie en `true` et, sinon, il retournera la valeur sur sa droite. Cela a l'effet attendu quand les valeurs sont booléennes et fait quelque chose d'analogue pour les valeurs d'autres types.
 
@@ -304,7 +304,7 @@ console.log("Agnes" || "user")
 
 Nous pouvons utiliser cette fonctionnalité comme un moyen de revenir à une valeur par défaut. Si vous avez une valeur qui peut être vide, vous pouvez mettre `||` après avec sa valeur de remplacement. Si la valeur initiale peut être convertie en `false`, vous aurez la valeur de remplacement. Les règles pour convertir les chaînes et les nombres en booléens définissent que `0`, `NaN`, et la chaîne vide (`""`) comptent comme `false`, alors que toutes les autres valeurs comptent comme `true`. Donc `0 || -1` produit `-1`, et `"" || "!?"` retourne `"!?"`.
 
-L’opérateur `&&` fonctionne de la même façon mais dans l'autre sens. Quand la valeur à sa gauche est quelque chose qui se convertit en `false`, il retourne cette valeur, et sinon il retourne la valeur à sa droite.
+L’opérateur `&&` fonctionne de la même façon, mais dans l'autre sens. Quand la valeur à sa gauche est quelque chose qui se convertit en `false`, il retourne cette valeur, sinon il retourne la valeur à sa droite.
 
 Une autre propriété importante de ces deux opérateurs est que la partie à leur droite est évaluée seulement quand cela est nécessaire. Dans le cas de `true || X`, quel que soit `X` — même si c'est une partie de programme qui fait quelque chose de *terrible* — le résultat sera vrai, et donc `X` n'est jamais évalué. De même pour `false && X` qui est faux et qui ignore `X`. Ceci est appelé *évaluation en court-circuit*.
 
