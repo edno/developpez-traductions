@@ -61,7 +61,7 @@ C'est 2.998 × 108 = 299 800 000.
 
 Les calculs avec les nombres entiers (aussi appelés *entiers*) plus petits que le précédemment mentionné 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est une honte, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. Ce qui est important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
 
-## Arithmétique
+### Arithmétique
 
 La principale chose à faire avec les nombres c'est de l’arithmétique. Les opérations arithmétiques comme l'addition ou la multiplication prennent deux valeurs de nombre et produisent un nouveau nombre a partir d'eux. Voici à quoi cela ressemble en JavaScript :
 
@@ -85,7 +85,7 @@ Ces règles de précédence ne sont pas quelque chose dont vous devez vous inqui
 
 Il y a un autre opérateur arithmétique, que vous ne reconnaîtrez peut être pas immédiatement. Le symbole `%` est utilisé pour représenter l’opération de *reste*. `X % Y` est le reste de la division de `X` par `Y`. Par exemple, `314 % 100` produit `14`, et `144 % 12` retourne `0`. La précédence de l’opérateur de reste est le même que pour la multiplication et la division. Vous verrez aussi souvent cet opérateur être appelé *modulo*.
 
-## Nombres speciaux
+### Nombres spéciaux
 
 Il y a trois valeurs spéciales en JavaScript qui sont considérées comme des nombres mais ne se comportent pas comme des nombres normaux.
 
@@ -142,5 +142,108 @@ Quand vous écrivez quelque chose à l’intérieur de `${}` dans un littéral d
 
 ## Opérateurs unaires
 
+Tous les opérateurs unaires ne sont pas des symboles. Certains sont écrits avec des mots. Un exemple est l’opérateur `typeof` qui produit une valeur de chaîne nommant le type de valeur que vous lui avez donnée.
 
+```javascript
+console.log(typeof 4.5)
+// → number
+console.log(typeof "x")
+// → string
+```
+
+Nous utiliserons `console.log` dans le code de l'exemple pour indiquer que nous voulons voir le résultat de quelque chose qui a été évalué. Plus a propos de cela dans le  [chapitre suivant]().
+
+Les opérateurs qui ont été présentés opèrent tous avec deux valeurs, mais `typeof` n'en prend qu'une seule. Les opérateurs qui utilisent deux valeurs sont appelés opérateurs *binaires*, alors que ceux qui en prennent une sont appelés opérateurs *unaires*. L’opérateur moins peut être utilise à la fois comme un opérateur binaire et comme un opérateur unaire.
+
+```javascript
+console.log(- (10 - 2))
+// → -8
+```
+
+## Valeurs booléennes
+
+Il est souvent utile d'avoir une valeur qui distingue entre deux possibilités telles que "oui" et "non" ou "on" et "off". Pour ce faire, JavaScript a un type *booléen* qui a seulement deux valeurs, *true* (vrai) et *false* (faux) qui sont écrits tels quels.
+
+### Comparaison
+
+Voici une façon de produire des valeurs booléennes :
+
+``` javascript
+console.log(3 > 2)
+// → true
+console.log(3 < 2)
+// → false
+```
+
+Les signes `>` et `<` sont respectivement les symboles traditionnels pour "plus grand que" et "plus petit que". Ce sont des opérateurs binaires. Leur application résulte une valeur booléenne indiquant si ils sont vrais ou non.
+
+Les chaînes peuvent être comparées de la même façon.
+
+```javascript
+console.log("Aardvark" < "Zoroaster")
+// → true
+```
+
+La manière dont les chaînes sont ordonnées est grosso-modo alphabétique, mais pas vraiment ce que vous vous attendriez a voir dans un dictionnaire : les lettres majuscules sont toujours "moins" que les minuscules, donc `"Z" < "a"`, et les caractères non alphabétiques (!,-, et autres) sont aussi inclus dans l'ordre. Lorsque de la comparaison de chaînes, JavaScript parcourt les caractères de gauche à droite, comparant les codes Unicode un par un.
+
+Les autres opérateurs similaires sont `>=` (plus grand ou égal à), `<=` (plus petit ou égal à), `==` (égal à), et `!=` (pas égal à).
+
+```javascript
+console.log("Itchy" != "Scratchy")
+// → true
+console.log("Pomme" == "Orange")
+// → false
+```
+
+Il y a seulement une valeur en JavaScript qui n'est pas égale à elle même, et c'est `NaN` ("not a number").
+
+```javascript
+console.log(NaN == NaN)
+// → false
+```
+
+`NaN` est supposé représenter le résultat d'un calcul absurde, et en tant que tel, il n'est pas égal au résultat de quelconque autre calcul absurde.
+
+### Opérateurs logiques
+
+Il y a aussi quelques opérations qui peuvent appliquées aux valeurs booléenne elles-même. JavaScript supporte trois opérateurs logiques: *et*, *ou* et *non*. Ils peuvent être utilisés pour "raisonner" à propos des booléens.
+
+L’opérateur `&&` représente la logique *et*. C'est un opérateur binaire, et son résultat est vrai (*true*) seulement si les deux valeurs qui lui sont données sont vraies.
+
+```javascript
+console.log(true && false)
+// → false
+console.log(true && true)
+// → true
+```
+
+L’opérateur `||` représente la logique *ou*. Il retourne vrai (*true*) si l'une ou l'autre des valeurs qui lui sont données est vraie.
+
+```javascript
+console.log(false || true)
+// → true
+console.log(false || false)
+// → false
+```
+
+*Non* est écrit avec un point d'exclamation (`!`). C'est un opérateur unaire qui inverse la valeur qui lui est passée —`!true` retourne `false` et `!false` retourne `true`.
+
+Lorsque l'on mélange ces opérateurs booléens avec les opérateurs arithmétiques et les autres, il n'est pas toujours évident de savoir quand les parenthèses sont nécessaires. En pratique, vous pour habituellement le savoir en connaissant les opérateurs que nous avons vu jusque-là, `||` a la précédence la plus basse, puis vient `&&`, et puis les opérateurs de comparaison (`>`, `==`, ainsi de suite), et puis le reste. Cet ordre a été choisi de telle manière que, dans une expression typique comme la suivante, aussi peu de parenthèses que possible sont nécessaires : 
+
+```javascript
+1 + 1 == 2 && 10 * 10 > 50
+```
+
+Le dernier opérateur logique dont je vais discuter n'est ni unaire, ni binaire, mais ternaire, opérant sur trois valeur. Il est écrit avec un point d'interrogation et un deux-points, comme suit :
+
+```javascript
+console.log(true ? 1 : 2);
+// → 1
+console.log(false ? 1 : 2);
+// → 2
+```
+
+Celui-ci est appelé opérateur conditionnel (ou quelquefois juste opérateur ternaire puisque c'est le seul opérateur de ce type dans le langage). La valeur à gauche du point d'interrogation "choisit" laquelle des deux autres valeurs sera retournée. Quand elle est vrai, elle choisi la valeur du milieu, et quand elle est fausse, elle choisi la valeur de droite.
+
+## Valeurs vides
 
