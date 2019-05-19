@@ -247,3 +247,73 @@ Celui-ci est appelé opérateur conditionnel (ou quelquefois juste opérateur te
 
 ## Valeurs vides
 
+Il y a deux valeurs spéciales, écrites `null` et `undefined`, qui sont utilises pour dénoter l'absence de valeur *significative*. Elles sont elles-même des valeurs, mais elle ne portent pas d'information.
+
+Beaucoup d’opérations dans le langage qui ne produisent pas de valeur significative (vous verrez cela plus tard) retournent `undefined` simplement parce qu'elles doivent retourner *une* valeur.
+
+La différence de sens entre `undefined` et `null` est un accident de conception de JavaScript, et cela n'a pas d'important la plupart du temps. Dans les cas où vous êtes effectivement concernés par ces valeurs, je recommande de les considérez comme interchangeables.
+
+## Conversion de type automatique
+
+Dans l'[Introduction](), j'ai mentionne que JavaScript se met en quatre pour accepter presque tous les programmes que vous lui donnez, même ceux qui font des choses bizarres. Ceci est bien démontré avec les expressions suivantes :
+
+```javascript
+console.log(8 * null)
+// → 0
+console.log("5" - 1)
+// → 4
+console.log("5" + 1)
+// → 51
+console.log("five" * 2)
+// → NaN
+console.log(false == 0)
+// → true
+```
+
+Quand un opérateur est applique sur le "mauvais" type de valeur, JavaScript va silencieusement convertir cette valeur dans le type dont il a besoin, utilisant un jeu de règles qui souvent ne sont pas ce que vous voulez ou attendez C'est appelé "*conversion de type*". Le `null` de la première expression devient `0`, et le `"5"` de la seconde expression devient `5` (d'une chaîne à un nombre). Mais dans la troisième expression, `+` essaye de concaténer avant de faire l’opération numérique, donc le `1` est converti en `"1"` (d'un nombre a une chaîne).
+
+Quand quelque chose qui ne correspond pas a un nombre de façon évidente (tel que `"five"` ou `undefined`) est converti en un nombre, vous obtenez la valeur `NaN`. De plus, les opérations arithmétiques sur `NaN` continuent de produire un `NaN`, donc si vous vous retrouvez a obtenir un de ceux-ci a un endroit inattendu, regardez pour les conversions de type accidentelles.
+
+Lors de la comparaison de valeurs de même type utilisant `==`, le résultat est facile à prédire : vous devriez obtenir `true` quand les deux valeurs sont les même, sauf dans le cas de `NaN`. Mais si les types différent, JavaScript utilise un jeu de règles compliqué et confus pour déterminer quoi faire. Dans la plupart des cas, il essaie juste de convertir une des valeurs dans le type de l'autre valeur. Cependant, quand `null` ou `undefined` apparaissent de l'un ou l'autre côté de l’opérateur, il produit `true` seulement si les deux côtés sont soit `null` ou `undefined`.
+
+```javascript
+console.log(null == undefined);
+// → true
+console.log(null == 0);
+// → false
+```
+
+Ce comportement est souvent utile. Quand vous voulez tester si une valeur a une vraie valeur plutôt que `null` ou `undefined`, vous pouvez la comparer à `null` avec l’opérateur `==` (ou `!=`).
+
+Mais que faire si vous voulez tester si quelque chose réfère précisément à la valeur `false` ? Des expressions comme `0 == false` et `"" == false` sont aussi vraies à cause de la conversion de type automatique. Quand vous ne voulez *aucune* conversion de type se produire, il y a deux opérateurs additionnels : `===` et `!===`. Le premier teste si une valeur est précisément égale à l'autre, et le second tests si elle est précisément non égale. Donc `"" === false` est faux comme attendu.
+
+Je recommande d'utiliser les opérateurs de comparaison à trois caractères de manière défensive pour prévenir les conversion de type inattendues de vous piéger. Mais quand vous êtes certains que les types de chaque côté sont les même, il n'y a pas de problème à utiliser les opérateurs plus courts.
+
+### Court-cicuiter les opérateurs logiques
+
+Les opérateurs `&&` et `||` gèrent les valeurs de types différents d'une façon particulière. Ils convertirons la valeur a leur gauche en type booléen afin de décider quoi faire, mais en fonction de l’opérateur et du résultat de cette conversion, ils retourneront soit la valeur *originale* de gauche ou la valeur de droite. 
+
+Par exemple, l’opérateur `||` retournera la valeur à sa gauche quand elle peut être convertie en `true` et, sinon, il retournera la valeur sur sa droite. Cela a l'effet attendu quand les valeurs sont booléenne et fait quelque chose d'analogue pour les valeurs d'autres types.
+
+```javascript
+console.log(null || "user")
+// → user
+console.log("Agnes" || "user")
+// → Agnes
+```
+
+Nous pouvons utiliser cette fonctionnalité comme un moyen de revenir à une valeur par défaut. Si vous avez une valeur qui peut être vide, vous pouvez mettre `||` après avec sa valeur de remplacement. Si la valeur initiale peut être convertie en `false`, vous aurez la valeur de remplacement. Les règles pour convertir les chaînes et les nombres en booléens définissent que `0`, `NaN`, et la chaîne vide (`""`) comptent comme `false`, alors que toutes les autres valeurs comptent comme `true`. Donc `0 || -1` produit `-1`, et `"" || "!?"` retourne `"!?"`.
+
+L’opérateur `&&` fonctionne de la même façon mais dans l'autre sens. Quand la valeur à sa gauche est quelque chose qui se converti en `false`, il retourne cette valeur, et sinon il retourne la valeur à sa droite.
+
+Une autre propriété importante de ces deux opérateurs est que la partie à leur droite est évaluée seulement quand cela est nécessaire. Dans le cas de `true || X`, quelque soit `X` — même si c'est une partie de programme qui fait quelque chose de *terrible* — le résultat sera vrai, et donc `X` n'est jamais évalué. De même pour `false && X` qui est faux et qui ignore `X`. Ceci est appelé *évaluation en court-circuit*.
+
+L’opérateur conditionnel fonctionne d'une manière similaire. Parmi les seconde et la troisième valeurs, seule celle qui est sélectionnée est évaluée.
+
+## Résumé
+
+Nous avons vu quatre types de valeur JavaScript dans ce chapitre : nombres, chaînes, booléens, et valeurs non définies.
+
+De telles valeurs sont créées en tapant leur nom (`true`, `null`) ou valeur (`13`, `"abc"`). Vous pouvez combiner et transformer des valeurs avec des opérateurs. Nous avons vu les opérateurs binaires pour l’arithmétique (`+`, `-`, `*`, `/` et `%`), la concaténation de chaîne (`+`), la comparaison (`==`, `!=`, `===`, `!==`, `<`, `>`, `<=`, `>=`), et la logique (`&&`, `||`), de même que plusieurs opérateurs unaires (`-` pour opposer un nombre, `!` pour opposer logiquement, et `typeof` pour trouver le type d'une valeur) et un opérateur ternaire (`?:`) pour choisir une valeur parmi deux à partir d'une d'une troisième valeur.
+
+Cela vous donne assez d'information pour utiliser JavaScript comme une calculatrice de poche mais pas beaucoup plus. Le [prochain chapitre]() commencera à intégrer ces expressions ensemble pour faire des programmes de base.
