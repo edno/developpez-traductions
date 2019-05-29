@@ -1,14 +1,14 @@
 # Valeurs, Types et Opérateurs
 
-> Sous la surface de la machine, le programme bouge. Sans effort, il s’étend et se contracte. En grande harmonie, les électrons se dispersent et se regroupent. Les formes sur l’écran ne sont que des ondulations sur l'eau. L'essence reste invisible en dessous.
+> Sous la surface de la machine, le programme bouge. Sans effort, il se dilate et se contracte. En grande harmonie, les électrons se dispersent et se regroupent. Les formes sur l’écran ne sont que des ondulations sur l'eau. L'essence reste invisible en dessous.
 >
 > — Maître Yuan-Ma, *Le Livre de la Programmation*
 
 ![Image d'une mer de bits](https://eloquentjavascript.net/img/chapter_picture_1.jpg)
 
-À l’intérieur du monde de l'ordinateur, ce ne sont que des données. Vous pouvez lire des données, modifier des données, créer de nouvelles données — mais ce qui n'est pas une donnée ne peut pas être mentionné. Toutes ces données sont stockées comme de long séquences de bits et sont donc fondamentalement identiques.
+À l’intérieur du monde de l'ordinateur, ce ne sont que des données. Vous pouvez lire des données, modifier des données, créer de nouvelles données — mais ce qui n'est pas une donnée ne peut pas être mentionné. Toutes ces données sont stockées comme de longues séquences de bits et sont donc fondamentalement identiques.
 
-Bits sont n'importe quoi ayant deux valeurs, habituellement décris comme zéros et uns. À l’intérieur de l'ordinateur, ils prennent des formes telles qu'une charge électrique haute ou basse, un signal fort ou faible, ou un point brillant ou terne sur la surface d'un CD. N'importe quelle information discrète peut être réduite à une séquence de zéros et de uns, et donc représentés en bits.
+Les bits représentent n'importe quoi ayant deux valeurs, habituellement décris comme zéros et uns. À l’intérieur de l'ordinateur, ils prennent des formes telles qu'une charge électrique haute ou basse, un signal fort ou faible, ou un point brillant ou terne sur la surface d'un CD. N'importe quelle information discrète peut être réduite à une séquence de zéros et de uns, et donc représentés en bits.
 
 Par exemple, nous pouvons exprimer le nombre 13 en bits. Cela fonctionne de la même façon qu'un nombre décimal, mais au lieu de 10 différents chiffres, vous n'en avez que 2, et le poids de chacun accroît par un facteur 2 de droite à gauche. Voici les bits qui font le nombre 13, avec le poids des chiffres affiché en dessous d'eux :
 
@@ -25,7 +25,7 @@ Imaginez une mer de bits — un océan de bits. Un ordinateur moderne typique a 
 
 Pour être capable de travailler avec de telles quantités de bits sans être perdu, nous devons les séparer en morceaux qui représentent des éléments d’information. Dans un environnement JavaScript, ces morceaux sont appelés *valeurs*. Bien que toutes ces valeurs soient faites de bits, elles jouent des rôles différents. Toute valeur a un type qui détermine son rôle. Certaines valeurs sont des nombres, certaines sont des morceaux de texte, certaines sont des fonctions, et ainsi de suite.
 
-Pour créer une valeur, vous devez juste invoquer son nom. C'est pratique. Vous n'avez pas besoin de collecter des matériaux de construction pour vos valeurs ou payer pour elles. Vous en appelez une, et tada, vous l'avez. Bien sûr, elles ne sont pas vraiment créées à partir de rien. Chaque valeur doit être stockée quelque part, et si vous voulez utiliser une gigantesque quantité d'entre elles au même moment, vous pouvez être à court de mémoire. Heureusement, cela n'est un problème que si vous avez besoin de toutes simultanément. Dès que vous n'utilisez plus une valeur, elle disparaîtra, laissant derrière elle ses bits pour être recyclés comme matériel de construction pour la prochaine génération de valeurs.
+Pour créer une valeur, vous devez juste invoquer son nom. C'est pratique. Vous n'avez pas besoin de collecter des matériaux de construction pour vos valeurs ou payer pour elles. Vous en appelez une, et vous l'avez de suite. Bien sûr, elles ne sont pas vraiment créées à partir de rien. Chaque valeur doit être stockée quelque part, et si vous voulez utiliser une gigantesque quantité d'entre elles au même moment, vous pouvez être à court de mémoire. Heureusement, cela n'est un problème que si vous avez besoin de toutes simultanément. Dès que vous n'utilisez plus une valeur, elle disparaîtra, laissant derrière elle ses bits pour être recyclés comme matériel de construction pour la prochaine génération de valeurs.
 
 Ce chapitre introduit les éléments atomiques des programmes JavaScript, qui sont les types simples de valeurs et les opérateurs qui peuvent agir sur de telles valeurs.
 
@@ -43,7 +43,7 @@ JavaScript utilise un nombre fixe de bits, 64 d'entre eux, pour stocker une seul
 
 La mémoire d'ordinateur a été beaucoup plus petite, et les gens tendaient à utiliser des groupes de 8 ou 16 bits pour représenter leurs nombres. Il était facile de déborder (*overflow*) de si petits nombres par accident — pour finir avec un nombre qui ne peut pas être contenu dans le nombre donné de bits. Aujourd'hui, même les ordinateurs qui rentrent dans votre poche ont plein de mémoire, donc vous êtes libres d'utiliser des morceaux de 64 bits, et vous devez seulement vous inquiéter quand vous traiter avec des nombres réellement astronomiques.
 
-Cependant, Les nombres de moins de 18 quintillions ne peuvent pas tous être contenus dans un nombre JavaScript. Ces bits stockent aussi des nombres négatifs, donc un bit indique le signe du nombre. Un problème plus important est que les nombres non-entiers doivent aussi être représentés. Pour faire cela, certains bits sont utilisés pour stocker la position du séparateur décimal. Le vrai nombre entier maximal qui peut être stocké est plus autour de 9 quadrillions (15 zéros) — ce qui est toujours plaisamment énorme.
+Cependant, Les nombres de moins de 18 quintillions ne peuvent pas tous être contenus dans un nombre JavaScript. Ces bits stockent aussi des nombres négatifs, donc un bit indique le signe du nombre. Un problème plus important est que les nombres non-entiers doivent aussi être représentés. Pour faire cela, certains bits sont utilisés pour stocker la position du séparateur décimal. Le vrai nombre entier maximal qui peut être stocké est plus autour de 9 quadrillions (15 zéros) — ce qui est toujours énormément plaisant.
 
 Les nombres fractionnaires sont écrits avec un point.
 
@@ -59,11 +59,11 @@ Pour de très grands ou très petites nombres, vous pouvez aussi utiliser la not
 
 C'est 2.998 × 108 = 299 800 000.
 
-Les calculs avec les nombres entiers (aussi appelés *entiers*) plus petits que le susmentionné 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est une honte, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. Ce qui est important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
+Les calculs avec les nombres entiers (aussi appelés *entiers*) plus petits que les susmentionnés 9 quadrillions sont garantis d’être toujours précis. Malheureusement, les calculs avec les nombres fractionnaires ne le sont généralement pas. Tout comme π (pi) ne peut pas être exprimé précisément par un nombre fini de chiffres décimaux, beaucoup de nombres perdent en précision quand seulement 64 bits sont disponibles pour les stocker. C'est dommage, mais cela ne cause des problèmes pratiques que dans des situations spécifiques. L'important c'est de le savoir et de traiter les nombres numériques fractionnaires comme approximations, et non pas comme des valeurs précises.
 
 ### Arithmétique
 
-La principale chose à faire avec les nombres c'est de l’arithmétique. Les opérations arithmétiques comme l'addition ou la multiplication prennent deux valeurs nombre et produisent un nouveau nombre à partir d'eux. Voici à quoi cela ressemble en JavaScript :
+La principale chose à faire avec les nombres c'est de l’arithmétique. Les opérations arithmétiques comme l'addition ou la multiplication prennent deux valeurs numériques et produisent un nouveau nombre à partir d'elles. Voici à quoi cela ressemble en JavaScript :
 
 ```javascript
 100 + 4 * 11
@@ -132,7 +132,7 @@ Les chaînes ne peuvent pas être divisées, multipliées, ou soustraites, mais 
 
 Les valeurs chaîne ont un nombre de fonctions (méthodes) qui leur sont associées et qui peuvent être utilisées pour réaliser des opérations sur elles. J'en dirai plus à propos de celles-ci dans le [Chapitre 4]().
 
-Les chaînes écrites avec des guillemets simples ou doubles se comportent de façon très similaire — la seule différence est le type de guillemet que vous avez besoin d’échapper à l’intérieur. Les chaînes avec guillemets obliques, habituellement appelées *littéraux de gabarits*, peuvent faire quelques trucs supplémentaires. En dehors de pouvoir étendre des lignes, elles peuvent aussi intégrer d'autres valeurs.
+Les chaînes écrites avec des guillemets simples ou doubles se comportent de façon très similaire — la seule différence est le type de guillemets que vous avez besoin d’échapper à l’intérieur. Les chaînes avec guillemets obliques, habituellement appelées *littéraux de gabarits*, peuvent faire quelques trucs supplémentaires. En dehors de pouvoir étendre des lignes, elles peuvent aussi intégrer d'autres valeurs.
 
 ```javascript
 `la moitié de 100 est ${100 / 2}`
@@ -186,7 +186,7 @@ console.log("Aardvark" < "Zoroaster")
 
 La manière dont les chaînes sont ordonnées est grosso-modo alphabétique, mais pas vraiment ce que vous vous attendriez à voir dans un dictionnaire : les lettres majuscules sont toujours "moins" que les minuscules, donc `"Z" < "a"`, et les caractères non alphabétiques (!,-, et autres) sont aussi inclus dans l'ordre. Lors de la comparaison de chaînes, JavaScript parcourt les caractères de gauche à droite, comparant les codes Unicode un par un.
 
-Les autres opérateurs similaires sont `>=` (plus grand ou égal à), `<=` (plus petit ou égal à), `==` (égal à), et `!=` (pas égal à).
+Les autres opérateurs similaires sont `>=` (plus grand ou égal à), `<=` (plus petit ou égal à), `==` (égal à), et `!=` (différent de).
 
 ```javascript
 console.log("Itchy" != "Scratchy")
@@ -195,14 +195,14 @@ console.log("Pomme" == "Orange")
 // → false
 ```
 
-Il y a seulement une valeur en JavaScript qui n'est pas égale à elle-même, et c'est `NaN` ("not a number").
+Il y a seulement une valeur en JavaScript qui n'est pas égale à elle-même, et c'est `NaN` ("not a number" signifiant "n'est pas un nombre").
 
 ```javascript
 console.log(NaN == NaN)
 // → false
 ```
 
-`NaN` est supposé représenter le résultat d'un calcul absurde, et en tant que tel, il n'est pas égal au résultat de quelqu'autre calcul absurde.
+`NaN` est supposé représenter le résultat d'un calcul absurde, et en tant que tel, il n'est pas égal au résultat de quelque autre calcul absurde.
 
 ### Opérateurs logiques
 
@@ -228,7 +228,7 @@ console.log(false || false)
 
 *Non* est écrit avec un point d'exclamation (`!`). C'est un opérateur unaire qui inverse la valeur qui lui est passée —`!true` retourne `false` et `!false` retourne `true`.
 
-Lorsque l'on mélange ces opérateurs booléens avec les opérateurs arithmétiques et les autres, il n'est pas toujours évident de savoir quand les parenthèses sont nécessaires. En pratique, vous pour normalement le savoir en connaissant les opérateurs que nous avons vu jusque-là, `||` a la précédence la plus basse, puis vient `&&`, et puis les opérateurs de comparaison (`>`, `==`, ainsi de suite), et puis le reste. Cet ordre a été choisi de telle manière que, dans une expression typique comme la suivante, aussi peu de parenthèses que possible sont nécessaires : 
+Lorsque l'on mélange ces opérateurs booléens avec les opérateurs arithmétiques et les autres, il n'est pas toujours évident de savoir quand les parenthèses sont nécessaires. En pratique, vous pouvez normalement le savoir en connaissant les opérateurs que nous avons vu jusque-là, `||` a la précédence la plus basse, puis vient `&&`, et puis les opérateurs de comparaison (`>`, `==`, ainsi de suite), et puis le reste. Cet ordre a été choisi de telle manière que, dans une expression typique comme la suivante, aussi peu de parenthèses que possible sont nécessaires : 
 
 ```javascript
 1 + 1 == 2 && 10 * 10 > 50
@@ -251,11 +251,11 @@ Il y a deux valeurs spéciales, écrites `null` et `undefined`, qui sont utilis�
 
 Beaucoup d’opérations du langage qui ne produisent pas de valeur significative (vous verrez cela plus tard) retournent `undefined` simplement parce qu'elles doivent retourner *une* valeur.
 
-La différence de sens entre `undefined` et `null` est un accident de conception de JavaScript, et cela n'a pas d'important la plupart du temps. Dans les cas où vous êtes effectivement concernés par ces valeurs, je recommande de les considérer comme interchangeables.
+La différence de sens entre `undefined` et `null` est un accident de conception de JavaScript, et cela n'a pas d'importance la plupart du temps. Dans les cas où vous êtes effectivement concernés par ces valeurs, je recommande de les considérer comme interchangeables.
 
 ## Conversion de type automatique
 
-Dans l'[Introduction](), j'ai mentionné que JavaScript se met en quatre pour accepter presque tous les programmes que vous lui donnez, même ceux qui font des choses bizarres. Ceci est bien démontré avec les expressions suivantes :
+Dans l'[Introduction](), j'ai mentionné que JavaScript se plie en quatre pour accepter presque tous les programmes que vous lui donnez, même ceux qui font des choses bizarres. Ceci est bien démontré avec les expressions suivantes :
 
 ```javascript
 console.log(8 * null)
@@ -272,9 +272,9 @@ console.log(false == 0)
 
 Quand un opérateur est appliqué sur le "mauvais" type de valeur, JavaScript va discrètement convertir cette valeur dans le type dont il a besoin, utilisant un jeu de règles qui souvent ne sont pas celles que vous voulez ou attendez C'est appelé "*conversion de type*". Le `null` de la première expression devient `0`, et le `"5"` de la seconde expression devient `5` (d'une chaîne à un nombre). Mais dans la troisième expression, `+` essaye de concaténer avant de faire l’opération numérique, donc le `1` est converti en `"1"` (d'un nombre à une chaîne).
 
-Quand quelque chose qui ne correspond pas à un nombre de façon évidente (tel que `"five"` ou `undefined`) est converti en un nombre, vous obtenez la valeur `NaN`. De plus, les opérations arithmétiques sur `NaN` continuent de produire un `NaN`, donc si vous vous retrouvez à obtenir un de ceux-ci à un endroit inattendu, regardez pour les conversions de type accidentelles.
+Lorsque quelque chose qui ne correspond pas, de façon évidente, à un nombre (tel que `"five"` ou `undefined`) est converti en un nombre, vous obtenez la valeur `NaN`. De plus, les opérations arithmétiques sur `NaN` continuent de produire un `NaN`, donc si vous vous retrouvez à obtenir un `NaN` à un endroit inattendu, regardez au niveau des conversions de type accidentelles.
 
-Lors de la comparaison de valeurs de même type utilisant `==`, le résultat est facile à prédire : vous devriez obtenir `true` quand les deux valeurs sont les même, sauf dans le cas de `NaN`. Mais si les types diffèrent, JavaScript utilise un jeu de règles compliqué et confus pour déterminer quoi faire. Dans la plupart des cas, il essaie juste de convertir une des valeurs dans le type de l'autre valeur. Cependant, quand `null` ou `undefined` apparaissent d'un côté ou de l'autre de l’opérateur, il produit `true` seulement si les deux côtés sont soit `null` ou `undefined`.
+Lors de la comparaison de valeurs de même type utilisant `==`, le résultat est facile à prédire : vous devriez obtenir `true` quand les deux valeurs sont les mêmes, sauf dans le cas de `NaN`. Mais si les types diffèrent, JavaScript utilise un jeu de règles compliqué et confus pour déterminer quoi faire. Dans la plupart des cas, il essaie juste de convertir une des valeurs dans le type de l'autre valeur. Cependant, quand `null` ou `undefined` apparaissent d'un côté ou de l'autre de l’opérateur, il produit `true` seulement si les deux côtés sont soit `null` ou `undefined`.
 
 ```javascript
 console.log(null == undefined);
@@ -291,9 +291,9 @@ Je recommande d'utiliser les opérateurs de comparaison à trois caractères de 
 
 ### Court-cicuiter les opérateurs logiques
 
-Les opérateurs `&&` et `||` gèrent les valeurs de types différents d'une façon particulière. Ils convertiront la valeur à leur gauche en type booléen afin de décider quoi faire, mais en fonction de l’opérateur et du résultat de cette conversion, ils retourneront soit la valeur *originale* de gauche ou la valeur de droite. 
+Les opérateurs `&&` et `||` gèrent les valeurs de types différents d'une façon particulière. Ils convertiront la valeur à leur gauche en type booléen afin de décider quoi faire, mais en fonction de l’opérateur et du résultat de cette conversion, ils retourneront soit la valeur *originale* de gauche, soit la valeur de droite. 
 
-Par exemple, l’opérateur `||` retournera la valeur à sa gauche quand elle peut être convertie en `true` et, sinon, il retournera la valeur sur sa droite. Cela a l'effet attendu quand les valeurs sont booléennes et fait quelque chose d'analogue pour les valeurs d'autres types.
+Par exemple, l’opérateur `||` retournera la valeur de gauche quand elle peut être convertie en `true`, sinon, il retournera la valeur de droite. Cela a l'effet attendu quand les valeurs sont booléennes et fait quelque chose d'analogue pour les valeurs d'autres types.
 
 ```javascript
 console.log(null || "user")
@@ -302,7 +302,7 @@ console.log("Agnes" || "user")
 // → Agnes
 ```
 
-Nous pouvons utiliser cette fonctionnalité comme un moyen de revenir à une valeur par défaut. Si vous avez une valeur qui peut être vide, vous pouvez mettre `||` après avec sa valeur de remplacement. Si la valeur initiale peut être convertie en `false`, vous aurez la valeur de remplacement. Les règles pour convertir les chaînes et les nombres en booléens définissent que `0`, `NaN`, et la chaîne vide (`""`) comptent comme `false`, alors que toutes les autres valeurs comptent comme `true`. Donc `0 || -1` produit `-1`, et `"" || "!?"` retourne `"!?"`.
+Nous pouvons utiliser cette fonctionnalité comme un moyen de revenir à une valeur par défaut. Si vous avez une valeur qui peut être vide, vous pouvez mettre `||` après, avec sa valeur de remplacement. Si la valeur initiale peut être convertie en `false`, vous aurez la valeur de remplacement. Les règles pour convertir les chaînes et les nombres en booléens définissent que `0`, `NaN`, et la chaîne vide (`""`) comptent comme `false`, alors que toutes les autres valeurs comptent comme `true`. Donc `0 || -1` produit `-1`, et `"" || "!?"` retourne `"!?"`.
 
 L’opérateur `&&` fonctionne de la même façon, mais dans l'autre sens. Quand la valeur à sa gauche est quelque chose qui se convertit en `false`, il retourne cette valeur, sinon il retourne la valeur à sa droite.
 
