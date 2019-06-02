@@ -116,3 +116,33 @@ Ne vous souciez pas de mémoriser cette liste. Lorsque la création d'un binding
 
 ## L'environnement
 
+La collection de bindings et leurs valeurs qui existent à un moment donné est appelé l'*environnement*. Quand un programme démarre, cet environnement n'est pas vide. Il contient toujours des bindings qui fond partie du language en standard, et la plupart du temps, il a aussi des bindings qui fournissent des moyens d'interagir avec le système environnant. Par exemple, dans un navigateur, il y a des fonctions pour interagir avec le site web actuellement chargé et pour lire les entrées de la souris et du claviers.
+
+## Fonctions
+
+Un grand nombre des valeurs fournies dans l'environnement par défaut sont de type *fonction*. Une fonction est un morceau de programme encapsulé dans une valeur. De telles valeurs peuvent être appliquées afin d’exécuter le programme encapsulé. Par exemple, dans un environnement de navigateur, le binding `prompt` contient une fonction qui affiche une petite boîte de dialogue demandant une entrée utilisateur. Il est utilisé ainsi :
+
+```javascript
+prompt("Entrer le mot de passe");
+```
+
+![Une boîte de dialogue de saisie](https://eloquentjavascript.net/img/prompt.png)
+
+Exécuter une fonction est appelé *invoquer*, *appeler*, ou *appliquer* une fonction. Vous pouvez appeler une fonction en mettant des parenthèses après une expression qui produit une valeur de fonction. Habituellement, vous utiliserez directement le nom du binding qui contient la fonction. Les valeurs entre les parenthèses sont données au programme à l'intérieur de la fonction. Dans l'exemple, la fonction  `prompt` utilise la chaîne que nous lui donnons en tant que texte à afficher. Les valeurs passées à des fonctions sont appelés *arguments*. Différentes fonctions peuvent avoir besoin d'un nombre différent ou de différents types d'arguments.
+
+La fonction `prompt` n'est pas très utilisée dans la programmation web moderne, principalement parce que vous n'avez pas de contrôle sur la manière sur l'apparence des boîtes de dialogue, mais cela peut être un  utile pour des petits programmes ou des expérimentations.
+
+## La fonction console.log
+
+Dans les exemples, j'ai utilisé `console.log` pour afficher des valeurs. La plupart des systèmes JavaScript (incluant tous les navigateurs web modernes et Node.js) fournissent une fonction `console.log` qui retranscrit ses arguments sur un périphérique de sortie texte. Dans les navigateurs, la sortie arrive dans la console JavaScript. Cette partie de l'interface du navigateur est masquée par défaut, mais la plupart des navigateurs l'ouvre lorsque vous pressez `F12` ou, sur un Mac, `COMMAND-OPTION-I`. Si cela ne fonctionne pas, cherchez dans les menus pour un item nommé Developer Tools ou similaire.
+
+Lors de l'exécution des exemples (ou de votre propre code) dans les pages de ce livre, la sortie `console.log` sera affichée après l'exemple, au lieu de la console JavaScript du navigateur.
+
+```javascript
+let x = 30;
+console.log("la valeur de x est", x);
+// → la valeur de x est 30
+```
+
+Bien que les noms de bindings ne peuvent pas contenir de caractères point, `console.log` en a un. Ceci est dû au fait que `console.log` n'est pas un simple binding. C'est en fait une expression qui retrouve la propriété `log` de la valeur contenue par le binding `console`. Nous verrons exactement de quoi il en retourne au [Chapitre 4]().
+
