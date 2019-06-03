@@ -146,3 +146,98 @@ console.log("la valeur de x est", x);
 
 Bien que les noms de bindings ne peuvent pas contenir de caractères point, `console.log` en a un. Ceci est dû au fait que `console.log` n'est pas un simple binding. C'est en fait une expression qui retrouve la propriété `log` de la valeur contenue par le binding `console`. Nous verrons exactement de quoi il en retourne au [Chapitre 4]().
 
+## Valeurs de retour
+
+Afficher une boîte de dialogue ou afficher du texte à l'écran est un *effet secondaire*. Beaucoup de fonctions sont utiles à cause des effets secondaires qu'elles produisent. Des fonctions peuvent aussi produire des valeurs, dans quel cas elle n'ont pas besoin d'avoir un effet secondaire pour être utiles. Par exemple, la fonction `Math.max` prend n'importe quelle quantité de nombres en argument et redonne le plus grand.
+
+```javascript
+console.log(Matx.max(2,4));
+// → 4
+```
+
+Quand une fonction produit une valeur, on dit qu'elle *retourne* cette valeur. N'importe quoi produisant une valeur est une expression en JavaScript, ce qui signifie que les appels aux fonctions peuvent être utilisés dans des expressions plus grandes. Ici un appel à `Math.min`, qui est l'opposé de `Math.max`, est utilisé comme une composante d'une expression plus (+).
+
+```javascript
+console.log(Math.min(2, 4) + 100);
+// → 102
+```
+
+Le [prochain chapitre]() explique comment écrire vos propres fonctions.
+
+## Flux de contrôle
+
+Quand votre programme contient plus d'une instruction, les instructions sont exécutées comme s'il s'agissait d'une histoire, de haut en bas. Cet exemple de programme à deux instructions. La première demande un nombre à l'utilisateur, et la seconde, qui est exécutée après la première, affiche le carré de ce nombre.
+
+```javascript
+let leNombre = Number(prompt("Choissez un nombre"));
+console.log("Votre nombre est la racine carrée de " +
+            leNombre * leNombre);
+```
+
+La fonction `Number` convertit une valeur en un nombre. Nous avons besoin de cette conversion car le résultat de `prompt` est une chaîne, et nous voulons un nombre. Il y a des fonctions similaires appelées `String` et `Boolean` qui convertissent dans ces types.
+
+Voici la représentation schématique, plutôt triviale, du flux de contrôle linéaire :
+
+![Contrôle de flux trivial](https://eloquentjavascript.net/img/controlflow-straight.svg)
+
+## Exécution conditionnelle
+
+Tous les programmes ne sont pas des routes droites. Nous pouvons, par exemple, vouloir créer un embranchement, où le programme prends la branche correcte en fonction de la situation. Ceci est appelé *exécution conditionnelle*.
+
+![Flux de contrôle conditionnel](https://eloquentjavascript.net/img/controlflow-if.svg)
+
+Une exécution conditionnelle est crée avec le mot-clef `if` en JavaScript. Dans le cas simple, nous vous que du code soit exécuté if, et seulement si, une certaine condition est satisfaite. Nous pouvons, par exemple, vouloir afficher le carré de l'entrée seulement si l'entrée est effectivement un nombre.
+
+```javascript
+let leNombre = Number(prompt("Choissez un nombre"));
+if (!Number.isNaN(leNombre)) {
+  console.log("Votre nombre est la racine carrée de " +
+              leNombre * leNombre);
+}
+```
+
+Avec cette modification, si vous saisissez "perroquet", rien n'est affiché.
+
+Le mot-clef `if` exécute ou saute une instruction en fonction de la valeur d'une expression booléenne. L'expression décisive est écrite après le mot-clef, entre parenthèse, suivi de l'instruction à exécuter.
+
+La fonction `Number.isNaN` est une fonction JavaScript standard qui retourne `true` uniquement si l'argument qui lui est donné est `NaN`. La fonction `Number` retourne `NaN` quand vous lui donnez une chaîne qui ne représente pas un nombre valide. Et donc, la condition se traduit en "à moins que `leNombre` ne soit pas un nombre, fait ceci".
+
+L'instruction après le `if` est encadrée par des accolades (`{` et `}`) dans cet exemple. Les parenthèses peuvent être utilisées pour grouper n'importe quel nombre d'instructions en une unique instruction, appelé *bloc*. Vous pourriez aussi les avoir omises dans ce cas, puisqu'elles ne contiennent qu'une seule instruction, mais pour éviter d'avoir à penser si elles sont nécessaires, la plupart des programmeurs JavaScript les utilisent pour chaque instruction encapsulée comme celle-ci. Nous suivrons, la plupart du temps, cette convention dans ce livre, excepté pour les occasionnelles unique ligne.
+
+```javascript
+if (1 + 1 == 2) console.log("C'est vrai");
+// → C'est vrai
+```
+
+Souvent, vous n'avez pas seulement le code qui s'exécute quand une condition est vraie, mais aussi le code qui prend en charge l'autre cas. Ce chemin alternatif est représenté par la second flèche dans le diagramme. Vous pouvez utiliser le mot-clef `else`, ensemble avec `if`, pour créer deux chemins d'exécution alternatifs séparés.
+
+```javascript
+let leNombre = Number(prompt("Choissez un nombre"));
+if (!Number.isNaN(leNombre)) {
+  console.log("Votre nombre est la racine carrée de " +
+              theNumber * theNumber);
+} else {
+  console.log("Hé. Pourquoi ne m'avez-vous pas donné un nombre ?");
+}
+```
+
+Si vous devez choisir parmi plus de deux chemins, vous pouvez chaîner plusieurs paires `if\else` ensemble. Voici un exemple :
+
+```javascript
+let nombre = Number(prompt("Choissez un nombre"));
+
+if (nombre < 10) {
+  console.log("Petit");
+} else if (nombre < 100) {
+  console.log("Moyen");
+} else {
+  console.log("Grand");
+}
+```
+
+Le programme va d'abord vérifier si `num` est plus petit que 10. Si c'est le cas, il choisit cette branche, affiche "Petit", et c'est fini. Si ce n'est pas le cas, il prend la branche `else`, qui elle même contient un second `if`. Si la seconde condition (`< 100`) est satisfaite, cela signifie que le nombre est compris entre 10 et 100, et "Moyen" est affiché. Sinon, le deuxième et dernière branche `else` est choisie.
+
+Le schéma pour ce programme ressemble à ceci :
+
+![Contrôle de flux avec if imbriqués](https://eloquentjavascript.net/img/controlflow-nested-if.svg)
+
