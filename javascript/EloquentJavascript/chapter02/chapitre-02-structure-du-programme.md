@@ -16,11 +16,11 @@ Expressions et instructions
 
 Dans le [Chapitre 1](), nous avons créé des valeurs et leur avons appliqué des opérateurs pour obtenir de nouvelles valeurs. Créer des valeur de cette façon est la substance principale de n'importe quel programme JavaScript. Mais cette substance doit être encadrée d'une structure plus large pour être utile. Donc c'est ce que nous allons couvrir dans la suite.
 
-Un fragment de code qui produit une valeur est appelé une *expression*. Toute valeur qui est écrite littéralement (telle que `22` ou `"psychanalyse"`) est une expression. Une expression entre parenthèses est aussi une expression, tout l'est un opérateur binaire appliqué à deux expression, ou un opérateur unaire appliqué à une seule.
+Un fragment de code qui produit une valeur est appelé une *expression*. Toute valeur qui est écrite littéralement (telle que `22` ou `"psychanalyse"`) est une expression. Une expression entre parenthèses est aussi une expression, tout comme l'est un opérateur binaire appliqué à deux expression, ou un opérateur unaire appliqué à une seule.
 
 Cela montre une partie de la beauté d'une interface basée sur le langage. Des expressions peuvent contenir d'autres expressions d'une manière similaire à l'imbrication des sous-phrases dans les humains — une sous-phrase peut contenir elle-même des sous-phrases, et ainsi de suite. Cela nous permet de construire des expressions qui décrivent de manière arbitraire des calculs complexes.
 
-Si une expression correspond à un fragment de phrase, une instruction *JavaScript* correspond a une phrase complète. Un programme est une liste d'instructions.
+Si une expression correspond à un fragment de phrase, une instruction *JavaScript* correspond à une phrase complète. Un programme est une liste d'instructions.
 
 Le type le plus simple d'instruction est une expression terminée par un point-virgule. Ceci est un programme :
 
@@ -29,21 +29,21 @@ Le type le plus simple d'instruction est une expression terminée par un point-v
 !false;
 ```
 
-Cependant, c'est un programme inutile. Une expression peut se contenter de produire une valeur, qui sera à son tour pourra être utilisée par le code contenant l'expression. Une instruction est autonome, elle ne compte pour quelque chose que si elle affect le monde. Elle peut afficher quelque chose sur l’écran — cela compte comme changer le monde — ou elle peut changer l’état interne de la machine d'une manière qui affectera les instructions qui viennent après elle. Ces changements sont appelés *effets secondaires*. Les instructions de l'exemple précédent produisent juste les valeurs `1` et `true` et s'en débarrassent immédiatement après. Cela ne laisse absolument aucune empreinte sur le monde. Quand vous exécutez ce programme, rien d'observable ne se produit.
+Cependant, c'est un programme inutile. Une expression peut se contenter de produire une valeur, qui sera à son tour pourra être utilisée par le code contenant l'expression. Une instruction est autonome, elle ne compte pour quelque chose que si elle affecte le monde. Elle peut afficher quelque chose sur l’écran — cela compte comme changer le monde — ou elle peut changer l’état interne de la machine d'une manière qui affectera les instructions qui viennent après elle. Ces changements sont appelés *effets secondaires*. Les instructions de l'exemple précédent produisent juste les valeurs `1` et `true` et s'en débarrassent immédiatement après. Cela ne laisse absolument aucune trace  dans le monde. Quand vous exécutez ce programme, rien d'observable ne se produit.
 
-Dans certain cas, JavaScript vous permet d'omettre le point-virgule à la fin d'une instruction. Dans les autres cas, il doit être présent, sinon la prochaine ligne sera traitée comme faisant partie de la même instruction. Les règles pour quand il peut être omit sans risque sont quelque peu complexes et sources d'erreurs. Donc, dans ce livre, chaque instruction qui a besoin d'un point-virgule, en aura toujours un. Je vous recommande de faire de même, au moins jusqu'a ce que vous sachiez plus à propos des subtilités des point-virgules absents.
+Dans certain cas, JavaScript vous permet d'omettre le point-virgule à la fin d'une instruction. Dans les autres cas, il doit être présent, sinon la prochaine ligne sera traitée comme faisant partie de la même instruction. Les règles pour quand il peut être omit sans risque sont quelque peu complexes et sources d'erreurs. Donc, dans ce livre, chaque instruction qui a besoin d'un point-virgule, en aura toujours un. Je vous recommande de faire de même, au moins jusqu'à ce que vous en sachiez plus à propos des subtilités des point-virgules absents.
 
 ## Bindings
 
-Comment est-ce qu'un programme conserve un état interne ? Comment est-ce qu'il se souvient de quelque chose ? Nous avons vus comment produire de nouvelles valeurs à partir d'anciennes valeurs, mais cela ne change pas les anciennes valeurs, et la nouvelle valeur doit être immédiatement utilisée ou elle va a nouveau disparaître. Pour attraper et retenir des valeurs, JavaScript fournit quelque chose appelle un *binding*, ou une *variable* :
+Comment est-ce qu'un programme conserve un état interne ? Comment est-ce qu'il se souvient de quelque chose ? Nous avons vu comment produire de nouvelles valeurs à partir d'anciennes valeurs, mais cela ne change pas les anciennes valeurs, et la nouvelle valeur doit être immédiatement utilisée ou elle va à nouveau disparaître. Pour attraper et retenir des valeurs, JavaScript fournit quelque chose appelé un *binding*, ou une *variable* :
 
 ```javascript
-let caught = 5 * 5;
+let capture = 5 * 5;
 ```
 
-C'est un second type d'instruction. Le mot spécial (*mot-clef*)  `let` indique que cette phrase va définir un binding. Il est suivis par le nom du binding et, si on veut immédiatement lui donner une valeur, par un opérateur `=` et une expression.
+C'est un second type d'instruction. Le mot spécial (*mot-clef*)  `let` indique que cette phrase va définir un binding. Il est suivi par le nom du binding et, si on veut immédiatement lui donner une valeur, par un opérateur `=` et une expression.
 
-L'instruction précédente crée un binding appelé `caught` et l'utilise pour capturer le nombre qui est produit en multipliant 5 avec 5.
+L'instruction précédente créé un binding appelé `capture` et l'utilise pour capturer le nombre qui est produit en multipliant 5 avec 5.
 
 Après avoir définit un binding, son nom peut être utilisé comme une expression. La valeur d'une telle expression est la valeur que le binding contient à ce moment. Voici un exemple :
 
@@ -53,7 +53,7 @@ console.log(dix * dix);
 // → 100
 ```
 
-Quand un binding pointe vers une valeur, cela ne signifie pas qu'il est lie à cette valeur pour toujours. L’opérateur `=` peut être utilisé à n'importe quel moment sur les bindings existants pour les déconnecter de leur valeur courante et les faire pointer vers une nouvelle. 
+Quand un binding pointe vers une valeur, cela ne signifie pas qu'il est lié à cette valeur pour toujours. L’opérateur `=` peut être utilisé à n'importe quel moment sur les bindings existants pour les déconnecter de leur valeur courante et les faire pointer vers une nouvelle. 
 
 ```javascript
 let ambiance = "lumineuse";
@@ -64,7 +64,7 @@ console.log(ambiance);
 // → sombre
 ```
 
-Vous pouvez imaginer les bindings comme des tentacules, plutôt que des boites. Ils ne *contiennent* pas de valeurs ; ils s'en *saisissent* — deux bindings peuvent référer à la même valeur. Un programme accède uniquement aux valeurs pour lesquelles il a une référence. Quand vous avez besoin de vous souvenir de quelque chose, vous faites pousser un tentacule pour le saisir ou vous y ré-attachez un de vous tentacules existants.
+Vous pouvez imaginer les bindings comme des tentacules, plutôt que des boîtes. Ils ne *contiennent* pas de valeurs ; ils s'en *saisissent* — deux bindings peuvent référer à la même valeur. Un programme accède uniquement aux valeurs pour lesquelles il a une référence. Quand vous avez besoin de vous souvenir de quelque chose, vous faites pousser un tentacule pour le saisir ou vous y ré-attachez un de vous tentacules existants.
 
 Regardons un autre exemple. Pour se souvenir du nombre d'euros que Luigi vous doit, vous créez un binding. Et, quand il vous rembourse 35 €, vous donnez une nouvelle valeur à ce binding.
 
@@ -102,7 +102,7 @@ Le mot `const` signifie *constante*. Il définit un binding constant qui pointe 
 
 Les noms de binding peuvent être n'importe quel mot. Des chiffres peut faire partie des noms de binding — par exemple, `catch22` est un nom valide — mais le nom ne doit pas commencer par un chiffre. Un nom de binding peut inclure des signes dollars (`$`) ou des tirets bas (`_`) mais pas d'autres caractères de ponctuation ou caractères spéciaux.
 
-Les mots avec une signification particulière, tels que `let`, sont des mots-clefs (*keyword*s), et ils ne doivent pas être utilisés comme nom de binding. Il y a aussi un certain nombre de mots qui sont "réservés pour être utilisés" dans de futures version de JavaScript, qui aussi ne peuvent pas être utilisés comme nom de binding. La liste complète des mots-clefs et des mots réservés est plutôt longue.
+Les mots avec une signification particulière, tels que `let`, sont des mots-clefs (*keyword*s), et ils ne doivent pas être utilisés comme nom de binding. Il y a aussi un certain nombre de mots qui sont "réservés pour être utilisés" dans de futures versions de JavaScript, qui aussi ne peuvent pas être utilisés comme nom de binding. La liste complète des mots-clefs et des mots réservés est plutôt longue.
 
 ```
 reak case catch class const continue debugger default
@@ -130,7 +130,7 @@ prompt("Entrer le mot de passe");
 
 Exécuter une fonction est appelé *invoquer*, *appeler*, ou *appliquer* une fonction. Vous pouvez appeler une fonction en mettant des parenthèses après une expression qui produit une valeur de fonction. Habituellement, vous utiliserez directement le nom du binding qui contient la fonction. Les valeurs entre les parenthèses sont données au programme à l'intérieur de la fonction. Dans l'exemple, la fonction  `prompt` utilise la chaîne que nous lui donnons en tant que texte à afficher. Les valeurs passées à des fonctions sont appelés *arguments*. Différentes fonctions peuvent avoir besoin d'un nombre différent ou de différents types d'arguments.
 
-La fonction `prompt` n'est pas très utilisée dans la programmation web moderne, principalement parce que vous n'avez pas de contrôle sur la manière sur l'apparence des boîtes de dialogue, mais cela peut être un  utile pour des petits programmes ou des expérimentations.
+La fonction `prompt` n'est pas très utilisée dans la programmation web moderne, principalement parce que vous n'avez pas de contrôle sur l'apparence des boîtes de dialogue, mais cela peut être utile pour de courts programmes ou des expérimentations.
 
 ## La fonction console.log
 
@@ -155,7 +155,7 @@ console.log(Matx.max(2,4));
 // → 4
 ```
 
-Quand une fonction produit une valeur, on dit qu'elle *retourne* cette valeur. N'importe quoi produisant une valeur est une expression en JavaScript, ce qui signifie que les appels aux fonctions peuvent être utilisés dans des expressions plus grandes. Ici un appel à `Math.min`, qui est l'opposé de `Math.max`, est utilisé comme une composante d'une expression plus (+).
+Quand une fonction produit une valeur, on dit qu'elle *retourne* cette valeur. N'importe quoi produisant une valeur est une expression en JavaScript, ce qui signifie que les appels aux fonctions peuvent être utilisés dans des expressions plus grandes. Ici un appel à `Math.min`, qui est l'opposé de `Math.max`, est utilisé comme une composante d'une expression plus (`+`).
 
 ```javascript
 console.log(Math.min(2, 4) + 100);
@@ -182,11 +182,11 @@ Voici la représentation schématique, plutôt triviale, du flux de contrôle li
 
 ## Exécution conditionnelle
 
-Tous les programmes ne sont pas des routes droites. Nous pouvons, par exemple, vouloir créer un embranchement, où le programme prends la branche correcte en fonction de la situation. Ceci est appelé *exécution conditionnelle*.
+Tous les programmes ne sont pas tous des routes droites. Nous pouvons, par exemple, vouloir créer un embranchement, où le programme prend la branche adéquate en fonction de la situation. Ceci est appelé *exécution conditionnelle*.
 
 ![Flux de contrôle conditionnel](https://eloquentjavascript.net/img/controlflow-if.svg)
 
-Une exécution conditionnelle est crée avec le mot-clef `if` en JavaScript. Dans le cas simple, nous vous que du code soit exécuté if, et seulement si, une certaine condition est satisfaite. Nous pouvons, par exemple, vouloir afficher le carré de l'entrée seulement si l'entrée est effectivement un nombre.
+Une exécution conditionnelle est créée avec le mot-clef `if` en JavaScript. Dans le cas simple, nous vous que du code soit exécuté si, et seulement si, une certaine condition est satisfaite. Nous pouvons, par exemple, vouloir afficher le carré de l'entrée seulement si l'entrée est effectivement un nombre.
 
 ```javascript
 let leNombre = Number(prompt("Choissez un nombre"));
@@ -202,7 +202,7 @@ Le mot-clef `if` exécute ou saute une instruction en fonction de la valeur d'un
 
 La fonction `Number.isNaN` est une fonction JavaScript standard qui retourne `true` uniquement si l'argument qui lui est donné est `NaN`. La fonction `Number` retourne `NaN` quand vous lui donnez une chaîne qui ne représente pas un nombre valide. Et donc, la condition se traduit en "à moins que `leNombre` ne soit pas un nombre, fait ceci".
 
-L'instruction après le `if` est encadrée par des accolades (`{` et `}`) dans cet exemple. Les parenthèses peuvent être utilisées pour grouper n'importe quel nombre d'instructions en une unique instruction, appelé *bloc*. Vous pourriez aussi les avoir omises dans ce cas, puisqu'elles ne contiennent qu'une seule instruction, mais pour éviter d'avoir à penser si elles sont nécessaires, la plupart des programmeurs JavaScript les utilisent pour chaque instruction encapsulée comme celle-ci. Nous suivrons, la plupart du temps, cette convention dans ce livre, excepté pour les occasionnelles unique ligne.
+L'instruction après le `if` est encadrée par des accolades (`{` et `}`) dans cet exemple. Les accolades peuvent être utilisées pour grouper n'importe quel nombre d'instructions en une unique instruction, appelée *bloc*. Vous pourriez aussi les avoir omises dans ce cas, puisqu'elles ne contiennent qu'une seule instruction, mais pour éviter d'avoir à penser si elles sont nécessaires, la plupart des programmeurs JavaScript les utilisent avec chaque instruction encapsulée comme celle-ci. Nous suivrons, la plupart du temps, cette convention dans ce livre, excepté pour les occasionnelles lignes uniques.
 
 ```javascript
 if (1 + 1 == 2) console.log("C'est vrai");
@@ -243,7 +243,7 @@ Le schéma pour ce programme ressemble à ceci :
 
 ## Boucles while et do
 
-Prenez un programme qui affiche tout les nombres pairs de 0 à 12. Une façon de l'écrire est comme cela :
+Prenez un programme qui affiche tout les nombres pairs de 0 à 12. Une façon de l'écrire est la suivante :
 
 ```javascript
 console.log(0);
@@ -259,7 +259,7 @@ console.log(12);
 
 ![Boucle de contrôle de flux](https://eloquentjavascript.net/img/controlflow-loop.svg)
 
-La mise en boucle du flux de contrôle nous permet de revenir à un point donné dans le programme où nous étions avant et le répéter avec l'état courant de notre programme. Si nous combinons cela avec un binding qui compte, nous pouvons faire quelque chose comme :
+La mise en boucle du flux de contrôle nous permet de revenir à un point donné dans le programme où nous étions avant et de le répéter avec l'état courant de notre programme. Si nous combinons cela avec un binding qui compte, nous pouvons faire quelque chose comme :
 
 ```javascript
 let nombre = 0;
@@ -272,9 +272,9 @@ while (nombre <= 12) {
 //   … etcetera
 ```
 
-Une instruction avec le mot-clef `while` créer une boucle. Le mot `while` est suivi d'une expression entre parenthèses et puis d'une instruction, un peu comme `if`. La boucle continue d'entrer dans cette instruction aussi longtemps que l'expression produit une valeur qui vaut `true` quand elle est convertie en booléen.
+Une instruction avec le mot-clef `while` créé une boucle. Le mot `while` est suivi d'une expression entre parenthèses et puis d'une instruction, un peu comme `if`. La boucle continue d'entrer dans cette instruction aussi longtemps que l'expression produit une valeur qui vaut `true` quand elle est convertie en booléen.
 
-Le binding `nombre` démontre la manière dont un binding peut suivre la progression d'un programme. À chaque fois que la boucle se répète, `nombre` reçoit une valeur qui est 2 de plus que sa précédente valeur. Au début de chaque répétition, il est comparé avec le nombre 12 pour décider si oui ou non le travail du programme est terminé.
+Le binding `nombre` démontre la manière dont un binding peut suivre la progression d'un programme. À chaque fois que la boucle se répète, `nombre` reçoit une valeur qui est 2 de plus que sa précédente valeur. Au début de chaque répétition, il est comparé avec le nombre 12 pour décider si le travail du programme est terminé.
 
 En tant qu'exemple faisant effectivement quelque chose d'utile, nous pouvons maintenant écrire un programme qui calcule et affiche la valeur de 2<sup>10</sup> (2 à la puissance de 10). Nous utilisons deux bindings : un pour garder une trace de notre résultat et un pour compter combien de fois nous avons multiplié ce résultat par 2. La boucle vérifie si le second binding a déjà atteint 10, si non, elle met à jour les deux bindings.
 
@@ -302,15 +302,13 @@ do {
 console.log(votreNom);
 ```
 
-Ce programme vous force à saisir votre nom. Il va demander encore et encore jusqu'à ce qu'il reçoive quelque chose qui n'est pas une chaîne vide. Appliquer l'opérateur `!` à une valeur la convertira en type booléen avant de l'opposer, et toute chaîne sauf `""` est convertie en `true`. Cela signifie que la loupe continue de tourner en rond jusqu'à ce que vous fournissiez un nom non-vide.
+Ce programme vous force à saisir votre nom. Il va demander encore et encore jusqu'à ce qu'il reçoive quelque chose qui n'est pas une chaîne vide. Appliquer l'opérateur `!` à une valeur la convertira en type booléen avant de l'opposer, et toute chaîne, sauf `""`, est convertie en `true`. Cela signifie que la boucle continue de tourner en rond jusqu'à ce que vous fournissiez un nom non-vide.
 
 ## Indenter le code
 
- 
-
 Dans les exemples, j'ai ajouté des espaces devant les instructions qui font partie d'instruction plus large. Ces espaces ne sont pas nécessaires ­— l'ordinateur acceptera le programme très bien sans eux. En fait, même les sauts de lignes sont optionnels. Vous pouvez écrire un programme sur une unique longue ligne si vous le sentez ainsi.
 
-Le rôle de cette indentation dans les blocs et de faire apparaître la structure du code. Dans le code, où de nouveaux blocs sont ouverts dans d'autres blocs, il peut devenir difficile de voir où un bloc se termine et un autre commence. Avec un indentation correcte, la forme visuelle d'un programme correspond à la forme des blocs à l'intérieur. J'aime utiliser deux espaces pour chaque bloc ouvert, mais les goûts varient — certaines personnes utilisent quatre espaces, et d'autres personnes utilisent des caractères tabulation. Ce qui est important est que chaque nouveau bloc ajoute le même nombre d'espaces.
+Le rôle de cette indentation dans les blocs et de faire apparaître la structure du code. Dans le code, où de nouveaux blocs sont ouverts dans d'autres blocs, il peut devenir difficile de voir où un bloc se termine et un autre commence. Avec une indentation correcte, la forme visuelle d'un programme correspond à la forme des blocs à l'intérieur. J'aime utiliser deux espaces pour chaque bloc ouvert, mais les goûts varient — certaines personnes utilisent quatre espaces, et d'autres personnes utilisent des caractères tabulation. Ce qui est important est que chaque nouveau bloc ajoute le même nombre d'espaces.
 
 ```javascript
 if (false != true) {
@@ -325,9 +323,9 @@ La plupart des éditeurs de code (incluant celui de ce livre) aideront à indent
 
 ## Boucles for
 
-Beaucoup de boucles suivent le modèle présenter dans les exemples `while`. D'abord un binding "compteur" est créé pour suivre la progression de la boucle. Puis vient une boucle `while`, habituellement avec une expression de test qui vérifie si le compteur à atteint sa valeur de fin. À la fin du contenu de la boucle, le compteur est mis à jour pour suivre la progression.
+Beaucoup de boucles suivent le modèle présenté dans les exemples `while`. D'abord un binding "compteur" est créé pour suivre la progression de la boucle. Puis vient une boucle `while`, habituellement avec une expression de test qui vérifie si le compteur à atteint sa valeur de fin. À la fin du corps de la boucle, le compteur est mis à jour pour suivre la progression.
 
-Parce que que ce modèle est si commun, JavaScript et les langages similaires fournissent un format légèrement plus courte et plus compréhensible, la boucle `for`.
+Parce que que ce modèle est si commun, JavaScript et les langages similaires fournissent un format légèrement plus court et plus compréhensible, la boucle `for`.
 
 ```javascript
 for (let nombre = 0; nombre <= 12; nombre = nombre + 2) {
@@ -338,7 +336,7 @@ for (let nombre = 0; nombre <= 12; nombre = nombre + 2) {
 //   … etcetera
 ```
 
-Ce programme est un équivalent exact à l'exemple [précédent](#boucles-while-et-do) d'affichage des nombres pairs. Le seul changement est que toutes les instructions liées à l'état de la boucle sont groupés ensemble après `for`.
+Ce programme est exactement équivalent à l'exemple [précédent](#boucles-while-et-do) d'affichage des nombres pairs. Le seul changement est que toutes les instructions liées à l'état de la boucle sont groupées ensemble après `for`.
 
 Les parenthèses après un mot-clef `for` doivent contenir deux points-virgules. La partie avant le premier point-virgule *initialise* la boucle, habituellement en définissant un binding. La second partie est l'expression qui *vérifie* si la boucle doit continuer. La dernière partie *met à jour* l'état de la boucle après chaque itération. Dans la plupart des cas, c'est plus court et plus clair qu'une construction `while`.
 
@@ -355,7 +353,7 @@ console.log(resultat);
 
 ## Sortir d'une boucle
 
-Avoir la condition de bouclage produisant `false` n'est pas la seule manière dont une boucle peut se terminer. Il y a une instruction spéciale appelé `break` qui a pour effet d'immédiatement sortir de la boucle.
+Avoir la condition de bouclage produisant `false` n'est pas la seule manière dont une boucle peut se terminer. Il y a une instruction spéciale appelée `break` qui a pour effet d'immédiatement sortir de la boucle.
 
 Ce programme illustre l'instruction `break`. Il cherche le premier nombre qui est à la fois plus grand ou égale à 20 et divisible par 7.
 
@@ -373,15 +371,15 @@ Utiliser l'opérateur de reste (`%`) est une façon simple de tester si un nombr
 
 La construction `for` dans l'exemple n'a pas la partie qui vérifie la fin de la boucle est atteinte. Cela signifie que la boucle ne s'arrêtera jamais à moins que l'instruction `break`, à l'intérieur, ne soit exécutée.
 
-Si vous deviez enlever cette instruction `break`, ou accidentellement écrire une condition de fin qui produit toujours `true`, votre programme serait bloqué dans une *boucle infinie*. Un programme coincé dans une boucle infinie ne finira jamais sont exécution,  ce qui est généralement une mauvaise chose.
+Si vous deviez enlever cette instruction `break`, ou accidentellement écrire une condition de fin qui produit toujours `true`, votre programme serait bloqué dans une *boucle infinie*. Un programme coincé dans une boucle infinie ne finira jamais sont exécution, ce qui est généralement une mauvaise chose.
 
-Si vous créez une boucle infinie dans l'un des exemples de ces pages, on vous demandera généralement si vous voulez arrêter le programme après quelques secondes. Si cela échoue, vous devrez fermer l'onglet dans lequel vous travaillez, ou sur certain navigateur fermer le navigateur complet, pour reprendre.
+Si vous créez une boucle infinie dans l'un des exemples de ces pages, on vous demandera généralement si vous voulez arrêter le programme après quelques secondes. Si cela échoue, vous devrez fermer l'onglet dans lequel vous travaillez, ou sur certains navigateurs fermer le navigateur complet, pour reprendre.
 
-Le mot-clef `continue` est similaire à `break`, dans le fait qu'il influence la progression d'une boucle. Quand `continue` est rencontré dans le contenu d'une boucle, le contrôle saute hors du contenu et continue avec l'itération suivante de la boucle.
+Le mot-clef `continue` est similaire à `break`, dans le fait qu'il influence la progression d'une boucle. Quand `continue` est rencontré dans le contenu d'une boucle, le contrôle saute le corps de la boucle et continue avec l'itération suivante.
 
 ## Mettre à jour succinctement des bindings
 
-En particulier lors de la mise en boucle, un programme doit souvent "mettre à jour" un binding pour conserver une valeur basée sur la valeur précédente de ce binding.
+Lors de la mise en boucle, un programme doit souvent "mettre à jour" un binding pour conserver une valeur basée sur la valeur précédente de ce binding.
 
 ```javascript
 compteur = compteur + 1;
@@ -416,7 +414,7 @@ else if (x == "valeur3") action3();
 else actionDefaut();
  ```
 
-Il y a une construction appelé `switch` qui est prévue pour exprimer une telle "répartition" d'une façon plus directe. Malheureusement, la syntaxe JavaScript utilisée pour cela (qui est héritée de la lignée des langages de programmation C/Java) n'est pas très pratique — une chaîne d'instruction `if` peut sembler meilleure. En voici un exemple :
+Il y a une construction appelée `switch` qui est prévue pour exprimer une telle "répartition" d'une façon plus directe. Malheureusement, la syntaxe JavaScript utilisée pour cela (qui est héritée de la lignée des langages de programmation C/Java) n'est pas très pratique — une chaîne d'instruction `if` peut sembler meilleure. En voici un exemple :
 
 ```javascript
 switch (prompt("Quel temps fait-il?")) {
@@ -434,7 +432,7 @@ switch (prompt("Quel temps fait-il?")) {
 }
 ```
 
-Vous pouvez mettre n'import quel nombre de labels `case` dans le bloc ouvert part `switch`. Le programme commencera l'exécution à partir du label correspondant à la valeur qui a été passée à `switch`, ou à partir de `default` si aucune valeur correspondante n'a été trouvée. Il continuera l'exécution, même au travers d'autres labels, jusqu'à ce qu'il atteigne une instruction `break`. Dans certains cas, tel que le cas "ensoleillé" de cet exemple, cela peut être utilisé pour partager du code entre les options (il recommande d'aller dehors pour le temps ensoleillé et le temps nuageux). Mais faites attention — il est facile d'oublier un tel `break`, ce qui obligera le programme à exécuter du code que vous ne voulez pas être exécuté.
+Vous pouvez mettre n'importe quel nombre de labels `case` dans le bloc ouvert part `switch`. Le programme commencera l'exécution à partir du label correspondant à la valeur qui a été passée à `switch`, ou à partir de `default` si aucune valeur correspondante n'a été trouvée. Il continuera l'exécution, même au travers d'autres labels, jusqu'à ce qu'il atteigne une instruction `break`. Dans certains cas, tel que le cas "ensoleillé" de cet exemple, cela peut être utilisé pour partager du code entre les options (il recommande d'aller dehors pour le temps ensoleillé et le temps nuageux). Mais faites attention — il est facile d'oublier un tel `break`, ce qui obligera le programme à exécuter du code que vous ne voulez pas être exécuté.
 
 ## Majuscules
 
@@ -447,9 +445,9 @@ PetiteTortueFloue
 petiteTortueFloue
 ```
 
-Le premier style peut être difficile à lire. Je préfère plutôt l'aspect des tirets-bas, bien que ce style un peu pénible à taper. Les fonctions JavaScript standard, et la plupart des développeurs JavaScript, suivent le style du bas — ils mettent en majuscules tous les mots sauf le premier. Il n'est pas difficile de s'habituer à de petite chose comme ça, et du code avec des style de nommage différents peut être perturbant à lire, donc nous suivons cette convention.
+Le premier style peut être difficile à lire. Je préfère plutôt l'aspect des tirets-bas, bien que ce style soit un peu pénible à taper. Les fonctions JavaScript standard, et la plupart des développeurs JavaScript, suivent le style du bas — ils mettent en majuscule la première lettre de tous les mots sauf le premier. Il n'est pas difficile de s'habituer à de petite chose comme ça, et du code avec des style de nommage différents peut être perturbant à lire, donc nous suivons cette convention.
 
-Dans de rares cas, tels que la fonction `Number`, la première lettre d'un binding est aussi en majuscule. Cela a été fait pour marquer cette fonction en tant que constructeur. Ce qu'est un constructeur deviendra plus clair dans le [Chapitre 6](). Pour le moment, l'important est de ne pas être dérangé par le manque apparent de cohérence.
+Dans de rares cas, tels que la fonction `Number`, la première lettre d'un binding est aussi en majuscule. Cela a été fait pour marquer cette fonction comme étant un constructeur. Ce qu'est un constructeur deviendra plus clair dans le [Chapitre 6](). Pour le moment, l'important est de ne pas être dérangé par le manque apparent de cohérence.
 
 ## Commentaires
 
@@ -482,11 +480,11 @@ const monNumero = 11213;
 
 ## Résumé
 
-Vous savez maintenant qu'un programme est fait à partir d'instructions, qui elles-même contiennent quelque fois d'autres instructions. Des instructions tendent à contenir des expressions, qui elles-même peuvent être construites à partir d'expression plus petites.
+Vous savez maintenant qu'un programme est fait à partir d'instructions, qui elles-même contiennent quelque fois d'autres instructions. Des instructions tendent à contenir des expressions, qui elles-même peuvent être construites à partir d'expressions plus petites.
 
 Mettre des instructions les unes derrière les autres vous donne un programme qui est exécuté de haut en bas. Vous pouvez introduire des perturbations dans le flux de contrôle en utilisant des instructions conditionnelles (`if`, `else`, et `switch`) et des instructions de boucle (`while`, `do`, et `for`).
 
-Des bindings peuvent être utilisés pour mettre un nom sur des morceaux de données, et ils sont utiles pour suivre l'état de votre programme. L'environnement est l'ensemble des bindings qui sont définis. Les systèmes JavaScript ajoutent toujours un certain nombre de binding standard utiles dans votre environnement.
+Des bindings peuvent être utilisés pour mettre un nom sur des morceaux de données, et ils sont utiles pour suivre l'état de votre programme. L'environnement est l'ensemble des bindings qui sont définis. Les systèmes JavaScript ajoutent toujours un certain nombre de bindings standards utiles dans votre environnement.
 
 Les fonctions sont des valeurs spéciales qui encapsulent un morceau de programme. Vous pouvez les invoquer en écrivant `nomFonction(argument1, argument2)`. Un tel appel de fonction est une expression et peut produire une valeur.
 
@@ -526,13 +524,13 @@ La plupart des exercices contiennent un morceau de code que vous pouvez modifier
 
 > Vous pouvez commencer avec un programme qui affiche les nombres 1 à 7, que vous pouvez obtenir en faisant quelques modifications à l'exemple d'affichage des nombres pairs donné plutôt dans ce chapitre, là où la boucle `for` a été introduite.
 >
-> Maintenant considérez l'équivalence entre nombres et chaîne de caractères dièse. Vous pouvez aller de 1 à 2 en ajoutant 1 (`+= 1`). Vous pouvez aller de "#" à "##" en ajoutant un caractère (`+= "#"`) . Et donc, votre solution peut suivre de près le programme d'affichage de nombres.
+> Maintenant considérez l'équivalence entre nombres et chaînes de caractères dièse. Vous pouvez aller de 1 à 2 en ajoutant 1 (`+= 1`). Vous pouvez aller de "#" à "##" en ajoutant un caractère (`+= "#"`) . Et donc, votre solution peut suivre de près le programme d'affichage de nombres.
 
 ### FizzBuzz
 
-Écrivez un programme qui utilise `console.log` pour afficher tous les nombres de 1 à 100, avec deux exceptions. Pour les nombres divisibles par 3, affichez "`Fizz`" au lieu du nombre, et pour les nombres divisible par 5 (et pas par 3), affichez "`Buzz`" à la place.
+Écrivez un programme qui utilise `console.log` pour afficher tous les nombres de 1 à 100, avec deux exceptions. Pour les nombres divisibles par 3, affichez "`Fizz`" au lieu du nombre, et pour les nombres divisibles par 5 (et pas par 3), affichez "`Buzz`" à la place.
 
-Quand avez fait fonctionner ça, modifiez votre programme pour afficher "`FizzBuzz`" pour les nombres qui sont à la fois divisible par 3 et 5 (et toujours afficher "`Fizz`" ou "`Buzz`" pour les nombres divisible uniquement par un de ces nombres).
+Quand avez fait fonctionner ça, modifiez votre programme pour afficher "`FizzBuzz`" pour les nombres qui sont à la fois divisible par 3 et 5 (et toujours afficher "`Fizz`" ou "`Buzz`" pour les nombres divisibles uniquement par un de ces nombres).
 
 (C'est en fait un question d'entretient censée éliminer un large pourcentage de candidats programmeurs. Donc, si vous l'avez résolu, votre valeur sur le marché du travail vient juste d'augmenter.)
 
@@ -548,7 +546,7 @@ Quand avez fait fonctionner ça, modifiez votre programme pour afficher "`FizzBu
 
 ### Plateau d'échecs
 
-Écrivez un programme qui créer un chaîne qui représente une grille de 8×8, utilisant des caractères nouvelle ligne pour séparer les lignes. À chaque position de la grille, il y a soit un espace ou soit un caractère "#". Les caractères doivent former un plateau d'échecs.
+Écrivez un programme qui créer une chaîne qui représente une grille de 8×8, utilisant des caractères nouvelle ligne pour séparer les lignes. À chaque position de la grille, il y a soit un espace, soit un caractère "#". Les caractères doivent former un plateau d'échecs.
 
 Passer cette chaîne à `console.log` devrait afficher quelque chose comme :
 
@@ -569,10 +567,10 @@ Quand vous avez un programme qui génère ce motif, définissez un binding `tail
 // Votre code ici
 ```
 
-> Vous pouvez construire la chaîne en commençant avec une chaîne vide (`""`) et ajoutant des caractères de façon répétitive. Un caractère nouvelle ligne s'écrit "`\n`".
+> Vous pouvez construire la chaîne en commençant avec une chaîne vide (`""`) et en ajoutant des caractères de façon répétitive. Un caractère nouvelle ligne s'écrit "`\n`".
 >
 > Pour travailler avec deux dimensions, vous allez avoir besoin d'une boucle dans une boucle. Mettez des accolades autour des corps de chaque boucle pour facilement voir où elles commencent et se terminent. Essayez d'indenter correctement le contenu des boucles. L'ordre des boucles doit suivre l'ordre dans lequel nous allons construire la chaîne (ligne par ligne, gauche à droite, haut en bas). Donc la boucle extérieure se charge des lignes, et la boucle intérieure se charge des caractères sur une ligne.
 >
-> Vous allez avoir besoin de deux bindings pour suivre votre progression. Pour savoir s'il faut mettre un espace ou un dièse à une position donnée, vous pouvez tester si la somme des deux compteur est paire (`% 2`).
+> Vous allez avoir besoin de deux bindings pour suivre votre progression. Pour savoir s'il faut mettre un espace ou un dièse à une position donnée, vous pouvez tester si la somme des deux compteurs est paire (`% 2`).
 >
 > Terminer une ligne en ajoutant un caractère nouvelle ligne doit être fait après que la ligne ait été construite, donc le faire après la boucle intérieure mais dans la boucle extérieure.
