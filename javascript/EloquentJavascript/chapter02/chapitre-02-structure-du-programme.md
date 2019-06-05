@@ -449,5 +449,130 @@ petiteTortueFloue
 
 Le premier style peut être difficile à lire. Je préfère plutôt l'aspect des tirets-bas, bien que ce style un peu pénible à taper. Les fonctions JavaScript standard, et la plupart des développeurs JavaScript, suivent le style du bas — ils mettent en majuscules tous les mots sauf le premier. Il n'est pas difficile de s'habituer à de petite chose comme ça, et du code avec des style de nommage différents peut être perturbant à lire, donc nous suivons cette convention.
 
-Dans de rares cas, tels que la fonction `Number`, la première lettre d'un binding est aussi en majuscule. Cela a été fait pour marquer cette fonction en tant que constructeur. Ce qu'est un constructeur deviendra plus clair dans le [Chapitre 6](). Pour le moment, la chose importante est de ne pas être ennuyé par le manque apparent de consistance.
+Dans de rares cas, tels que la fonction `Number`, la première lettre d'un binding est aussi en majuscule. Cela a été fait pour marquer cette fonction en tant que constructeur. Ce qu'est un constructeur deviendra plus clair dans le [Chapitre 6](). Pour le moment, l'important est de ne pas être dérangé par le manque apparent de cohérence.
 
+## Commentaires
+
+Souvent, le code brut n'exprime pas toute l'information que vous voulez qu'un programme transmette aux lecteurs humains, ou bien il l'exprime d'une manière tellement cryptique que les gens ne pourront pas comprendre. À d'autres moments, vous voudrez peut-être juste inclure des idées connexes dans votre programme. C'est ce pourquoi les *commentaires* sont faits.
+
+Un commentaire est un morceau de texte qui fait partie d'un programme mais est complètement ignoré par l'ordinateur. JavaScript a deux manières pour écrire les commentaires. Pour écrire un commentaire en une seule ligne, vous pouvez utiliser deux caractères barre oblique (`//`) et puis, après, le texte de commentaire.
+
+```javascript
+let balanceCompte = calculerBalance(compte);
+// C'est un trou de verdure où chante une rivière
+balanceCompte.ajuster();
+// Accrochant follement aux herbes des haillons d'argent
+let rapport = new Rapport();
+// Où le soleil, de la montagne fière, luit
+ajouterAuRapport(balanceCompte, rapport);
+// C'est un petit val qui mousse de rayons.
+```
+
+Un commentaire `//` va uniquement jusqu'à la fin de la ligne. Une section de texte comprise entre `/*` et `*/` sera ignorée complètement, quand bien même elle contiendrait des sauts de ligne. C'est utile pour ajouter des blocs d'information à propos d'un fichier ou d'un bout de programme.
+
+```javascript
+/*
+  J'ai d'abord trouvé ce numéro griffoné au dos d'un vieux carnet de notes.
+  Depuis lors, il est souvent revenu, apparaissant parmis les numéros de téléphones
+  et les numéros de série des produits que j'ai acheté. Il est évident qu'il m'aime,
+  donc j'ai décidé de le garder.
+*/
+const monNumero = 11213;
+```
+
+## Résumé
+
+Vous savez maintenant qu'un programme est fait à partir d'instructions, qui elles-même contiennent quelque fois d'autres instructions. Des instructions tendent à contenir des expressions, qui elles-même peuvent être construites à partir d'expression plus petites.
+
+Mettre des instructions les unes derrière les autres vous donne un programme qui est exécuté de haut en bas. Vous pouvez introduire des perturbations dans le flux de contrôle en utilisant des instructions conditionnelles (`if`, `else`, et `switch`) et des instructions de boucle (`while`, `do`, et `for`).
+
+Des bindings peuvent être utilisés pour mettre un nom sur des morceaux de données, et ils sont utiles pour suivre l'état de votre programme. L'environnement est l'ensemble des bindings qui sont définis. Les systèmes JavaScript ajoutent toujours un certain nombre de binding standard utiles dans votre environnement.
+
+Les fonctions sont des valeurs spéciales qui encapsulent un morceau de programme. Vous pouvez les invoquer en écrivant `nomFonction(argument1, argument2)`. Un tel appel de fonction est une expression et peut produire une valeur.
+
+## Exercices
+
+Si vous n'êtes par sûr de comment tester vos solutions aux exercices, référez-vous à l'[Introduction]().
+
+Chaque exercice commence avec une description du problème. Lisez cette description et essayez de résoudre l'exercice. Si vous rencontrez des problèmes,  envisagez de lire les astuces après l’exercice. Les solutions complètes aux exercices ne sont pas incluses dans ce livre, mais vous pouvez les trouver en ligne à l'adresse [https://eloquentjavascript.net/code](https://eloquentjavascript.net/code#2). Si vous voulez apprendre quelque chose des exercices, je recommande de regarder les solutions seulement après que vous ayez résolu l'exercice, ou au moins après que vous l'ayez attaqué assez longtemps et avec assez d'insistance pour avoir un léger mal de tête.
+
+### Mettre un triangle en boucle
+
+Écrivez un programme qui effectue sept appels à `console.log` pour afficher le triangle suivant :
+
+```
+#
+##
+###
+####
+#####
+######
+#######
+```
+
+Il sera utile de savoir que vous pouvez trouver la longueur d'une chaîne en écrivant `.length` après elle.
+
+```javascript
+let abc = "abc";
+console.log(abc.length);
+// → 3
+```
+
+La plupart des exercices contiennent un morceau de code que vous pouvez modifier pour résoudre l'exercice. Souvenez-vous que vous pouvez cliquer sur les blocs de code pour les éditer.
+
+```javascript
+// Votre code ici
+```
+
+> Vous pouvez commencer avec un programme qui affiche les nombres 1 à 7, que vous pouvez obtenir en faisant quelques modifications à l'exemple d'affichage des nombres pairs donné plutôt dans ce chapitre, là où la boucle `for` a été introduite.
+>
+> Maintenant considérez l'équivalence entre nombres et chaîne de caractères dièse. Vous pouvez aller de 1 à 2 en ajoutant 1 (`+= 1`). Vous pouvez aller de "#" à "##" en ajoutant un caractère (`+= "#"`) . Et donc, votre solution peut suivre de près le programme d'affichage de nombres.
+
+### FizzBuzz
+
+Écrivez un programme qui utilise `console.log` pour afficher tous les nombres de 1 à 100, avec deux exceptions. Pour les nombres divisibles par 3, affichez "`Fizz`" au lieu du nombre, et pour les nombres divisible par 5 (et pas par 3), affichez "`Buzz`" à la place.
+
+Quand avez fait fonctionner ça, modifiez votre programme pour afficher "`FizzBuzz`" pour les nombres qui sont à la fois divisible par 3 et 5 (et toujours afficher "`Fizz`" ou "`Buzz`" pour les nombres divisible uniquement par un de ces nombres).
+
+(C'est en fait un question d'entretient censée éliminer un large pourcentage de candidats programmeurs. Donc, si vous l'avez résolu, votre valeur sur le marché du travail vient juste d'augmenter.)
+
+```javascript
+// Votre code ici
+```
+
+> Passer en revue les nombres est clairement un travail de boucle, et sélectionner quoi afficher est une question d'exécution conditionnelle. Souvenez-vous du truc utilisant l'opérateur de reste (`%`) pour vérifier si un nombre est divisible par un autre (il a un reste à zéro).
+>
+> Dans la première version, il y trois possibilités pour chaque nombre, donc vous allez devoir créer une chaîne de `if/else if else`.
+>
+> La seconde version du programme à une solution simple et une intelligente. La solution simple c'est d'ajouter une autre "branche" conditionnelle pour précisément tester la condition donnée. Pour la solution intelligente, construisez une chaîne contenant le ou les mots à afficher et affichez soit ce mot ou le nombre s'il n'y a pas de mot, potentiellement en faisant bon usage de l'opérateur `||`.
+
+### Plateau d'échecs
+
+Écrivez un programme qui créer un chaîne qui représente une grille de 8×8, utilisant des caractères nouvelle ligne pour séparer les lignes. À chaque position de la grille, il y a soit un espace ou soit un caractère "#". Les caractères doivent former un plateau d'échecs.
+
+Passer cette chaîne à `console.log` devrait afficher quelque chose comme :
+
+```
+ # # # #
+# # # # 
+ # # # #
+# # # # 
+ # # # #
+# # # # 
+ # # # #
+# # # #
+```
+
+Quand vous avez un programme qui génère ce motif, définissez un binding `taille = 8` et modifiez le programme pour qu'il fonctionne avec n'importe quelle `taille`, affichant une grille de largeur et hauteur données.
+
+```
+// Votre code ici
+```
+
+> Vous pouvez construire la chaîne en commençant avec une chaîne vide (`""`) et ajoutant des caractères de façon répétitive. Un caractère nouvelle ligne s'écrit "`\n`".
+>
+> Pour travailler avec deux dimensions, vous allez avoir besoin d'une boucle dans une boucle. Mettez des accolades autour des corps de chaque boucle pour facilement voir où elles commencent et se terminent. Essayez d'indenter correctement le contenu des boucles. L'ordre des boucles doit suivre l'ordre dans lequel nous allons construire la chaîne (ligne par ligne, gauche à droite, haut en bas). Donc la boucle extérieure se charge des lignes, et la boucle intérieure se charge des caractères sur une ligne.
+>
+> Vous allez avoir besoin de deux bindings pour suivre votre progression. Pour savoir s'il faut mettre un espace ou un dièse à une position donnée, vous pouvez tester si la somme des deux compteur est paire (`% 2`).
+>
+> Terminer une ligne en ajoutant un caractère nouvelle ligne doit être fait après que la ligne ait été construite, donc le faire après la boucle intérieure mais dans la boucle extérieure.
