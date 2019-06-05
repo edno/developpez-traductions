@@ -241,3 +241,213 @@ Le schéma pour ce programme ressemble à ceci :
 
 ![Contrôle de flux avec if imbriqués](https://eloquentjavascript.net/img/controlflow-nested-if.svg)
 
+## Boucles while et do
+
+Prenez un programme qui affiche tout les nombres pairs de 0 à 12. Une façon de l'écrire est comme cela :
+
+```javascript
+console.log(0);
+console.log(2);
+console.log(4);
+console.log(6);
+console.log(8);
+console.log(10);
+console.log(12);
+```
+
+Ça fonctionne, mais l'idée d'écrire un programme est de faire quelque chose avec *moins* de travail, et non pas plus. Si nous avons besoin de tous les nombres inférieurs à 1000, cette approche serait impraticable. Ce dont nous avons besoin c'est une façon d'exécuter un morceau de code plusieurs fois. Cette forme de flux de contrôle est appelée une *boucle*.
+
+![Boucle de contrôle de flux](https://eloquentjavascript.net/img/controlflow-loop.svg)
+
+La mise en boucle du flux de contrôle nous permet de revenir à un point donné dans le programme où nous étions avant et le répéter avec l'état courant de notre programme. Si nous combinons cela avec un binding qui compte, nous pouvons faire quelque chose comme :
+
+```javascript
+let nombre = 0;
+while (nombre <= 12) {
+  console.log(nombre);
+  nombre = nombre + 2;
+}
+// → 0
+// → 2
+//   … etcetera
+```
+
+Une instruction avec le mot-clef `while` créer une boucle. Le mot `while` est suivi d'une expression entre parenthèses et puis d'une instruction, un peu comme `if`. La boucle continue d'entrer dans cette instruction aussi longtemps que l'expression produit une valeur qui vaut `true` quand elle est convertie en booléen.
+
+Le binding `nombre` démontre la manière dont un binding peut suivre la progression d'un programme. À chaque fois que la boucle se répète, `nombre` reçoit une valeur qui est 2 de plus que sa précédente valeur. Au début de chaque répétition, il est comparé avec le nombre 12 pour décider si oui ou non le travail du programme est terminé.
+
+En tant qu'exemple faisant effectivement quelque chose d'utile, nous pouvons maintenant écrire un programme qui calcule et affiche la valeur de 2<sup>10</sup> (2 à la puissance de 10). Nous utilisons deux bindings : un pour garder une trace de notre résultat et un pour compter combien de fois nous avons multiplié ce résultat par 2. La boucle vérifie si le second binding a déjà atteint 10, si non, elle met à jour les deux bindings.
+
+```javascript
+let resultat = 1;
+let compteur = 0;
+while (compteur < 10) {
+  resultat = resultat * 2;
+  compteur = compteur + 1;
+}
+console.log(result);
+// → 1024
+
+```
+
+Le compteur aurait aussi put commencer à `1` et vérifier `<=10`, mais pour des raisons qui deviendront plus apparentes au [Chapitre 4](), c'est une bonne idée de s'habituer à compter à partir de `0`.
+
+Une boucle `do` est une structure de contrôle similaire à une boucle `while`. Elle diffère seulement sur un point : une boucle `do` exécute toujours son contenu au moins une fois, et elle commencer à vérifier si elle doit s'arrêter seulement après la première exécution. Pour refléter cela, la vérification apparaît après le contenu de la boucle.
+
+```
+let votreNom;
+do {
+  votreNom = prompt("Qui êtes-vous ?");
+} while (!votreNom);
+console.log(votreNom);
+```
+
+Ce programme vous force à saisir votre nom. Il va demander encore et encore jusqu'à ce qu'il reçoive quelque chose qui n'est pas une chaîne vide. Appliquer l'opérateur `!` à une valeur la convertira en type booléen avant de l'opposer, et toute chaîne sauf `""` est convertie en `true`. Cela signifie que la loupe continue de tourner en rond jusqu'à ce que vous fournissiez un nom non-vide.
+
+## Indenter le code
+
+ 
+
+Dans les exemples, j'ai ajouté des espaces devant les instructions qui font partie d'instruction plus large. Ces espaces ne sont pas nécessaires ­— l'ordinateur acceptera le programme très bien sans eux. En fait, même les sauts de lignes sont optionnels. Vous pouvez écrire un programme sur une unique longue ligne si vous le sentez ainsi.
+
+Le rôle de cette indentation dans les blocs et de faire apparaître la structure du code. Dans le code, où de nouveaux blocs sont ouverts dans d'autres blocs, il peut devenir difficile de voir où un bloc se termine et un autre commence. Avec un indentation correcte, la forme visuelle d'un programme correspond à la forme des blocs à l'intérieur. J'aime utiliser deux espaces pour chaque bloc ouvert, mais les goûts varient — certaines personnes utilisent quatre espaces, et d'autres personnes utilisent des caractères tabulation. Ce qui est important est que chaque nouveau bloc ajoute le même nombre d'espaces.
+
+```javascript
+if (false != true) {
+  console.log("Cela fait sens.");
+  if (1 < 2) {
+    console.log("Pas de surprise ici.");
+  }
+}
+```
+
+La plupart des éditeurs de code (incluant celui de ce livre) aideront à indenter automatiquement les nouvelles lignes avec le nombre correct d'espaces.
+
+## Boucles for
+
+Beaucoup de boucles suivent le modèle présenter dans les exemples `while`. D'abord un binding "compteur" est créé pour suivre la progression de la boucle. Puis vient une boucle `while`, habituellement avec une expression de test qui vérifie si le compteur à atteint sa valeur de fin. À la fin du contenu de la boucle, le compteur est mis à jour pour suivre la progression.
+
+Parce que que ce modèle est si commun, JavaScript et les langages similaires fournissent un format légèrement plus courte et plus compréhensible, la boucle `for`.
+
+```javascript
+for (let nombre = 0; nombre <= 12; nombre = nombre + 2) {
+  console.log(nombre);
+}
+// → 0
+// → 2
+//   … etcetera
+```
+
+Ce programme est un équivalent exact à l'exemple [précédent](#boucles-while-et-do) d'affichage des nombres pairs. Le seul changement est que toutes les instructions liées à l'état de la boucle sont groupés ensemble après `for`.
+
+Les parenthèses après un mot-clef `for` doivent contenir deux points-virgules. La partie avant le premier point-virgule *initialise* la boucle, habituellement en définissant un binding. La second partie est l'expression qui *vérifie* si la boucle doit continuer. La dernière partie *met à jour* l'état de la boucle après chaque itération. Dans la plupart des cas, c'est plus court et plus clair qu'une construction `while`.
+
+Voici le code qui calcule 2<sup>10</sup> utilisant `for` à la place de `while` :
+
+```javascript
+let resultat = 1;
+for (let compteur = 0; compteur < 10; compteur = compteur + 1) {
+  resultat = resultat * 2;
+}
+console.log(resultat);
+// → 1024
+```
+
+## Sortir d'une boucle
+
+Avoir la condition de bouclage produisant `false` n'est pas la seule manière dont une boucle peut se terminer. Il y a une instruction spéciale appelé `break` qui a pour effet d'immédiatement sortir de la boucle.
+
+Ce programme illustre l'instruction `break`. Il cherche le premier nombre qui est à la fois plus grand ou égale à 20 et divisible par 7.
+
+```javascript
+for (let courant = 20; ; courant = courant + 1) {
+  if (courant % 7 == 0) {
+    console.log(courant);
+    break;
+  }
+}
+// → 21
+```
+
+Utiliser l'opérateur de reste (`%`) est une façon simple de tester si un nombre est divisible par un autre nombre. Si tel est le cas, le reste de la division vaut zéro.
+
+La construction `for` dans l'exemple n'a pas la partie qui vérifie la fin de la boucle est atteinte. Cela signifie que la boucle ne s'arrêtera jamais à moins que l'instruction `break`, à l'intérieur, ne soit exécutée.
+
+Si vous deviez enlever cette instruction `break`, ou accidentellement écrire une condition de fin qui produit toujours `true`, votre programme serait bloqué dans une *boucle infinie*. Un programme coincé dans une boucle infinie ne finira jamais sont exécution,  ce qui est généralement une mauvaise chose.
+
+Si vous créez une boucle infinie dans l'un des exemples de ces pages, on vous demandera généralement si vous voulez arrêter le programme après quelques secondes. Si cela échoue, vous devrez fermer l'onglet dans lequel vous travaillez, ou sur certain navigateur fermer le navigateur complet, pour reprendre.
+
+Le mot-clef `continue` est similaire à `break`, dans le fait qu'il influence la progression d'une boucle. Quand `continue` est rencontré dans le contenu d'une boucle, le contrôle saute hors du contenu et continue avec l'itération suivante de la boucle.
+
+## Mettre à jour succinctement des bindings
+
+En particulier lors de la mise en boucle, un programme doit souvent "mettre à jour" un binding pour conserver une valeur basée sur la valeur précédente de ce binding.
+
+```javascript
+compteur = compteur + 1;
+```
+
+JavaScript fournit un raccourcit pour cela.
+
+```javascript
+compteur += 1;
+```
+
+Des raccourcis similaires fonctionnent pour de nombreux autres opérateurs, tels que `resultat =* 2` pour doubler `resultat` ou `compteur =-1` pour décrémenter.
+
+Cela nous permet de raccourcir un peu plus notre exemple de comptage.
+
+```javascript
+for (let nombre = 0; nombre <= 12; nombre += 2) {
+  console.log(nombre);
+}
+```
+
+Pour `compteur += 1` et `compteur -=1`, il y a même des équivalents plus courts : `compteur++` et `compteur--`.
+
+## Répartir sur la base d'une valeur avec switch
+
+Il n'est pas rare pour du code de ressembler à cela :
+
+ ```javascript
+if (x == "valeur1") action1();
+else if (x == "valeur2") action2();
+else if (x == "valeur3") action3();
+else actionDefaut();
+ ```
+
+Il y a une construction appelé `switch` qui est prévue pour exprimer une telle "répartition" d'une façon plus directe. Malheureusement, la syntaxe JavaScript utilisée pour cela (qui est héritée de la lignée des langages de programmation C/Java) n'est pas très pratique — une chaîne d'instruction `if` peut sembler meilleure. En voici un exemple :
+
+```javascript
+switch (prompt("Quel temps fait-il?")) {
+  case "pluvieux":
+    console.log("Pensez à prendre un parapluie.");
+    break;
+  case "ensoleillé":
+    console.log("Habillez-vous légèrement.");
+  case "nuageux":
+    console.log("Allez dehors.");
+    break;
+  default:
+    console.log("Type de temps inconnu !");
+    break;
+}
+```
+
+Vous pouvez mettre n'import quel nombre de labels `case` dans le bloc ouvert part `switch`. Le programme commencera l'exécution à partir du label correspondant à la valeur qui a été passée à `switch`, ou à partir de `default` si aucune valeur correspondante n'a été trouvée. Il continuera l'exécution, même au travers d'autres labels, jusqu'à ce qu'il atteigne une instruction `break`. Dans certains cas, tel que le cas "ensoleillé" de cet exemple, cela peut être utilisé pour partager du code entre les options (il recommande d'aller dehors pour le temps ensoleillé et le temps nuageux). Mais faites attention — il est facile d'oublier un tel `break`, ce qui obligera le programme à exécuter du code que vous ne voulez pas être exécuté.
+
+## Majuscules
+
+Les noms de bindings ne peuvent pas contenir d'espace, cependant il est souvent pratique d'utiliser plusieurs mots pour décrire clairement ce que le binding représente. Voici à peu près vos choix pour écrire un nom de binding avec plusieurs mots :
+
+```
+petitetortuefloue
+petite_tortue_floue
+PetiteTortueFloue
+petiteTortueFloue
+```
+
+Le premier style peut être difficile à lire. Je préfère plutôt l'aspect des tirets-bas, bien que ce style un peu pénible à taper. Les fonctions JavaScript standard, et la plupart des développeurs JavaScript, suivent le style du bas — ils mettent en majuscules tous les mots sauf le premier. Il n'est pas difficile de s'habituer à de petite chose comme ça, et du code avec des style de nommage différents peut être perturbant à lire, donc nous suivons cette convention.
+
+Dans de rares cas, tels que la fonction `Number`, la première lettre d'un binding est aussi en majuscule. Cela a été fait pour marquer cette fonction en tant que constructeur. Ce qu'est un constructeur deviendra plus clair dans le [Chapitre 6](). Pour le moment, la chose importante est de ne pas être ennuyé par le manque apparent de consistance.
+
