@@ -18,7 +18,7 @@ Répertoire des traductions en français d'articles pour le [club Developpez.com
 
 * [Chapter 1. Values, Types, and Operators](https://eloquentjavascript.net/01_values.html) ![en relecture](https://img.shields.io/badge/traduction-en%20relecture-blue.svg?style=flat-square)
 
-* [Chapter 2. Program Structure](https://eloquentjavascript.net/02_program_structure.html) ![en cours](https://img.shields.io/badge/traduction-en%20cours-orange.svg?style=flat-square)
+* [Chapter 2. Program Structure](https://eloquentjavascript.net/02_program_structure.html) ![en cours](https://img.shields.io/badge/traduction-en%20relecture-blue.svg?style=flat-square)
 
 * [Chapter 5. Higher-Order Functions](https://eloquentjavascript.net/05_higher_order.html) ![en relecture](https://img.shields.io/badge/traduction-en%20relecture-blue.svg?style=flat-square)
 
