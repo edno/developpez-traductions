@@ -151,7 +151,7 @@ Bien que les noms de bindings ne peuvent pas contenir de caractères point, `con
 Afficher une boîte de dialogue ou afficher du texte à l'écran est un *effet secondaire*. Beaucoup de fonctions sont utiles à cause des effets secondaires qu'elles produisent. Des fonctions peuvent aussi produire des valeurs, dans quel cas elle n'ont pas besoin d'avoir un effet secondaire pour être utiles. Par exemple, la fonction `Math.max` prend n'importe quelle quantité de nombres en argument et redonne le plus grand.
 
 ```javascript
-console.log(Matx.max(2,4));
+console.log(Math.max(2,4));
 // → 4
 ```
 
